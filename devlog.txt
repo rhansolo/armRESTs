@@ -1,28 +1,11 @@
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-USAGE:
-* Replace all fields, angle brackets included, with specified info.
-  eg, pd <pd#> --> pd 3
-* Delete these instructions once all teammates understand usage.
-  (from tilde bar above to tilde bar below)
-* rename this file devlog.txt
-
-devlog--
-Use keyboard shortcut to jump to end,
- replicate entry template, (Ctrl-Shift up x5, Ctrl-X, Ctrl-V x2)
- modify appropriately.
-Each entry should begin with the following format:
- firstL -- TIMESTAMP\n
-e.g.:
-clydeS -- 2999-12-31 23:59
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 armRESTs
 Robin Han
 Aleksandra Koroza
 Johnny Wong
 pd 8
 ---------------------
-<Project Title/Description>
+GroovyMovie
+	This team wishes to create a website that provides the user with information regarding movies. Users would be able to see trending movies, movies sorted under certain categories, search for movies through keywords or their mood at the time, add movies to their personal lists such as favorites or to-watch, and rate movies themselves.    
 
 
  ______   ______   __   __   __       ______   _______
@@ -39,4 +22,8 @@ pd 8
 johnnyW -- 2018-11-19 13:46
 --------------------------------------------------------------
 Added devlog to repo.
+==============================================================
+hanR -- 2018-11-20 21:51
+--------------------------------------------------------------
+Added project name and description to devlog.
 ==============================================================
