@@ -5,10 +5,10 @@ Johnny Wong
 pd 8
 ---------------------
 Groovy Movie
-	This team wishes to create a website that provides the user with information regarding movies. 
-Users would be able to see trending movies, movies sorted under certain categories, search for movies 
-through keywords or their mood at the time, add movies to their personal lists such as favorites or 
-to-watch, and rate movies themselves.    
+	This team wishes to create a website that provides the user with information regarding movies.
+Users would be able to see trending movies, movies sorted under certain categories, search for movies
+through keywords or their mood at the time, add movies to their personal lists such as favorites or
+to-watch, and rate movies themselves.
 
 
  ______   ______   __   __   __       ______   _______
@@ -29,4 +29,42 @@ Added devlog to repo.
 robinH -- 2018-11-20 21:51
 --------------------------------------------------------------
 Added project name and description to devlog.
+==============================================================
+johnnyW -- 2018-11-23 18:04
+--------------------------------------------------------------
+Added data/armRESTs.db to store data
+	Contains table user which holds
+		user_name 	text
+		passwords 	text
+		user_id 		integer
+
+Added utils/database.py to manage database interactions
+through Python
+	Needs to be adjusted for use with movies and APIs
+
+Added /app.py
+	imported:
+			os
+			Flask
+			redirect
+			url_for
+			render_template
+			session
+			request
+			flash
+			get_flashed_messages
+			database from utils
+	finished the following routes:
+			root route
+			/register
+			/authenticate
+			/logout
+	added the following templates:
+			template.html
+			index.html
+			register.html
+
+Need to update design.pdf, specifically component map to incorporate
+Bootstrap...
+
 ==============================================================

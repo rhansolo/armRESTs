@@ -1,0 +1,27 @@
+<!-- armRESTs - Robin Han, Aleksandra Koroza, Johnny Wong -->
+{% extends "template.html" %}
+{% block title %} armRESTs {% endblock %}
+
+{% block content %}
+{% if not logged_in %}
+<a href = "/register" > <button type="button" name="signup">Sign Up</button> </a> <br><br>
+    <form action="/authenticate" method="POST">
+      <h3>Login here</h3>
+      <b>
+           Username: <input type = "text" name = "username" placeholder = "user" required>
+           <br><br>
+           Password: <input type = "password" name = "password" placeholder = "password" required>
+      </b>
+      <br><br>
+      <input type="submit" name="submit" value = "Login">
+      <br><br>
+    </form>
+{% endif %}
+
+{% if logged_in %}
+  <form action="/logout">
+    <input type="submit" name="submit" value = "Logout">
+  </form>
+{% endif %}
+
+{% endblock %}

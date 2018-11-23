@@ -1,0 +1,17 @@
+<!-- armRESTs - Robin Han, Aleksandra Koroza, Johnny Wong -->
+{% extends "template.html" %}
+{% block title %} armRESTs {% endblock %}
+
+{% block content %}
+<form action="/authenticate" method="POST">
+    <h3>Register here</h3>
+    <b>
+         Username: <input type = "text" name = "username" placeholder = "user" required>
+         <br><br>
+         Password: <input type = "password" name = "password" placeholder = "password" required>
+    </b>
+    <br><br>
+    <input type="submit" name="submit" value = "Register">
+    <br><br>
+  </form>
+{% endblock %}

@@ -1,0 +1,32 @@
+<!-- armRESTs - Robin Han, Aleksandra Koroza, Johnny Wong -->
+<!DOCTYPE html>
+<html>
+  <head>
+        {% block head %}
+         <title>    {% block title %} {% endblock %}</title>
+         <!-- bootstrap linkage -->
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        {% endblock %}
+  </head>
+  <body>
+        <a href = "/"> <button type="button" name ="LI"> Homepage </button>  </a>
+        <br>
+        {% if errors %}
+        <font color = 'red'> {% set msgs = get_flashed_messages() %}{# program is now  aware there are flash messages #}
+              {% for each in msgs %}{# Loops through messages #}
+                  <br>{{each}}
+                  <br>
+              {% endfor %}
+        </font>
+        {% endif %}
+
+        
+        {% block content %}
+
+        {% endblock %}
+
+     {% block footer %}
+     &copy; Copyright -- armRESTs 2018
+     {% endblock %}
+</body>
+</html>
