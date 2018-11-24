@@ -4,29 +4,55 @@
   <head>
         {% block head %}
          <title>    {% block title %} {% endblock %}</title>
-         <!-- bootstrap linkage -->
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        {% endblock %}
+         <!-- Required meta tags -->
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+          <!-- Bootstrap CSS -->
+          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+         {% endblock %}
   </head>
   <body>
-        <a href = "/"> <button type="button" name ="LI"> Homepage </button>  </a>
-        <br>
+        <div class="container bg-white rounded">
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark flex-row">
+              <!-- The navbar present at the top of our demo page -->
+                 <a class="navbar-brand text-info" href="/"><b>armRESTs</b></a>
+                 <!-- JavaScript is needed for the toggle to function properly in a tiny window where nav-items cannot be seen -->
+                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                 </button>
+                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                      <div class="navbar-nav mr-auto">
+                           <ul class="navbar-nav mx-auto pl-4 pr-4">
+                                <li class="nav-item pl-2"><a class="nav-link text-info" href="about"><b>ABOUT</b></a></button></li>
+                                <li class="nav-item pl-2"><a class="nav-link text-info" href="contact"><b>CONTACT</b></a></li>
+                                <li class="nav-item pl-2"><a class="nav-link text-info" href="https://groups.google.com/a/stuy.edu/forum/#!forum/softdev18-19"><b>QAF</b></a></li>
+                           </ul>
+                           <form class="form-inline pl-4 pr-4 my-2 my-lg-0">
+                             <input class="form-control form-control- mr-sm-2" type="search" placeholder="Search for Movies" aria-label="Search">
+                              <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Go</button>
+                            </form>
+                      </div>
+                      {% block login %}
+                      {% endblock %}
+                  </div>
+            </nav>
+        </div>
+        <br><br><br>
         {% if errors %}
-        <font color = 'red'> {% set msgs = get_flashed_messages() %}{# program is now  aware there are flash messages #}
+
+        {% set msgs = get_flashed_messages() %}{# program is now  aware there are flash messages #}
               {% for each in msgs %}{# Loops through messages #}
-                  <br>{{each}}
-                  <br>
+              <div class="alert alert-danger">
+                  {{each}}
+              </div>
               {% endfor %}
-        </font>
         {% endif %}
 
-        
         {% block content %}
 
         {% endblock %}
 
-     {% block footer %}
-     &copy; Copyright -- armRESTs 2018
-     {% endblock %}
+      <footer class="-footer bg-dark fixed-bottom text-warning text-right ">&copy;armRESTs 2018 &mdash; Robin Han, Aleksandra Koroza, Johnny Wong</footer>
 </body>
 </html>
