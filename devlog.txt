@@ -66,5 +66,10 @@ Added /app.py
 
 Need to update design.pdf, specifically component map to incorporate
 Bootstrap...
-
+==============================================================
+johnnyW -- 2018-11-23 21:58
+--------------------------------------------------------------
+Added Bootstrap css to template.html, index.html, and register.html
+There is now a pleasing navbar at the top with search, login, and register features.
+Search needs to be implemented along with the APIs.
 ==============================================================
