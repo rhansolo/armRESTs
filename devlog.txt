@@ -73,3 +73,22 @@ Added Bootstrap css to template.html, index.html, and register.html
 There is now a pleasing navbar at the top with search, login, and register features.
 Search needs to be implemented along with the APIs.
 ==============================================================
+korozaA -- 2018-11-25 11:04
+--------------------------------------------------------------
+Continued setup work
+added following routes:
+/search
+/mood
+
+added following templates:
+about.html
+mood.html
+movie.html
+profile.html
+running.html
+searchResults.html
+templateLog.html
+
+Note: instead of repeatedly copying over the login/logout code feature, we can now just extend from templateLog.html templates
+Some bugs remain with keeping the user logged in as they navigate across the site and about page needs to be properly linked
+==============================================================

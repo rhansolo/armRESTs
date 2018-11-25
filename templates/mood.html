@@ -1,0 +1,15 @@
+<!-- armRESTs - Robin Han, Aleksandra Koroza, Johnny Wong -->
+<!-- Used to create movie suggestions based on user's mood -->
+{% extends "templateLog.html" %}
+{% block title %} armRESTs {% endblock %}
+{% block content %}
+  <p> Input currently working with: {{ movie }} </p>
+  <p> Please choose from the following moods </p>
+  <form class="form-inline my-2 my-lg-0" action="/mood" method="POST">
+    <input class="btn btn-outline-warning ml-4" type="submit" name="submit" value = "Happy">
+    <input class="btn btn-outline-warning ml-4" type="submit" name="submit" value = "Sad">
+    <input class="btn btn-outline-warning ml-4" type="submit" name="submit" value = "Stressed">
+    <input class="btn btn-outline-warning ml-4" type="submit" name="submit" value = "Bored">
+  </form>
+
+{% endblock %}

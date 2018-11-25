@@ -1,4 +1,5 @@
 <!-- armRESTs - Robin Han, Aleksandra Koroza, Johnny Wong -->
+<!-- Basic template for all pages -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -24,13 +25,16 @@
                  <div class="navbar-collapse collapse" id="navbarSupportedContent">
                       <div class="navbar-nav mr-auto">
                            <ul class="navbar-nav mx-auto pl-4 pr-4">
-                                <li class="nav-item pl-2"><a class="nav-link text-info" href="about"><b>ABOUT</b></a></button></li>
+                                <li class="nav-item pl-2"><a class="nav-link text-info" href="templates/about.html"><b>ABOUT</b></a></button></li>
                                 <li class="nav-item pl-2"><a class="nav-link text-info" href="contact"><b>CONTACT</b></a></li>
                                 <li class="nav-item pl-2"><a class="nav-link text-info" href="https://groups.google.com/a/stuy.edu/forum/#!forum/softdev18-19"><b>QAF</b></a></li>
                            </ul>
-                           <form class="form-inline pl-4 pr-4 my-2 my-lg-0">
-                             <input class="form-control form-control- mr-sm-2" type="search" placeholder="Search for Movies" aria-label="Search">
-                              <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Go</button>
+                           <!-- Search bar -->
+                           <form class="form-inline pl-4 pr-4 my-2 my-lg-0" action="/search" method= "POST">
+                             <input class="form-control form-control- mr-sm-2" type="search" name="entry" placeholder="Search for Movies" aria-label="Search">
+                              <button class="btn btn-outline-info my-2 my-sm-0" type="submit" name="Submit" value="Search1">Go</button>
+                              <button class="btn btn-outline-info my-2 my-sm-0" type="submit" name="Submit" value="Search2">Mood</button>
+                              <button class="btn btn-outline-info my-2 my-sm-0" type="submit" name="Submit" value="Search3">Lucky</button>
                             </form>
                       </div>
                       {% block login %}

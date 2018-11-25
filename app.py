@@ -75,6 +75,52 @@ def logout():
     setUser(None)
     return redirect(url_for('index'))
 
+@app.route('/search',methods=['POST'])
+def search():
+    #following code can be shortened
+    if request.form["Submit"] == "Search1":
+        entry = request.form['entry']
+        if entry != "":
+            if user in session:
+                return render_template('searchResults.html', movie= entry, logged_in=True)
+            else:
+                return render_template('searchResults.html', movie= entry, logged_in=False)
+        flash("Please input a movie name!")
+        return redirect(url_for('index'))
+
+    elif request.form["Submit"] == "Search2":
+        entry = request.form['entry']
+        if entry != "":
+            if user in session:
+                return render_template('mood.html', movie= entry, logged_in=True)
+            else:
+                return render_template('mood.html', movie= entry, logged_in=False)
+        flash("Please input a movie name!")
+        return redirect(url_for('index'))
+
+    elif request.form["Submit"] == "Search3":
+        entry = request.form['entry']
+        if entry != "":
+            if user in session:
+                return render_template('searchResults.html', movie= entry, logged_in=True)
+            else:
+                return render_template('searchResults.html', movie= entry, logged_in=False)
+        flash("Please input a movie name!")
+        return redirect(url_for('index'))
+
+@app.route('/mood',methods=['POST'])
+def mood():
+    if request.form["submit"] == "Happy":
+        #fill in some API shenanigans
+        #possible problem: passing in entry from searching into mood
+        return render_template('searchResults.html')
+    if request.form["submit"] == "Sad":
+        return render_template('searchResults.html')
+    if request.form["submit"] == "Stressed":
+        return render_template('searchResults.html')
+    if request.form["submit"] == "Bored":
+        return render_template('searchResults.html')
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
