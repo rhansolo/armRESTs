@@ -3,13 +3,22 @@
 {% extends "templateLog.html" %}
 {% block title %} armRESTs {% endblock %}
 {% block content %}
-  <p> Input currently working with: {{ movie }} </p>
-  <p> Please choose from the following moods </p>
-  <form class="form-inline my-2 my-lg-0" action="/mood" method="POST">
-    <input class="btn btn-outline-warning ml-4" type="submit" name="submit" value = "Happy">
-    <input class="btn btn-outline-warning ml-4" type="submit" name="submit" value = "Sad">
-    <input class="btn btn-outline-warning ml-4" type="submit" name="submit" value = "Stressed">
-    <input class="btn btn-outline-warning ml-4" type="submit" name="submit" value = "Bored">
-  </form>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <b><p class="text-info text-left"> Please choose from the following moods:</p></b>
+        <form class="form-inline my-2 my-lg-0" action="/mood" method="POST">
+          <input class="btn btn-success" type="submit" name="submit" value = "Happy">
+          <input class="btn btn-info ml-4" type="submit" name="submit" value = "Sad">
+          <input class="btn btn-danger ml-4" type="submit" name="submit" value = "Stressed">
+          <input class="btn btn-secondary ml-4" type="submit" name="submit" value = "Bored">
+        </form>
+      </div>
+      <div class="col-md-3">
+        <p class="text-right border-bottom border-info"> <i> Input currently working with: <b>{{ movie }}</b> </i></p>
+      </div>
+    </div>
+
+  </div>
 
 {% endblock %}

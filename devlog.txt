@@ -54,12 +54,12 @@ Added /app.py
 			flash
 			get_flashed_messages
 			database from utils
-	finished the following routes:
+finished the following routes:
 			root route
 			/register
 			/authenticate
 			/logout
-	added the following templates:
+added the following templates:
 			template.html
 			index.html
 			register.html
@@ -96,4 +96,11 @@ robinH -- 2018-11-25 13:07
 --------------------------------------------------------------
 Implemented a sidebar in template.html such that it would display hard coded movie categories. Errors still exist when displaying
 error messages and displaying main info in the bottom right section.
+==============================================================
+johnnyW -- 2018-11-25 15:10
+--------------------------------------------------------------
+Fixed robinH's bugs. Errors now are displayed and sidebar looks operational.
+Current bugs:
+	navbar's forms stretch in height when window size shrinks
+		(is this fixable???)
 ==============================================================

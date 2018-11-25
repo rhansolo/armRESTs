@@ -21,13 +21,13 @@
               top: 0;
               bottom: 0;
               left: 0;
-              background-color: #FFA500;
               border-right: 1px solid #eee;
             }
           </style>
   </head>
   <body>
         <div class="container bg-white rounded">
+          <div class="container">
             <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark flex-row">
               <!-- The navbar present at the top of our demo page -->
                  <a class="navbar-brand text-info" href="/"><b>armRESTs</b></a>
@@ -38,57 +38,64 @@
                  <div class="navbar-collapse collapse" id="navbarSupportedContent">
                       <div class="navbar-nav mr-auto">
                            <ul class="navbar-nav mx-auto pl-4 pr-4">
-                                <li class="nav-item pl-2"><a class="nav-link text-info" href="templates/about.html"><b>ABOUT</b></a></button></li>
-                                <li class="nav-item pl-2"><a class="nav-link text-info" href="contact"><b>CONTACT</b></a></li>
+                                <li class="nav-item pl-2"><a class="nav-link text-info" href="/about"><b>ABOUT</b></a></button></li>
+                                <li class="nav-item pl-2"><a class="nav-link text-info" href="/contact"><b>CONTACT</b></a></li>
                                 <li class="nav-item pl-2"><a class="nav-link text-info" href="https://groups.google.com/a/stuy.edu/forum/#!forum/softdev18-19"><b>QAF</b></a></li>
                            </ul>
                            <!-- Search bar -->
                            <form class="form-inline pl-4 pr-4 my-2 my-lg-0" action="/search" method= "POST">
                              <input class="form-control form-control- mr-sm-2" type="search" name="entry" placeholder="Search for Movies" aria-label="Search">
                               <button class="btn btn-outline-info my-2 my-sm-0" type="submit" name="Submit" value="Search1">Go</button>
-                              <button class="btn btn-outline-info my-2 my-sm-0" type="submit" name="Submit" value="Search2">Mood</button>
-                              <button class="btn btn-outline-info my-2 my-sm-0" type="submit" name="Submit" value="Search3">Lucky</button>
+                              <button class="btn btn-outline-info ml-5 my-2 my-sm-0" type="submit" name="Submit" value="Search2">Mood</button>
+                              <button class="btn btn-outline-info ml-3 my-2 my-sm-0" type="submit" name="Submit" value="Search3">Feeling Lucky?</button>
                             </form>
+
                       </div>
                       {% block login %}
                       {% endblock %}
                   </div>
             </nav>
-        </div>
+          </div>
+          <br><br><br>
+        <!-- Side navbar for categories of movies -->
         <div class="wrapper">
-          <nav class="sidebar">
+          <nav class="sidebar bg-dark text-warning">
             <ul class="nav flex-column">
-              <br>
-              <br>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Categories</a>
+              <li class="nav-item ml-auto mt-5 mb-1">
+                <a class="nav-link disabled text-warning" href="#"><b>Categories</b></a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Horror</a>
+              <li class="nav-item ml-auto">
+                <a class="nav-link text-light" href="#">Horror</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Adventure</a>
+              <li class="nav-item ml-auto">
+                <a class="nav-link text-light" href="#">Adventure</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link " href="#">Romantic</a>
+              <li class="nav-item ml-auto">
+                <a class="nav-link text-light" href="#">Romantic</a>
               </li>
             </ul>
           </nav>
         </div>
-        {% if errors %}
 
+        {% if errors %}
         {% set msgs = get_flashed_messages() %}{# program is now  aware there are flash messages #}
-              {% for each in msgs %}{# Loops through messages #}
-              <div class="alert alert-danger">
-                  {{each}}
-              </div>
-              {% endfor %}
+                {% for each in msgs %}{# Loops through messages #}
+                <div class="container">
+                  <div class="row">
+                      <div class="col-md-12">
+                        <div class="alert alert-warning text-center">
+                          {{each}}
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                {% endfor %}
         {% endif %}
 
         {% block content %}
 
         {% endblock %}
-
+      </div>
       <footer class="-footer bg-dark fixed-bottom text-warning text-right ">&copy;armRESTs 2018 &mdash; Robin Han, Aleksandra Koroza, Johnny Wong</footer>
 </body>
 </html>

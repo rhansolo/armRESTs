@@ -18,10 +18,11 @@ def setUser(userName):
     global user
     user = userName
 
+
 @app.route('/')
 def index():
     if user in session:
-        return render_template('index.html', logged_in = True)
+        return render_template('index.html', errors = True, logged_in = True)
     return render_template('index.html', errors = True, logged_in = False)
 
 @app.route('/register')
@@ -43,6 +44,7 @@ def authenticate():
             session[username] = password
             setUser(username)
             data.save()
+            flash('Successfully logged in!')
             return redirect(url_for('index'))
         # user was found in DB but password did not match
         elif data.findUser(username):
@@ -59,6 +61,8 @@ def authenticate():
                 # add account to DB
                 data.registerUser(username, password)
                 data.save()
+                setOut()
+                flash('Successfully registered account for user  "{}"'.format(username))
                 return redirect(url_for('index'))
             else:
                 flash('Password length insufficient')
@@ -73,14 +77,23 @@ def authenticate():
 def logout():
     session.pop(user, None)
     setUser(None)
+    flash('Successfully logged out!')
     return redirect(url_for('index'))
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    pass
 
 @app.route('/search',methods=['POST'])
 def search():
     #following code can be shortened
     if request.form["Submit"] == "Search1":
         entry = request.form['entry']
-        if entry != "":
+        if len(entry.strip()) != 0:
             if user in session:
                 return render_template('searchResults.html', movie= entry, logged_in=True)
             else:
@@ -90,7 +103,7 @@ def search():
 
     elif request.form["Submit"] == "Search2":
         entry = request.form['entry']
-        if entry != "":
+        if len(entry.strip()) != 0:
             if user in session:
                 return render_template('mood.html', movie= entry, logged_in=True)
             else:
@@ -100,7 +113,7 @@ def search():
 
     elif request.form["Submit"] == "Search3":
         entry = request.form['entry']
-        if entry != "":
+        if len(entry.strip()) != 0:
             if user in session:
                 return render_template('searchResults.html', movie= entry, logged_in=True)
             else:
