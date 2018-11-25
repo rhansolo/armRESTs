@@ -73,7 +73,7 @@ Added Bootstrap css to template.html, index.html, and register.html
 There is now a pleasing navbar at the top with search, login, and register features.
 Search needs to be implemented along with the APIs.
 ==============================================================
-korozaA -- 2018-11-25 11:04
+aleksandraK -- 2018-11-25 11:04
 --------------------------------------------------------------
 Continued setup work
 added following routes:
