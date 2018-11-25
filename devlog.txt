@@ -92,3 +92,8 @@ templateLog.html
 Note: instead of repeatedly copying over the login/logout code feature, we can now just extend from templateLog.html templates
 Some bugs remain with keeping the user logged in as they navigate across the site and about page needs to be properly linked
 ==============================================================
+robinH -- 2018-11-25 13:07
+--------------------------------------------------------------
+Implemented a sidebar in template.html such that it would display hard coded movie categories. Errors still exist when displaying
+error messages and displaying main info in the bottom right section.
+==============================================================
