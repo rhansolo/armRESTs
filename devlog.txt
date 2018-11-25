@@ -104,3 +104,7 @@ Current bugs:
 	navbar's forms stretch in height when window size shrinks
 		(is this fixable???)
 ==============================================================
+robinH -- 2018-11-25 18:04
+--------------------------------------------------------------
+Updated Site-Map in design.pdf based on other devo's suggestions and uploaded the new copy to repo. 
+==============================================================
