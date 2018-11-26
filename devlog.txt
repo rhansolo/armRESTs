@@ -108,3 +108,7 @@ robinH -- 2018-11-25 18:04
 --------------------------------------------------------------
 Updated Site-Map in design.pdf based on other devo's suggestions and uploaded the new copy to repo. 
 ==============================================================
+robinH -- 2018-11-26 14:02
+--------------------------------------------------------------
+Fixed formatting of navbar header by commenting out additional features. Resizing still doesn't work. 
+==============================================================
