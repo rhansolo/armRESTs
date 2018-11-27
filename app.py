@@ -5,6 +5,7 @@
 import os
 from flask import Flask, redirect, url_for, render_template, session, request, flash, get_flashed_messages
 from utils import database as arms
+from utils import api
 
 
 # instantiate Flask object

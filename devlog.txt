@@ -143,3 +143,8 @@ Timeline:
 	really helped us narrow down specific tasks necessary to get the project moving and what features should be prioritized (eg. searching and movie pages may be more
 	difficult than previously anticipated).
 ==============================================================
+aleksandraK -- 2018-11-26 23:07
+--------------------------------------------------------------
+Setup api.py in utils and wrote fetchInfo() helper method to fetch API url info.
+Still have issues accessing popular movies from MovieDB 
+==============================================================
