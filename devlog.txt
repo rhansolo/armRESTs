@@ -106,11 +106,11 @@ Current bugs:
 ==============================================================
 robinH -- 2018-11-25 18:04
 --------------------------------------------------------------
-Updated Site-Map in design.pdf based on other devo's suggestions and uploaded the new copy to repo. 
+Updated Site-Map in design.pdf based on other devo's suggestions and uploaded the new copy to repo.
 ==============================================================
 robinH -- 2018-11-26 14:02
 --------------------------------------------------------------
-Fixed formatting of navbar header by commenting out additional features. Resizing still doesn't work. 
+Fixed formatting of navbar header by commenting out additional features. Resizing still doesn't work.
 ==============================================================
 johnnyW -- 2018-11-26 21:44
 --------------------------------------------------------------
@@ -127,5 +127,19 @@ Updated component map in design.pdf:
 		Mood to point to a movie page based on mood
 		Search Bar pointing to movie search template
 	main Python file called app.py
-		
+
+==============================================================
+aleksandraK -- 2018-11-26 22:21
+--------------------------------------------------------------
+Fixed up timeline and roles on the design.pdf:
+Roles:
+	Roles were originally divided to be Robin (PM), Johnny (front-end), and me (back-end).
+	We have since realized that this is an unequal distribution of labor. Robin will help out with minor
+	coding tasks and Johnny will help with the currently running movies feature of our site and maintaining page templates
+	in addition to working on front-end.
+Timeline:
+	Although we were sticking to the original timeline, we realized that we would not be able to get the entire project done and tested by the Dec. 4
+	release date. We now set our deadline to Dec 11 in the time line section and have added an entire weekend of testing our work. Face time in class
+	really helped us narrow down specific tasks necessary to get the project moving and what features should be prioritized (eg. searching and movie pages may be more
+	difficult than previously anticipated).
 ==============================================================
