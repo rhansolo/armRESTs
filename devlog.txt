@@ -112,3 +112,20 @@ robinH -- 2018-11-26 14:02
 --------------------------------------------------------------
 Fixed formatting of navbar header by commenting out additional features. Resizing still doesn't work. 
 ==============================================================
+johnnyW -- 2018-11-26 21:44
+--------------------------------------------------------------
+Based on other devos' suggestions...
+Added to component map in design.pdf:
+	template.html powered by Bootstrap
+	which extends to...
+		index.html (the Homepage)
+		movie.html (a Movie Page)
+		search.html (Movie Search Template)
+Updated component map in design.pdf:
+	corrected arrows of:
+		Feeling Lucky to point to random movie page template
+		Mood to point to a movie page based on mood
+		Search Bar pointing to movie search template
+	main Python file called app.py
+		
+==============================================================
