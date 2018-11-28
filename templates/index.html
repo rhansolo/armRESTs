@@ -3,5 +3,10 @@
 {% extends "templateLog.html" %}
 {% block title %} armRESTs {% endblock %}
 {% block content %}
-<p> {{ trend }} </p>
+	{% if trend %}
+	{% for movie in trend %}
+	
+	<p> sssssssssssssssssssssssssssssssssssssssssssssssssssshere{{movie['original_title']}} </p>
+	{% endfor %}
+	{% endif %}
 {% endblock %}

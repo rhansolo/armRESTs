@@ -31,5 +31,6 @@ movKey= "95e69e7f8882e106d7cf82de25f6a422"
 #get currently popular movies
 def getPopular():
     movInfo= fetchInfo(movURL+movKey)
-    pops= movInfo['results'][0]['original_title']
-    return pops
+    return movInfo['results'];
+    #pops= movInfo['results'][0]['original_title']
+    #return pops
