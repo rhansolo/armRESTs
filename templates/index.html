@@ -3,10 +3,16 @@
 {% extends "templateLog.html" %}
 {% block title %} armRESTs {% endblock %}
 {% block content %}
+	<div class="container">
 	{% if trend %}
+	<div class="row">
 	{% for movie in trend %}
-	
-	<p> sssssssssssssssssssssssssssssssssssssssssssssssssssshere{{movie['original_title']}} </p>
+		{% if movie != "" %}
+		<div class="col-md-3">
+			<p>{{movie['original_title']}}</p>
+		</div>
+		{% endif %}
 	{% endfor %}
 	{% endif %}
+	</div></div>
 {% endblock %}
