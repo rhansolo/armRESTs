@@ -148,3 +148,8 @@ aleksandraK -- 2018-11-26 23:07
 Setup api.py in utils and wrote fetchInfo() helper method to fetch API url info.
 Still have issues accessing popular movies from MovieDB 
 ==============================================================
+robinH -- 2018-11-27 23:46
+--------------------------------------------------------------
+Passed API dictionary into html and processed it using Jinja. Our page now displays a list of all trending movie titles of the month.
+Problem still exists with formatting and FEF display. 
+==============================================================
