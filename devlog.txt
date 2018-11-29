@@ -174,3 +174,7 @@ using a dropdown inside the collapse span.
 Each category page now displays the titles of the most popular movies for that genre.
 	Perhaps can implement several pages of that genre, as there are lots of results...
 ==============================================================
+aleksandraK & robinH -- 2018-11-29 14:08
+--------------------------------------------------------------
+Homepage now displays the movie's poster retrieved from the API under the movie title. Bugs like some posters don't have titles still exist. Will display pictures for movies in categories later. 
+==============================================================
