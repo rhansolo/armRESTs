@@ -146,10 +146,16 @@ Timeline:
 aleksandraK -- 2018-11-26 23:07
 --------------------------------------------------------------
 Setup api.py in utils and wrote fetchInfo() helper method to fetch API url info.
-Still have issues accessing popular movies from MovieDB 
+Still have issues accessing popular movies from MovieDB
 ==============================================================
 robinH -- 2018-11-27 23:46
 --------------------------------------------------------------
 Passed API dictionary into html and processed it using Jinja. Our page now displays a list of all trending movie titles of the month.
-Problem still exists with formatting and FEF display. 
+Problem still exists with formatting and FEF display.
+==============================================================
+aleksandraK -- 2018-11-28 20:53
+--------------------------------------------------------------
+The sidebar on the home page now displays all of the genres as retrieved from the MovieDB API. What remains to be done is to
+transfer info to all the other routes that display sidebar and to fix how the bar is displayed (ie. it is too short at the moment).
+There may be a less redundant way to pass info from API, to be reviewed.
 ==============================================================

@@ -32,5 +32,9 @@ movKey= "95e69e7f8882e106d7cf82de25f6a422"
 def getPopular():
     movInfo= fetchInfo(movURL+movKey)
     return movInfo['results'];
-    #pops= movInfo['results'][0]['original_title']
-    #return pops
+
+#getting genres
+def getGenres():
+    genURL="https://api.themoviedb.org/3/genre/movie/list?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US"
+    genInfo= fetchInfo(genURL)
+    return genInfo['genres']

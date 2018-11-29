@@ -59,21 +59,24 @@
           </div>
           <br><br><br>
         <!-- Side navbar for categories of movies -->
+        <!-- still an issue -->
         <div class="wrapper">
           <nav class="sidebar bg-dark text-warning">
             <ul class="nav flex-column">
+
               <li class="nav-item ml-auto mt-5 mb-1">
                 <a class="nav-link disabled text-warning" href="#"><b>Categories</b></a>
               </li>
-              <li class="nav-item ml-auto">
-                <a class="nav-link text-light" href="#">Horror</a>
-              </li>
-              <li class="nav-item ml-auto">
-                <a class="nav-link text-light" href="#">Adventure</a>
-              </li>
-              <li class="nav-item ml-auto">
-                <a class="nav-link text-light" href="#">Romantic</a>
-              </li>
+                {% if sidebar %}
+              	{% for genre in sidebar %}
+              		{% if genre != "" %}
+                    <li class="nav-item ml-auto">
+                      <a class="nav-link text-light" href="#"> {{ genre['name'] }}</a>
+                    </li>
+              		{% endif %}
+              	{% endfor %}
+              	{% endif %}
+
             </ul>
           </nav>
         </div>
