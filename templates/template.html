@@ -14,14 +14,16 @@
          {% endblock %}
          <style>
             .sidebar {
-              height: 100%;
-              position: absolute;
+              width: 150px;
+              position: fixed; /* Fixed location as you scroll*/
               font-size: x-large;
-              width: 180px;
+              z-index: 1;
               top: 0;
               bottom: 0;
               left: 0;
-              border-right: 1px solid #eee;
+            }
+            #search {
+              padding-right: 275px;
             }
           </style>
   </head>
@@ -34,8 +36,9 @@
                  <!-- JavaScript is needed for the toggle to function properly in a tiny window where nav-items cannot be seen -->
                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
+                      <!-- Stuff can be done here!!! Add smaller versions of the navbar in here as a drop down, since we cannot use JS-->
                  </button>
-                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                 <div class="navbar-collapse collapse ml-4 pl-4" id="navbarSupportedContent">
                       <!--<div class="navbar-nav mr-auto">
                            <ul class="navbar-nav mx-auto pl-4 pr-4">
                                 <li class="nav-item pl-2"><a class="nav-link text-info" href="/about"><b>ABOUT</b></a></button></li>
@@ -45,13 +48,13 @@
                       -->
                            <!-- Search bar -->
                            <form class="form-inline pl-4 pr-4 my-2 my-lg-0" action="/search" method= "POST">
-                             <input class="form-control form-control ml-4 mr-sm-2" type="search" name="entry" placeholder="Search for Movies" aria-label="Search">
+                             <input id="search" class="form-control form-control ml-4 mr-sm-2" type="search" name="entry" placeholder="Search for Movies" aria-label="Search">
                               <button class="btn btn-outline-info my-2 my-sm-0" type="submit" name="Submit" value="Search1">Go</button>
                               <button class="btn btn-outline-info ml-2 my-2 my-sm-0" type="submit" name="Submit" value="Search2">Mood</button>
                               <button class="btn btn-outline-info ml-2 my-2 my-sm-0" type="submit" name="Submit" value="Search3">Feeling Lucky?</button>
                             </form>
 
-                      </div>
+                  </div>
                       {% block login %}
                       {% endblock %}
                   </div>
@@ -59,21 +62,19 @@
           </div>
           <br><br><br>
         <!-- Side navbar for categories of movies -->
-        <!-- still an issue -->
         <div class="wrapper">
           <nav class="sidebar bg-dark text-warning">
             <ul class="nav flex-column">
               <center>
               <li class="nav-item ml-auto mt-5 mb-1">
-                <a class="nav-link disabled text-warning"><b>Categories</b></a>
+                <a class="nav-link disabled text-light"><b>Categories</b></a>
               </li>
                 {% if sidebar %}
               	{% for genre in sidebar %}
               		{% if genre != "" %}
-                    <li class="nav-item ml-auto">
-                      
-                      <button class="btn btn-outline-info ml-2 my-2 my-sm-0" type="submit" name="Submit" value={{ genre['name'] }}>{{ genre['name'] }}</button>
-                    </li>
+                    <form action="/categories">
+                      <button class="btn btn-dark text-warning mb-1" type="submit" name="Submit" value={{genre['name']}}><b>{{genre['name']}}</b></button>
+                    </form>
               		{% endif %}
               	{% endfor %}
               	{% endif %}

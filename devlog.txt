@@ -163,3 +163,14 @@ robinH -- 2018-11-29 00:20
 --------------------------------------------------------------
 Changed it such that each category displayed in the side bar is now a button, allowing app.py to process the user's choice and display information according. When buttons are clicked however, results don't change accordingly. FEF still needs work.
 ==============================================================
+johnnyW -- 2018-11-29 0
+--------------------------------------------------------------
+Fixed back-end functionality to allow each button to render the category.html template with the specific genre associated with the button.
+Sidebar now stays in place while scrolling down a page.
+Added padding-right to search input
+Put login/register/logout buttons/forms inside of a div that is collapsible as the screen gets smaller.
+Collapse features will not function in this project as we cannot use JavaScript... perhaps an alternative would be
+using a dropdown inside the collapse span.
+Each category page now displays the titles of the most popular movies for that genre.
+	Perhaps can implement several pages of that genre, as there are lots of results...
+==============================================================

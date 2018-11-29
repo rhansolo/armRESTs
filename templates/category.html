@@ -1,0 +1,18 @@
+<!-- armRESTs - Robin Han, Aleksandra Koroza, Johnny Wong -->
+<!-- Category template -->
+{% extends "templateLog.html" %}
+{% block title %} armRESTs {% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <h3>{{genre}} Movies</h3>
+  </div>
+  <div class="row">
+  {% for movie in movieDict %}
+    <div class="col-md-3">
+      <p>{{movie['original_title']}}</p>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+{% endblock %}
