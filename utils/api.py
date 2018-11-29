@@ -36,7 +36,8 @@ def getPopular():
     movInfo= fetchInfo(movURL+movKey)
     return movInfo['results'];
 
-
+def getMoviePics(id):
+    movInfo = "https://api.themoviedb.org/3/movie/" + id + "/images?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&include_image_language=en"
 
 #getting genres
 def getGenres():
