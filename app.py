@@ -91,6 +91,13 @@ def about():
 def contact():
     pass
 
+
+@app.route('/categories',methods=['POST'])
+def categories():
+    if request.form["Submit"] == "yes":
+        return render_template('about.html')
+
+
 @app.route('/search',methods=['POST'])
 def search():
     #following code can be shortened
