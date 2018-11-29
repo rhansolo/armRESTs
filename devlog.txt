@@ -159,3 +159,7 @@ The sidebar on the home page now displays all of the genres as retrieved from th
 transfer info to all the other routes that display sidebar and to fix how the bar is displayed (ie. it is too short at the moment).
 There may be a less redundant way to pass info from API, to be reviewed.
 ==============================================================
+robinH -- 2018-11-29 00:20
+--------------------------------------------------------------
+Changed it such that each category displayed in the side bar is now a button, allowing app.py to process the user's choice and display information according. When buttons are clicked however, results don't change accordingly. FEF still needs work.
+==============================================================
