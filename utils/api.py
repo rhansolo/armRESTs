@@ -29,8 +29,7 @@ remember that it's 40 requests per 10 sec
 examples: https://www.themoviedb.org/documentation/api/discover
 /discover/movie?sort_by=popularity.desc for popular movies ?
 '''
-movURL="https://api.themoviedb.org/3/trending/all/day?api_key="
-movKey= "95e69e7f8882e106d7cf82de25f6a422"
+
 
 def getMovieDict(id):
     ''' Getting entire associated movie dictionary '''
@@ -40,7 +39,10 @@ def getMovieDict(id):
 
 def getPopular():
     ''' Getting trending movies '''
-    movInfo= fetchInfo(movURL+movKey)
+    movURL=" https://api.themoviedb.org/3/movie/popular?api_key="
+    movKey= "95e69e7f8882e106d7cf82de25f6a422"
+    movLang="&language=en-US&page=1"
+    movInfo= fetchInfo(movURL+movKey+movLang)
     return movInfo['results'];
 
 def getGenres():

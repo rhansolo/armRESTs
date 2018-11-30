@@ -9,7 +9,7 @@
     <center> <h3>{{genre}} Movies</h3> </center>
   </div>
   <center>
-	<h2> {{ dict['original_title'] }} </h2>
+	<h2> {{ dict['title'] }} </h2>
 	 {% if dict['poster_path'] != None %}
       {% set poster = dict['poster_path'] %}
       {% set link = "https://image.tmdb.org/t/p/w500" + poster %}
