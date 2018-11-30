@@ -115,9 +115,12 @@ def movie():
 def search():
     #following code can be shortened
     if request.args["Submit"] == "Search1":
-        entry = request.args['entry'].lower()
+        entry = request.args['entry'].lower().strip()
         if len(entry.strip()) != 0:
             movieDict = api.searchMovie(entry)
+            if len(movieDict) == 0:
+                flash("There were no movies with '{0}'!".format(entry))
+                return redirect(url_for('index'))
             if user in session:
                 return render_template('searchResults.html', entry= entry, logged_in=True, sidebar=genres, movieDict=movieDict)
             else:

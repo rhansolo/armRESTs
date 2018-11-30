@@ -61,5 +61,8 @@ def getMovies(genre):
 
 def searchMovie(keyword, page = '1'):
     '''Getting all movies given keyword'''
-    keywordURL = "https://api.themoviedb.org/3/search/movie?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&query={0}&page={1}&include_adult=false".format(keyword, page)
+    word = keyword
+    print(word.count(""))
+    # fix space issue in keyword
+    keywordURL = "https://api.themoviedb.org/3/search/movie?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&query={0}&page={1}&include_adult=false".format(word, page)
     return fetchInfo(keywordURL)['results']

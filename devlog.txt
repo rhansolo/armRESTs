@@ -190,9 +190,10 @@ robinH -- 2018-11-30 00:36
 --------------------------------------------------------------
 Passed the dictionary and processed it in jinja when user clicks on a specific movie and the html page displays specific info instead of passing each arguement in app.py. Also added poster picture and displayed other relevant information regarding each specific movie and made it a little more aesthetic.
 ==============================================================
-johnnyW -- 2018-11-30 01:30
+johnnyW -- 2018-11-30 02:20
 --------------------------------------------------------------
 Search functionality given a keyword now functions. Searches for movies that contain the entry in their title.
+	Bug: cannot search keywords that have spaces in between chars
 Posters of movies also redirect to the movie's page describing it.
 Potential design implementation:
 	Add pages of several movies instead of only one page, along with formatting search queries to change with current page.
