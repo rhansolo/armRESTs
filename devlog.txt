@@ -163,7 +163,7 @@ robinH -- 2018-11-29 00:20
 --------------------------------------------------------------
 Changed it such that each category displayed in the side bar is now a button, allowing app.py to process the user's choice and display information according. When buttons are clicked however, results don't change accordingly. FEF still needs work.
 ==============================================================
-johnnyW -- 2018-11-29 0
+johnnyW -- 2018-11-29 02:38
 --------------------------------------------------------------
 Fixed back-end functionality to allow each button to render the category.html template with the specific genre associated with the button.
 Sidebar now stays in place while scrolling down a page.
@@ -184,9 +184,16 @@ Added images to different genres.
 User can now access individual movie pages and see some very simple information.
 To do so I added /movie route and added a new method to api.py to access each movie's dictionary.
 Work remains to be done on the aesthetics of movie pages and user interaction with each movie (ie. rating, commenting, etc.)
-Also, some movies do not have images to display. 
+Also, some movies do not have images to display.
 ==============================================================
 robinH -- 2018-11-30 00:36
 --------------------------------------------------------------
-Passed the dictionary and processed it in jinja when user clicks on a specific movie and the html page displays specific info instead of passing each arguement in app.py. Also added poster picture and displayed other relevant information regarding each specific movie and made it a little more aesthetic. 
+Passed the dictionary and processed it in jinja when user clicks on a specific movie and the html page displays specific info instead of passing each arguement in app.py. Also added poster picture and displayed other relevant information regarding each specific movie and made it a little more aesthetic.
+==============================================================
+johnnyW -- 2018-11-30 01:30
+--------------------------------------------------------------
+Search functionality given a keyword now functions. Searches for movies that contain the entry in their title.
+Posters of movies also redirect to the movie's page describing it.
+Potential design implementation:
+	Add pages of several movies instead of only one page, along with formatting search queries to change with current page.
 ==============================================================

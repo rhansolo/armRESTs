@@ -58,3 +58,8 @@ def getMovies(genre):
     genURL = "https://api.themoviedb.org/3/discover/movie?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres={0}".format(genre_id)
     genInfo = fetchInfo(genURL)
     return genInfo['results']
+
+def searchMovie(keyword, page = '1'):
+    '''Getting all movies given keyword'''
+    keywordURL = "https://api.themoviedb.org/3/search/movie?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&query={0}&page={1}&include_adult=false".format(keyword, page)
+    return fetchInfo(keywordURL)['results']

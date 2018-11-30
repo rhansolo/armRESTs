@@ -111,36 +111,37 @@ def movie():
     rating= movDict["popularity"]
     return render_template('movie.html', dict = movDict, sidebar = genres)
 
-@app.route('/search', methods=['POST'])
+@app.route('/search', methods=['GET'])
 def search():
     #following code can be shortened
-    if request.form["Submit"] == "Search1":
-        entry = request.form['entry']
+    if request.args["Submit"] == "Search1":
+        entry = request.args['entry'].lower()
         if len(entry.strip()) != 0:
+            movieDict = api.searchMovie(entry)
             if user in session:
-                return render_template('searchResults.html', movie= entry, logged_in=True, sidebar=genres)
+                return render_template('searchResults.html', entry= entry, logged_in=True, sidebar=genres, movieDict=movieDict)
             else:
-                return render_template('searchResults.html', movie= entry, logged_in=False, sidebar=genres)
+                return render_template('searchResults.html', entry= entry, logged_in=False, sidebar=genres, movieDict=movieDict)
         flash("Please input a movie name!")
         return redirect(url_for('index'))
 
-    elif request.form["Submit"] == "Search2":
-        entry = request.form['entry']
+    elif request.args["Submit"] == "Search2":
+        entry = request.args['entry']
         if len(entry.strip()) != 0:
             if user in session:
-                return render_template('mood.html', movie= entry, logged_in=True, sidebar=genres)
+                return render_template('mood.html', entry= entry, logged_in=True, sidebar=genres)
             else:
-                return render_template('mood.html', movie= entry, logged_in=False, sidebar=genres)
+                return render_template('mood.html', entry= entry, logged_in=False, sidebar=genres)
         flash("Please input a movie name!")
         return redirect(url_for('index'))
 
-    elif request.form["Submit"] == "Search3":
-        entry = request.form['entry']
+    elif request.args["Submit"] == "Search3":
+        entry = request.args['entry']
         if len(entry.strip()) != 0:
             if user in session:
-                return render_template('searchResults.html', movie= entry, logged_in=True, sidebar=genres)
+                return render_template('searchResults.html', entry= entry, logged_in=True, sidebar=genres)
             else:
-                return render_template('searchResults.html', movie= entry, logged_in=False, sidebar=genres)
+                return render_template('searchResults.html', entry= entry, logged_in=False, sidebar=genres)
         flash("Please input a movie name!")
         return redirect(url_for('index'))
 
