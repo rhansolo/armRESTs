@@ -186,3 +186,7 @@ To do so I added /movie route and added a new method to api.py to access each mo
 Work remains to be done on the aesthetics of movie pages and user interaction with each movie (ie. rating, commenting, etc.)
 Also, some movies do not have images to display. 
 ==============================================================
+robinH -- 2018-11-30 00:36
+--------------------------------------------------------------
+Passed the dictionary and processed it in jinja when user clicks on a specific movie and the html page displays specific info instead of passing each arguement in app.py. Also added poster picture and displayed other relevant information regarding each specific movie and made it a little more aesthetic. 
+==============================================================
