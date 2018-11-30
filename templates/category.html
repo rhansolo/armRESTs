@@ -4,8 +4,8 @@
 {% block title %} armRESTs {% endblock %}
 {% block content %}
 <div class="container">
+  <a class="text-dark" style="text-decoration: none;" href="/categories?Submit={{genre}}"><h1 class="text-center">{{genre}} Movies</h1>
   <div class="row">
-    <h3>{{genre}} Movies</h3>
   </div>
   <div class="row">
   {% for movie in movieDict %}
