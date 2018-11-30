@@ -198,3 +198,7 @@ Posters of movies also redirect to the movie's page describing it.
 Potential design implementation:
 	Add pages of several movies instead of only one page, along with formatting search queries to change with current page.
 ==============================================================
+robinH -- 2018-11-30 11:00
+--------------------------------------------------------------
+Added to mood.html such that it displays movies from multiple specific genres based on the user's input on what mood he/she is feeling. So far, only 4 options are given and the returned movies are hardcoded. Initial display when clicking on the button "mood" still needs to be changed.
+==============================================================
