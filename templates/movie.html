@@ -4,12 +4,31 @@
 {% block title %} armRESTs {% endblock %}
 
 {% block content %}
-<div>
+<div class = "container">
+	<div class="row">
+    <center> <h3>{{genre}} Movies</h3> </center>
+  </div>
   <center>
-<p> The title is: {{ title }} </p>
-<p> The budget is: {{ budget }} </p>
-<p> The summary is: {{ summary }} </p>
-<p> The rating is: {{ rating }} </p>
+	<h2> {{ dict['original_title'] }} </h2>
+	 {% if dict['poster_path'] != None %}
+      {% set poster = dict['poster_path'] %}
+      {% set link = "https://image.tmdb.org/t/p/w500" + poster %}
+      <img src = {{link}} height="400" width="260">
+      {% endif %}
+    <br>
+    <i> {{dict['tagline']}} </i>
+    <br>
+    <br>
+    <br>
+    <h3> Summary </h3>
+	<p>{{ dict['overview'] }} </p>
+	<h3> Runtime </h3>
+	<p> {{ dict ['runtime']}} minutes</p>
+	<h3> Budget </h3>
+	<p> ${{ dict['budget'] }} </p>
+	<h3> Rating </h3>
+	<p> {{ dict['popularity'] }} </p>
+	<
  </center>
 </div>
 {% endblock %}

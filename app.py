@@ -109,7 +109,7 @@ def movie():
     budget= movDict["budget"]
     summary= movDict["overview"]
     rating= movDict["popularity"]
-    return render_template('movie.html',sidebar=genres, budget=budget, title=title, summary=summary, rating=rating)
+    return render_template('movie.html', dict = movDict, sidebar = genres)
 
 @app.route('/search', methods=['POST'])
 def search():
