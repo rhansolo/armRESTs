@@ -202,3 +202,7 @@ robinH -- 2018-11-30 11:00
 --------------------------------------------------------------
 Added to mood.html such that it displays movies from multiple specific genres based on the user's input on what mood he/she is feeling. So far, only 4 options are given and the returned movies are hardcoded. Initial display when clicking on the button "mood" still needs to be changed.
 ==============================================================
+aleksandraK & robinH -- 2018-11-30 14:11
+--------------------------------------------------------------
+Fixed TV show bugs in trending and found probable solutions to other bugs such as preventing the display of TV Movie category and randomizing the order of displayed movies. johnnyW tried to fix bug related to white-space, which will be fixed later.
+==============================================================
