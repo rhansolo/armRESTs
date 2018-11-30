@@ -176,5 +176,13 @@ Each category page now displays the titles of the most popular movies for that g
 ==============================================================
 aleksandraK & robinH -- 2018-11-29 14:08
 --------------------------------------------------------------
-Homepage now displays the movie's poster retrieved from the API under the movie title. Bugs like some posters don't have titles still exist. Will display pictures for movies in categories later. 
+Homepage now displays the movie's poster retrieved from the API under the movie title. Bugs like some posters don't have titles still exist. Will display pictures for movies in categories later.
+==============================================================
+aleksandraK -- 2018-11-29 23:23
+--------------------------------------------------------------
+Added images to different genres.
+User can now access individual movie pages and see some very simple information.
+To do so I added /movie route and added a new method to api.py to access each movie's dictionary.
+Work remains to be done on the aesthetics of movie pages and user interaction with each movie (ie. rating, commenting, etc.)
+Also, some movies do not have images to display. 
 ==============================================================

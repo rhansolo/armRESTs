@@ -9,10 +9,18 @@
   </div>
   <div class="row">
   {% for movie in movieDict %}
+    {% if movie != "" %}
     <div class="col-md-3">
-      <p>{{movie['original_title']}}</p>
-      <p> 
+      <form action="/movie">
+        <button class="btn btn-dark text-warning mb-1" type="submit" name="Submit" value={{movie['id']}}><b>{{movie['original_title']}}</b></button>
+      </form>
+      {% if movie['poster_path'] != None %}
+      {% set poster = movie['poster_path'] %}
+      {% set link = "https://image.tmdb.org/t/p/w500" + poster %}
+      <img src = {{link}} height="200" width="130">
+      {% endif %}
     </div>
+    {% endif %}
   {% endfor %}
   </div>
 </div>

@@ -12,8 +12,9 @@ import urllib.request as request
 '''
 API HELPERS
 '''
-#returns loaded response
+
 def fetchInfo(url):
+    ''' Returns loaded response '''
     response = request.urlopen(url)
     response = response.read()
     info = json.loads(response)
@@ -31,24 +32,27 @@ examples: https://www.themoviedb.org/documentation/api/discover
 movURL="https://api.themoviedb.org/3/trending/all/day?api_key="
 movKey= "95e69e7f8882e106d7cf82de25f6a422"
 
-#get currently popular movies
+def getMovieDict(id):
+    ''' Getting entire associated movie dictionary '''
+    link1 = "https://api.themoviedb.org/3/movie/"
+    link2 = "?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US"
+    return fetchInfo(link1+id+link2)
+
 def getPopular():
+    ''' Getting trending movies '''
     movInfo= fetchInfo(movURL+movKey)
     return movInfo['results'];
 
-def getMoviePics(id):
-    movInfo = "https://api.themoviedb.org/3/movie/" + id + "/images?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&include_image_language=en"
-
-#getting genres
 def getGenres():
+    ''' Getting all possible genres '''
     genURL="https://api.themoviedb.org/3/genre/movie/list?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US"
     genInfo= fetchInfo(genURL)
     return genInfo['genres']
 
 GENRES = getGenres()
 
-#get movies given genre
 def getMovies(genre):
+    ''' Getting all movies given genre '''
     search_for_genre = [x for x in GENRES if x['name'] == genre][0]
     genre_id = search_for_genre['id']
     genURL = "https://api.themoviedb.org/3/discover/movie?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres={0}".format(genre_id)

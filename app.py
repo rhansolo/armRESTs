@@ -92,13 +92,24 @@ def contact():
     pass
 
 @app.route('/categories',methods=['GET'])
-# this route uses the 'GET' method so links can easily be shared amongst users for the different categories
-# while still maintaining the robustness of using one template to render a page dedicated to one
-# specific category of movies
+#this route uses the 'GET' method so links can easily be shared amongst users for the different categories
+#while still maintaining the robustness of using one template to render a page dedicated to one
+#specific category of movies
+
 def categories():
     genre = request.args["Submit"]
     movieDict = api.getMovies(genre)
     return render_template('category.html',  sidebar=genres, genre=genre, movieDict=movieDict)
+
+@app.route('/movie', methods=['POST','GET'])
+def movie():
+    movID = request.args["Submit"]
+    movDict = api.getMovieDict(movID)
+    title = movDict["original_title"]
+    budget= movDict["budget"]
+    summary= movDict["overview"]
+    rating= movDict["popularity"]
+    return render_template('movie.html',sidebar=genres, budget=budget, title=title, summary=summary, rating=rating)
 
 @app.route('/search', methods=['POST'])
 def search():

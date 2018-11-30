@@ -2,3 +2,14 @@
 <!-- page generated for each reccomended movie -->
 {% extends "templateLog.html" %}
 {% block title %} armRESTs {% endblock %}
+
+{% block content %}
+<div>
+  <center>
+<p> The title is: {{ title }} </p>
+<p> The budget is: {{ budget }} </p>
+<p> The summary is: {{ summary }} </p>
+<p> The rating is: {{ rating }} </p>
+ </center>
+</div>
+{% endblock %}
