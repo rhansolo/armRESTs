@@ -114,6 +114,7 @@ def movie():
 @app.route('/search', methods=['GET'])
 def search():
     #following code can be shortened
+    # using the search bar to find a movie
     if request.args["Submit"] == "Search1":
         entry = request.args['entry'].lower().strip()
         if len(entry.strip()) != 0:
@@ -127,39 +128,43 @@ def search():
                 return render_template('searchResults.html', entry= entry, logged_in=False, sidebar=genres, movieDict=movieDict)
         flash("Please input a movie name!")
         return redirect(url_for('index'))
-
+    #pressing the mood button
     elif request.args["Submit"] == "Search2":
-        entry = request.args['entry']
-        if len(entry.strip()) != 0:
             if user in session:
-                return render_template('mood.html', entry= entry, logged_in=True, sidebar=genres)
+                return render_template('mood.html', logged_in=True, sidebar=genres)
             else:
-                return render_template('mood.html', entry= entry, logged_in=False, sidebar=genres)
-        flash("Please input a movie name!")
-        return redirect(url_for('index'))
-
+                return render_template('mood.html', logged_in=False, sidebar=genres)
+    #pressing the I'm feeling lucky button
     elif request.args["Submit"] == "Search3":
-        entry = request.args['entry']
-        if len(entry.strip()) != 0:
             if user in session:
-                return render_template('searchResults.html', entry= entry, logged_in=True, sidebar=genres)
+                return render_template('searchResults.html', logged_in=True, sidebar=genres)
             else:
-                return render_template('searchResults.html', entry= entry, logged_in=False, sidebar=genres)
-        flash("Please input a movie name!")
-        return redirect(url_for('index'))
+                return render_template('searchResults.html',  logged_in=False, sidebar=genres)
 
 @app.route('/mood',methods=['POST'])
 def mood():
     if request.form["submit"] == "Happy":
+        family = api.getMovies("Family")
+        romantic = api.getMovies("Romance")
+        history = api.getMovies("History")
         #fill in some API shenanigans
         #possible problem: passing in entry from searching into mood
-        return render_template('searchResults.html', sidebar=genres)
+        return render_template('mood.html',mood = "Happy", sidebar=genres, disp = [family,romantic,history])
     if request.form["submit"] == "Sad":
-        return render_template('searchResults.html', sidebar=genres)
+        comedy = api.getMovies("Comedy")
+        fantasy = api.getMovies("Fantasy")
+        return render_template('mood.html', mood = "Sad", sidebar=genres, disp = [comedy,fantasy])
     if request.form["submit"] == "Stressed":
-        return render_template('searchResults.html', sidebar=genres)
+        animation = api.getMovies("Animation")
+        music = api.getMovies("Music")
+        action = api.getMovies("Action")
+        return render_template('mood.html', mood = "Stressed", sidebar=genres, disp = [animation,music,action])
     if request.form["submit"] == "Bored":
-        return render_template('searchResults.html', sidebar=genres)
+        drama = api.getMovies("Drama")
+        crime = api.getMovies("Crime")
+        adventure = api.getMovies("Adventure")
+        comedy = api.getMovies("Comedy")
+        return render_template('mood.html', mood = "Bored",sidebar=genres, disp = [drama,crime,adventure,comedy])
 
 if __name__ == '__main__':
     app.debug = True
