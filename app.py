@@ -136,8 +136,8 @@ def movie():
             comment = request.args['entry']
             data.addComment(movieTitle,user,comment)
             flash('Successfully left a comment!')
-            #return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments)
-        #return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments)
+            return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments)
+        return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments)
     return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= False)
 
 @app.route('/search', methods=['GET'])
