@@ -12,6 +12,13 @@
     </form>
 {% endif %}
 {% if logged_in %}
+<!-- User Profile -->
+<div>
+<form class="form-inline my-2 my-lg-0" action="/profile">
+  <input class="btn btn-outline-warning ml-4" type="submit" name="submit" value = "Profile">
+</div>
+</form>
+<!-- Log Out -->
 </div>
   <form class="form-inline my-2 my-lg-0" action="/logout">
     <input class="btn btn-outline-warning ml-4" type="submit" name="submit" value = "Log Out">
@@ -24,7 +31,7 @@
 <nav>
   <ul class="pagination justify-content-center">
     <li class="page-item"><span class="page-link">Previous</span></li>
-    
+
 
   </ul>
 </nav>

@@ -18,6 +18,7 @@ app.secret_key = os.urandom(32)
 DB_FILE = "data/armRESTs.db"
 user = None
 genres = api.getGenres()
+
 def setUser(userName):
     global user
     user = userName
@@ -66,7 +67,7 @@ def authenticate():
                 # add account to DB
                 data.registerUser(username, password)
                 data.save()
-                setOut()
+                #data.setOut()
                 flash('Successfully registered account for user  "{}"'.format(username))
                 return redirect(url_for('index'))
             else:
@@ -80,6 +81,9 @@ def authenticate():
 
 @app.route('/logout')
 def logout():
+    '''
+    Logs user out
+    '''
     session.pop(user, None)
     setUser(None)
     flash('Successfully logged out!')
@@ -93,11 +97,20 @@ def about():
 def contact():
     pass
 
+@app.route('/profile')
+def profile():
+    '''
+    Generates User profile
+    '''
+    if user in session:
+        name= user
+        return render_template("profile.html",name=name,logged_in = True, sidebar= genres)
+    return redirect(url_for('index'))
+
 @app.route('/categories',methods=['GET'])
 #this route uses the 'GET' method so links can easily be shared amongst users for the different categories
 #while still maintaining the robustness of using one template to render a page dedicated to one
 #specific category of movies
-
 def categories():
     genre = request.args["Submit"]
     movieDict = api.getMovies(genre)
@@ -105,9 +118,27 @@ def categories():
 
 @app.route('/movie', methods=['POST','GET'])
 def movie():
+    '''
+    Upon access, creates table specific to movie
+    Renders movie page from API info
+    stores current movie as global
+    '''
     movID = request.args["Submit"]
     movDict = api.getMovieDict(movID)
-    return render_template('movie.html', dict = movDict, sidebar = genres)
+    movieTitle= api.getMovieName(movID)
+
+    data = arms.DB_Manager(DB_FILE)
+    data.createMovie(movieTitle)
+
+    if user in session:
+        movComments= data.getComments(movieTitle)
+        if request.args["Submit"] == "Comment":
+            comment = request.args['entry']
+            data.addComment(movieTitle,user,comment)
+            flash('Successfully left a comment!')
+            #return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments)
+        #return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments)
+    return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= False)
 
 @app.route('/search', methods=['GET'])
 def search():

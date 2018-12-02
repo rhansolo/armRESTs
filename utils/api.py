@@ -38,6 +38,10 @@ def getMovieDict(id):
     link2 = "?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US"
     return fetchInfo(link1+id+link2)
 
+def getMovieName(id):
+    dict= getMovieDict(id)
+    return dict['title']
+
 def getPopular():
     ''' Getting trending movies '''
     movURL=" https://api.themoviedb.org/3/movie/popular?api_key="

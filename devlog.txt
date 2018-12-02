@@ -210,3 +210,11 @@ robinH -- 2018-12-2 11:49
 --------------------------------------------------------------
 Now clicking the "I'm Feeling Lucky" button will produce a page with a randomly generated movie from a certain year and displays its information for the user to see. Will fix certain bugs relating to missing poster pictures or descriptions soon.
 ==============================================================
+aleksandraK -- 2018-14:33
+--------------------------------------------------------------
+Added requirements.txt (user just has to run pip install -r <path-to-file>requirements.txt to install necessary packages.)
+Added createMovie(), getComments(), findMovie(), and addComment() to database.py
+manipulated movie.html to display submission form if user logged in
+still have difficulty adding comments to page and displaying previous ones
+issue may lie in a logic flaw within /movie route, comment is not being found
+==============================================================

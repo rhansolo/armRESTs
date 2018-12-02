@@ -159,36 +159,25 @@ class DB_Manager:
     Look at story stuff for reference...
     use it for movies instead
     '''
-    #==========================Start of story fxns==========================
-    def createStory(self, storyTitle):
+    #==========================Start of movie fxns==========================
+    def createMovie(self, movieTitle):
         '''
-        CREATES TABLE OF storyTitle IF storyTitle IS UNIQUE(NOT FOUND IN DATABASE)
+         cREATES TABLE OF movieTitle IF movieTitle IS UNIQUE(NOT FOUND IN DATABASE)
+         Each movie table used to store comments
         '''
-        if not self.findStory(storyTitle):
-            self.tableCreator(storyTitle, 'story_id integer', 'story_line text', 'user_id integer')
+        if not self.findMovie(movieTitle):
+            self.tableCreator(movieTitle, 'movie_title text', 'user text', 'comment text')
             return True
         return False
 
-    def addToStory(self, storyTitle, text, user_id):
+    def addComment(self, movieTitle, user, comment):
         '''
-        ADD text TO storyTitle's TABLE TO DATABASE
-        IF USER CONTRIBUTED TO storyTitle ALREADY, DON'T ADD TO STORY
+        ADD comment TO movieTitle's TABLE TO DATABASE
+        user can comment more than once
+        movietitle field redundant, (can be replaced with time of comment)
         '''
-        c = self.openDB()
-        if user_id in self.get_user_ids(storyTitle):
-            return False
-        # otherwise add text to story
-        command = "SELECT story_id FROM '{0}' WHERE story_id == (SELECT max(story_id) FROM '{0}')".format(storyTitle)
-        c.execute(command)
-        selectedVal = c.fetchone()
-        # max_id represents the id of the most recent story_line in storyTitle table
-        max_id = 0
-        if selectedVal == None:
-            max_id = 0
-        else:
-            max_id = selectedVal[0]
-        row = (max_id + 1, text, user_id)
-        self.insertRow(storyTitle, row)
+        row=(movieTitle,user,comment)
+        self.insertRow(movieTitle, row)
         return True
 
     def findMostRecentUpdate(self, storyTitle):
@@ -212,24 +201,35 @@ class DB_Manager:
         textList = [x[0] for x in selectedVal]
         return '\n'.join(textList)
 
-    def findStory(self, storyTitle):
+    def findMovie(self, movieTitle):
         '''
-        Checks if storyTitle is unique
+        Checks if movieTitle is unique
         '''
-        storyNames = self.getStories()
-        return storyTitle in storyNames
+        movieTitles = self.getMovies()
+        return movieTitle in movieTitles
 
-    def getStories(self):
+    def getMovies(self):
         '''
-        RETURNS A SET CONTAINING ALL CURRENT storyTitles
+        RETURNS A SET CONTAINING ALL CURRENT movieTitles
         '''
         c = self.openDB()
         command = "SELECT * FROM sqlite_master WHERE type = 'table'"
         c.execute(command)
         selectedVal = c.fetchall()
-        # list comprehensions -- fetch all storyTitles and store in a set
-        storyNames = set([x[1] for x in selectedVal if x[3] > 2])
-        return storyNames
+        # list comprehensions -- fetch all movieTitles and store in a set
+        movieTitles = set([x[1] for x in selectedVal if x[3] > 2])
+        return movieTitles
+
+    def getComments(self,movieTitle):
+        '''
+        RETURNS A SET CONTAINING ALL CURRENT movieComments
+        '''
+        c = self.openDB()
+        command = "SELECT comment FROM '{0}'".format(movieTitle)
+        c.execute(command)
+        selectedVal = c.fetchall()
+        movieComments = set([x[1] for x in selectedVal if x[3] > 2])
+        return movieComments
 
     def getStoriesContributedTo(self, userName):
         '''
@@ -251,25 +251,3 @@ class DB_Manager:
 
     #======================== DB FXNS =========================
 #======================== END OF CLASS DB_Manager =========================
-
-# TESTS
-#x = DB_Manager("../data/armRESTs.db")
-#x.tableCreator('users', 'user_name text', 'passwords text', 'user_id integer')
-#x.addToStory('abc', 'snitcher13123', 5)
-#print(x.getStoryText('abc'))
-#x.registerUser('admin', 'admin')
-#x.addToStory('abc', 'lmaoxD', x.getID_fromUser('men'))
-#x.registerUser('women', '456')
-#x.registerUser('admin', 'admin')
-#print(x.get_user_ids('users'))
-#print(x.getID_fromUser('jwt'))
-#x.addToStory('abc', 'jwtWasHere', 4)
-#print(x.getStoryText('abc'))
-#print(x.getID_fromUser('jwt'))
-
-#x.table('users')
-
-#x.createStory('cake')
-#x.addToStory('cake', 'yummy', 4)
-#print(x.getStoriesContributedTo('jwt'))
-#x.save()

@@ -25,7 +25,21 @@
 	<p> ${{ dict['budget'] }} </p>
 	<h3> Rating </h3>
 	<p> {{ dict['popularity'] }} </p>
-	<
+  <!-- Display user comments tbd -->
  </center>
 </div>
+{% if logged_in %}
+<!-- User comments and ratings -->
+<div class = "container">
+  <center>
+    <p> You may leave a comment or rating in the space below </p>
+    <form class="form-inline pl-4 pr-4 my-2 my-lg-0" action="/movie" method= "GET">
+      <input id="comment" class="form-control form-control ml-4 mr-sm-2" type="search" name="entry" placeholder="Leave a comment" aria-label="Comment">
+       <button class="btn btn-outline-info my-2 my-sm-0" type="submit" name="Submit" value="Comment">Submit</button>
+    </div>
+    <h3> Space </h3>
+    <p> more space </p>
+ </center>
+</div>
+{% endif %}
 {% endblock %}
