@@ -3,6 +3,7 @@
 # P01: ArRESTed Development
 
 import os
+import random
 
 from flask import Flask, redirect, url_for, render_template, session, request, flash, get_flashed_messages
 
@@ -106,10 +107,6 @@ def categories():
 def movie():
     movID = request.args["Submit"]
     movDict = api.getMovieDict(movID)
-    title = movDict["original_title"]
-    budget= movDict["budget"]
-    summary= movDict["overview"]
-    rating= movDict["popularity"]
     return render_template('movie.html', dict = movDict, sidebar = genres)
 
 @app.route('/search', methods=['GET'])
@@ -137,10 +134,11 @@ def search():
                 return render_template('mood.html', logged_in=False, sidebar=genres)
     #pressing the I'm feeling lucky button
     elif request.args["Submit"] == "Search3":
-            if user in session:
-                return render_template('searchResults.html', logged_in=True, sidebar=genres)
-            else:
-                return render_template('searchResults.html',  logged_in=False, sidebar=genres)
+        movDict = api.getRandom()
+        if user in session:
+            return render_template('movie.html', logged_in=True, sidebar=genres, dict = movDict)
+        else:
+            return render_template('movie.html',  logged_in=False, sidebar=genres, dict = movDict)
 
 @app.route('/mood',methods=['POST'])
 def mood():

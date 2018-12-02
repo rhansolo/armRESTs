@@ -4,6 +4,7 @@
 
 # Used for API access and methods
 import json
+import random
 import urllib.request as request
 
 
@@ -68,3 +69,13 @@ def searchMovie(keyword, page = '1'):
     # fix space issue in keyword
     keywordURL = "https://api.themoviedb.org/3/search/movie?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&query={0}&page={1}&include_adult=false".format(word, page)
     return fetchInfo(keywordURL)['results']
+
+def getRandom():
+    year = random.randint(2000,2018)
+    num = random.randint(0,19)
+    movURL = "https://api.themoviedb.org/3/discover/movie?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&page=1&year=" + str(year)
+    totalPages = fetchInfo(movURL)['total_pages']
+    page = random.randint(1,totalPages)
+    newMovUrl = "https://api.themoviedb.org/3/discover/movie?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&page=" + str(page) + "&year=" + str(year)
+    id = fetchInfo(newMovUrl)['results'][num]['id']
+    return getMovieDict(str(id))
