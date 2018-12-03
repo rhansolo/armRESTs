@@ -78,8 +78,20 @@ def getRandom():
     year = random.randint(2000,2018)
     num = random.randint(0,19)
     movURL = "https://api.themoviedb.org/3/discover/movie?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&page=1&year=" + str(year)
-    totalPages = fetchInfo(movURL)['total_pages']
-    page = random.randint(1,totalPages)
+    page = random.randint(1,8)
     newMovUrl = "https://api.themoviedb.org/3/discover/movie?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&page=" + str(page) + "&year=" + str(year)
     id = fetchInfo(newMovUrl)['results'][num]['id']
     return getMovieDict(str(id))
+
+def getTrailer(id):
+    movURL = "https://api.themoviedb.org/3/movie/"
+    movRest ="/videos?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US"
+    genInfo = fetchInfo(movURL + str(id) + movRest)
+    key = genInfo['results'][0]['key']
+    link =  "https://www.youtube.com/embed/" + str(key)
+    return link
+def getReviews(id):
+    movURL =  "https://api.themoviedb.org/3/movie/" 
+    movRest = "/reviews?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&page=1"
+    genInfo = fetchInfo(movURL + str(id) + movRest)
+    return genInfo['results']

@@ -126,7 +126,8 @@ def movie():
     movID = request.args["Submit"]
     movDict = api.getMovieDict(movID)
     movieTitle= api.getMovieName(movID)
-
+    movieTrailer = api.getTrailer(movID)
+    reviews = api.getReviews(movID)
     data = arms.DB_Manager(DB_FILE)
     data.createMovie(movieTitle)
 
@@ -136,9 +137,9 @@ def movie():
             comment = request.args['entry']
             data.addComment(movieTitle,user,comment)
             flash('Successfully left a comment!')
-            return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments)
-        return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments)
-    return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= False)
+            return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments, trailer = movieTrailer, review = reviews)
+        return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments, trailer = movieTrailer, review = reviews)
+    return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= False, trailer = movieTrailer, review = reviews)
 
 @app.route('/search', methods=['GET'])
 def search():
@@ -165,11 +166,14 @@ def search():
                 return render_template('mood.html', logged_in=False, sidebar=genres)
     #pressing the I'm feeling lucky button
     elif request.args["Submit"] == "Search3":
+
         movDict = api.getRandom()
+        movieTrailer = api.getTrailer(movDict['id'])
+        reviews = api.getReviews(movDict['id'])
         if user in session:
-            return render_template('movie.html', logged_in=True, sidebar=genres, dict = movDict)
+            return render_template('movie.html', logged_in=True, sidebar=genres, dict = movDict, trailer = movieTrailer, review = reviews)
         else:
-            return render_template('movie.html',  logged_in=False, sidebar=genres, dict = movDict)
+            return render_template('movie.html',  logged_in=False, sidebar=genres, dict = movDict, trailer = movieTrailer, review = reviews)
 
 @app.route('/mood',methods=['POST'])
 def mood():

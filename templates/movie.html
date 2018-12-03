@@ -21,10 +21,17 @@
 	<p>{{ dict['overview'] }} </p>
 	<h3> Runtime </h3>
 	<p> {{ dict ['runtime']}} minutes</p>
-	<h3> Budget </h3>
-	<p> ${{ dict['budget'] }} </p>
-	<h3> Rating </h3>
-	<p> {{ dict['popularity'] }} </p>
+	<h3> Trailer</h3>
+  <iframe width="840" height="630"
+    src={{trailer}}>
+  </iframe>
+	<h3> Reviews </h3>
+  {%  if review != None %}
+	{% for comment in review %}
+  <p> {{comment['content']}}</p>
+  <p>                        - {{comment['author']}}</p>
+  {% endfor %}
+  {% endif %}
   <!-- Display user comments tbd -->
  </center>
 </div>
