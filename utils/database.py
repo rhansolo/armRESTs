@@ -196,7 +196,7 @@ class DB_Manager:
         c.execute(command)
         selectedVal = c.fetchall()
         # list comprehensions -- fetch all movieTitles and store in a set
-        movieTitles = set([x[1] for x in selectedVal if x[3] > 2])
+        movieTitles = set([x[1] for x in selectedVal if x[3] > 2 and x != 'votes'])
         print(selectedVal)
         return movieTitles
 
@@ -250,18 +250,13 @@ class DB_Manager:
 
     #==========================End of story fxns==========================
     #==========================Start of vote fxns==========================
-    '''
+
     def createVoteTable(self):
 
          #cREATES TABLE OF votes IF votes IS UNIQUE(NOT FOUND IN DATABASE)
          #Used to store upvote/downvote information for each movie
-
-        try:
-            self.tableCreator(votes, 'movie_title text', 'user text', 'rate integer')
-            return True
-        except:
-            print("votes table already created!")
-            return False
+        self.tableCreator('votes', 'movie_title text', 'user text', 'rate integer')
+        return True
 
     def addVote(self, movieTitle, user, vote):
 
@@ -269,9 +264,17 @@ class DB_Manager:
         #users can upvote or downvote
 
         row=(movieTitle,user,vote)
-        self.insertRow(votes, row)
+        self.insertRow('votes', row)
         return True
-        '''
+
+    def checkVote(self, movieTitle, user):
+        c = self.openDB()
+        command = "SELECT user, movie_title FROM votes WHERE user == '{1}' and movie_title == '{2}'".format('votes', user, movieTitle)
+        c.execute(command)
+        selectedVal = c.fetchone()
+        print(selectedVal)
+        return selectedVal != None
+
     def getRating(self,movieTitle):
         pass
 

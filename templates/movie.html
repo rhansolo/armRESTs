@@ -49,11 +49,15 @@
     <div class="col-md-8">
     <h4 class="text-warning border-bottom border-dark"><b>Comments</b> ({{comments|length}})</h4>
     {% if logged_in %}
+    <!-- Vote section -->
       {% if not voted %}
     <form class="form-group pt-2" action="/vote" method= "GET">
        <button class="btn btn-outline-success my-2 my-sm-0 mt-2" type="submit" name="Submit1" value="{{mov_id}}">👍</button>
        <button class="btn btn-outline-danger my-2 my-sm-0 mt-2" type="submit" name="Submit2" value="{{mov_id}}">👎</button>
     </form>
+      {% endif %}
+      {% if voted %}
+      <h6 class="text-success">You have already voted! </h6>
       {% endif %}
       <form class="form-group pt-2" action="/comment" method= "GET">
         <textarea id="comment" class="form-control mb-3" name="entry" placeholder="Leave a Comment" aria-label="Comment"></textarea>

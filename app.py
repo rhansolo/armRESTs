@@ -117,7 +117,7 @@ def profile():
 def categories():
     genre = request.args["Submit"]
     movieDict = api.getMovies(genre)
-    return render_template('category.html',  sidebar=genres, genre=genre, movieDict=movieDict, logged_in = True)
+    return render_template('category.html',  sidebar=genres, genre=genre, movieDict=movieDict, logged_in = user in session)
 
 @app.route('/movie', methods=['POST','GET'])
 def movie():
@@ -134,10 +134,11 @@ def movie():
     data = arms.DB_Manager(DB_FILE)
     data.createMovie(movieTitle)
     movComments= data.getComments(movieTitle)
+    voted = data.checkVote(movieTitle, user)
 
     if user in session:
-        return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments, trailer = movieTrailer, review = reviews, mov_id = movID)
-    return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= False, comments=movComments, trailer = movieTrailer, review = reviews, mov_id = movID)
+        return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments, trailer = movieTrailer, review = reviews, mov_id = movID, voted=voted)
+    return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= False, comments=movComments, trailer = movieTrailer, review = reviews, mov_id = movID, voted=voted)
 
 @app.route('/comment', methods=['GET', 'POST'])
 def comment():
@@ -155,11 +156,11 @@ def comment():
         reviews = api.getReviews(id)
         return render_template('movie.html', errors = True, dict = movDict, sidebar = genres, logged_in = True, comments = movComments, trailer = movieTrailer, review = reviews, mov_id = id)
     return redirect(url_for('index'))
-'''
+
 @app.route('/vote', methods=['GET', 'POST'])
-def comment():
+def vote():
+    data = arms.DB_Manager(DB_FILE)
     if user in session:
-        data = arms.DB_Manager(DB_FILE)
         #creates table of votes if does not already exist
         data.createVoteTable()
         vote=0
@@ -184,7 +185,7 @@ def comment():
         #another db func here
         return render_template('movie.html', errors = True, dict = movDict, sidebar = genres, logged_in = True, comments = movComments, trailer = movieTrailer, review = reviews, mov_id = id, voted=True)
     return redirect(url_for('index'))
-'''
+
 @app.route('/search', methods=['GET'])
 def search():
     #following code can be shortened
