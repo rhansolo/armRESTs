@@ -74,8 +74,9 @@
                 {% if sidebar %}
               	{% for genre in sidebar %}
               		{% if genre != "" %}
+                    {% set genreName = genre['name']%}
                     <form action="/categories">
-                      <button class="btn btn-dark text-warning mb-1" type="submit" name="Submit" value={{genre['name']}}><b>{{genre['name']}}</b></button>
+                      <button class="btn btn-dark text-warning mb-1" type="submit" name="Submit" value="{{genreName}}"><b>{{genre['name']}}</b></button>
                     </form>
               		{% endif %}
               	{% endfor %}

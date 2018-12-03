@@ -130,16 +130,28 @@ def movie():
     reviews = api.getReviews(movID)
     data = arms.DB_Manager(DB_FILE)
     data.createMovie(movieTitle)
+    movComments= data.getComments(movieTitle)
 
     if user in session:
-        movComments= data.getComments(movieTitle)
-        if request.args["Submit"] == "Comment":
-            comment = request.args['entry']
-            data.addComment(movieTitle,user,comment)
-            flash('Successfully left a comment!')
-            return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments, trailer = movieTrailer, review = reviews)
-        return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments, trailer = movieTrailer, review = reviews)
-    return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= False, trailer = movieTrailer, review = reviews)
+        return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments, trailer = movieTrailer, review = reviews, mov_id = movID)
+    return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= False, comments=movComments, trailer = movieTrailer, review = reviews, mov_id = movID)
+
+@app.route('/comment', methods=['GET', 'POST'])
+def comment():
+    if user in session:
+        data = arms.DB_Manager(DB_FILE)
+        comment = request.args['entry']
+        id = request.args['Submit']
+        title = api.getMovieName(id)
+        data.addComment(title, user, comment)
+        data.save()
+        movComments= data.getComments(title)
+        flash('Successfully left a comment!')
+        movDict = api.getMovieDict(id)
+        movieTrailer = api.getTrailer(id)
+        reviews = api.getReviews(id)
+        return render_template('movie.html', errors = True, dict = movDict, sidebar = genres, logged_in = True, comments = movComments, trailer = movieTrailer, review = reviews, mov_id = id)
+    return redirect(url_for('index'))
 
 @app.route('/search', methods=['GET'])
 def search():

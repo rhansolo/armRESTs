@@ -34,9 +34,9 @@ examples: https://www.themoviedb.org/documentation/api/discover
 
 def getMovieDict(id):
     ''' Getting entire associated movie dictionary '''
-    link1 = "https://api.themoviedb.org/3/movie/"
-    link2 = "?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US"
-    return fetchInfo(link1+id+link2)
+    url = "https://api.themoviedb.org/3/movie/{0}?api_key={1}"
+    key = "95e69e7f8882e106d7cf82de25f6a422"
+    return fetchInfo(url.format(str(id), key))
 
 def getMovieName(id):
     dict= getMovieDict(id)
@@ -69,9 +69,8 @@ def getMovies(genre):
 def searchMovie(keyword, page = '1'):
     '''Getting all movies given keyword'''
     word = keyword
-    print(word.count(""))
     # fix space issue in keyword
-    keywordURL = "https://api.themoviedb.org/3/search/movie?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&query={0}&page={1}&include_adult=false".format(word, page)
+    keywordURL = "https://api.themoviedb.org/3/search/movie?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&query={0}&page={1}&include_adult=false".format(word.replace(" ", "%20"), page)
     return fetchInfo(keywordURL)['results']
 
 def getRandom():
@@ -91,7 +90,7 @@ def getTrailer(id):
     link =  "https://www.youtube.com/embed/" + str(key)
     return link
 def getReviews(id):
-    movURL =  "https://api.themoviedb.org/3/movie/" 
+    movURL =  "https://api.themoviedb.org/3/movie/"
     movRest = "/reviews?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&page=1"
     genInfo = fetchInfo(movURL + str(id) + movRest)
     return genInfo['results']

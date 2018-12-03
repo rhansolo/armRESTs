@@ -1,53 +1,73 @@
 <!-- armRESTs - Robin Han, Aleksandra Koroza, Johnny Wong -->
-<!-- page generated for each reccomended movie -->
+<!-- page generated for each recommended movie -->
 {% extends "templateLog.html" %}
 {% block title %} armRESTs {% endblock %}
 
 {% block content %}
 <div class = "container">
-  <center>
-	<h2> {{ dict['title'] }} </h2>
+  <div class="row justify-content-center">
+	<h2 class="text-center"> {{ dict['title'] }} </h2>
+  </div>
+  <div class="row justify-content-center embed-responsive-16by9">
 	 {% if dict['poster_path'] != None %}
-      {% set poster = dict['poster_path'] %}
-      {% set link = "https://image.tmdb.org/t/p/w500" + poster %}
-      <img src = {{link}} height="400" width="260">
-      {% endif %}
-    <br>
-    <i> {{dict['tagline']}} </i>
-    <br>
-    <br>
-    <br>
-    <h3> Summary </h3>
-	<p>{{ dict['overview'] }} </p>
-	<h3> Runtime </h3>
-	<p> {{ dict ['runtime']}} minutes</p>
-	<h3> Trailer</h3>
-  <iframe width="840" height="630"
-    src={{trailer}}>
-  </iframe>
-	<h3> Reviews </h3>
-  {%  if review != None %}
-	{% for comment in review %}
-  <p> {{comment['content']}}</p>
-  <p>                        - {{comment['author']}}</p>
-  {% endfor %}
-  {% endif %}
-  <!-- Display user comments tbd -->
- </center>
-</div>
-{% if logged_in %}
-<!-- User comments and ratings -->
-<div class = "container">
-  <center>
-    <p> You may leave a comment or rating in the space below </p>
-    <form class="form-inline pl-4 pr-4 my-2 my-lg-0" action="/movie" method= "GET">
-      <input id="comment" class="form-control form-control ml-4 mr-sm-2" type="search" name="entry" placeholder="Leave a comment" aria-label="Comment">
-       <button class="btn btn-outline-info my-2 my-sm-0" type="submit" name="Submit" value="Comment">Submit</button>
+        {% set poster = dict['poster_path'] %}
+        {% set link = "https://image.tmdb.org/t/p/w500" + poster %}
+        <div class="col-md-4">
+        <img src = {{link}} height="400" width="260">
+        </div>
+    {% endif %}
+    <iframe class="embed-responsive-item ml-2" width=580px src="{{trailer}}" allowfullscreen></iframe>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <i>{{dict['tagline']}}</i>
     </div>
-    <p> {{ comments }}</p>
-    <h3> Space </h3>
-    <p> more space </p>
- </center>
+  </div>
+  <div class="row pt-3 pb-3">
+    <div class="col-md-7">
+      <h3 class="pb-1">Summary</h3>
+      <p>{{dict['overview']}}</p>
+    </div>
+    <div class="col-md-4">
+      <h5 class="pb-1 text-right">Runtime: {{dict['runtime']}} minutes</h5>
+    </div>
+  </div>
+  <!-- Show reviews-->
+  <div class="row pt-3">
+    <div class="col-md-8">
+      <h3 class="text-info"><b>Reviews</b> ({{review|length}})</h3>
+      {% if review != None %}
+        {% for rev in review %}
+          <p class="pt-2 border-top border-dark"><b>{{rev['author']}}</b>:
+          </p>
+          <p class="ml-4">{{rev['content']}}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  <div class="row pt-3 mb-4">
+    <div class="col-md-8">
+    <h4 class="text-warning border-bottom border-dark"><b>Comments</b> ({{comments|length}})</h4>
+    {% if logged_in %}
+      <form class="form-group pt-2" action="/comment" method= "GET">
+        <textarea id="comment" class="form-control mb-3" name="entry" placeholder="Leave a Comment" aria-label="Comment"></textarea>
+         <button class="btn btn-outline-info my-2 my-sm-0 mt-2" type="submit" name="Submit" value="{{mov_id}}">Submit</button>
+      </form>
+    {% endif %}
+    {% if not logged_in %}
+      <h5 class="text-dark pb-3">Please log in to comment!</h5>
+    {% endif %}
+    </div>
+    <!-- Show comments -->
+    <div class="col-md-8">
+      {% if comments != None %}
+        {% for comment in comments %}
+        <p class="pt-2 border-top border-dark"><b>{{comment[1]}}</b>:
+        </p>
+        <p class="ml-4">{{comment[0]}}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
 </div>
-{% endif %}
 {% endblock %}

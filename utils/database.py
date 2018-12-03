@@ -225,10 +225,11 @@ class DB_Manager:
         RETURNS A SET CONTAINING ALL CURRENT movieComments
         '''
         c = self.openDB()
-        command = "SELECT comment FROM '{0}'".format(movieTitle)
+        command = "SELECT comment, user FROM '{0}'".format(movieTitle)
         c.execute(command)
         selectedVal = c.fetchall()
-        movieComments = set([x[1] for x in selectedVal if x[3] > 2])
+        print(selectedVal)
+        movieComments = set(selectedVal)
         return movieComments
 
     def getStoriesContributedTo(self, userName):
