@@ -218,3 +218,7 @@ manipulated movie.html to display submission form if user logged in
 still have difficulty adding comments to page and displaying previous ones
 issue may lie in a logic flaw within /movie route, comment is not being found
 ==============================================================
+robinH -- 2018-12-2 23:31
+--------------------------------------------------------------
+Added playable trailers for each individual movie from youtube. Also added available critic reviews below the trailer. 
+==============================================================
