@@ -228,4 +228,5 @@ Fixed TV Movie and Science Fiction category routes.
 Fixed issue regarding spaces inside search queries in our search form.
 Users can now add comments to a movie page.
 Fixed up FEF for movie.html to look nicer and display reviews and comments and the number of each on the page.
+Need to redirect login form to current page.
 ==============================================================
