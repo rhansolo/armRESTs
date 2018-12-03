@@ -117,7 +117,7 @@ def profile():
 def categories():
     genre = request.args["Submit"]
     movieDict = api.getMovies(genre)
-    return render_template('category.html',  sidebar=genres, genre=genre, movieDict=movieDict)
+    return render_template('category.html',  sidebar=genres, genre=genre, movieDict=movieDict, logged_in = True)
 
 @app.route('/movie', methods=['POST','GET'])
 def movie():
@@ -184,7 +184,7 @@ def comment():
         #another db func here
         return render_template('movie.html', errors = True, dict = movDict, sidebar = genres, logged_in = True, comments = movComments, trailer = movieTrailer, review = reviews, mov_id = id, voted=True)
     return redirect(url_for('index'))
-''' 
+'''
 @app.route('/search', methods=['GET'])
 def search():
     #following code can be shortened

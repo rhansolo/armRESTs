@@ -51,8 +51,8 @@
     {% if logged_in %}
       {% if not voted %}
     <form class="form-group pt-2" action="/vote" method= "GET">
-       <button class="btn btn-outline-info my-2 my-sm-0 mt-2" type="submit" name="Submit1" value="{{mov_id}}">Upvote</button>
-       <button class="btn btn-outline-info my-2 my-sm-0 mt-2" type="submit" name="Submit2" value="{{mov_id}}">Downvote</button>
+       <button class="btn btn-outline-success my-2 my-sm-0 mt-2" type="submit" name="Submit1" value="{{mov_id}}">👍</button>
+       <button class="btn btn-outline-danger my-2 my-sm-0 mt-2" type="submit" name="Submit2" value="{{mov_id}}">👎</button>
     </form>
       {% endif %}
       <form class="form-group pt-2" action="/comment" method= "GET">
