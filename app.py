@@ -4,6 +4,9 @@
 
 import os
 import random
+import ssl
+#bad
+ssl._create_default_https_context = ssl._create_unverified_context
 
 from flask import Flask, redirect, url_for, render_template, session, request, flash, get_flashed_messages
 
@@ -152,7 +155,36 @@ def comment():
         reviews = api.getReviews(id)
         return render_template('movie.html', errors = True, dict = movDict, sidebar = genres, logged_in = True, comments = movComments, trailer = movieTrailer, review = reviews, mov_id = id)
     return redirect(url_for('index'))
+'''
+@app.route('/vote', methods=['GET', 'POST'])
+def comment():
+    if user in session:
+        data = arms.DB_Manager(DB_FILE)
+        #creates table of votes if does not already exist
+        data.createVoteTable()
+        vote=0
+        try:
+            id = request.args['Submit1']
+            vote= 1
+            print(vote)
+        except:
+            id = request.args['Submit2']
+            vote = -1
+            print(vote)
 
+        title = api.getMovieName(id)
+        data.addVote(title, user, vote)
+        data.save()
+        movComments= data.getComments(title)
+        flash('Successfully left a vote!')
+        movDict = api.getMovieDict(id)
+        movieTrailer = api.getTrailer(id)
+        reviews = api.getReviews(id)
+        #need to store whether user navbar
+        #another db func here
+        return render_template('movie.html', errors = True, dict = movDict, sidebar = genres, logged_in = True, comments = movComments, trailer = movieTrailer, review = reviews, mov_id = id, voted=True)
+    return redirect(url_for('index'))
+''' 
 @app.route('/search', methods=['GET'])
 def search():
     #following code can be shortened

@@ -180,27 +180,6 @@ class DB_Manager:
         self.insertRow(movieTitle, row)
         return True
 
-    def findMostRecentUpdate(self, storyTitle):
-        '''
-        RETURNS TEXT OF MOST RECENT UPDATE TO storyTitle
-        '''
-        c = self.openDB()
-        command = "SELECT story_line FROM '{0}' WHERE story_id == (SELECT max(story_id) FROM '{0}')".format(storyTitle)
-        c.execute(command)
-        selectedVal = c.fetchone()[0]
-        return selectedVal
-
-    def getStoryText(self, storyTitle):
-        '''
-        RETURNS ALL TEXT OF storyTitle
-        '''
-        c = self.openDB()
-        command = "SELECT story_line FROM '{0}'".format(storyTitle)
-        c.execute(command)
-        selectedVal = c.fetchall()
-        textList = [x[0] for x in selectedVal]
-        return '\n'.join(textList)
-
     def findMovie(self, movieTitle):
         '''
         Checks if movieTitle is unique
@@ -218,6 +197,7 @@ class DB_Manager:
         selectedVal = c.fetchall()
         # list comprehensions -- fetch all movieTitles and store in a set
         movieTitles = set([x[1] for x in selectedVal if x[3] > 2])
+        print(selectedVal)
         return movieTitles
 
     def getComments(self,movieTitle):
@@ -247,8 +227,54 @@ class DB_Manager:
                 contributions.add(story)
         #print(contributions)
         return contributions
+    def getStoryText(self, storyTitle):
+        '''
+        RETURNS ALL TEXT OF storyTitle
+        '''
+        c = self.openDB()
+        command = "SELECT story_line FROM '{0}'".format(storyTitle)
+        c.execute(command)
+        selectedVal = c.fetchall()
+        textList = [x[0] for x in selectedVal]
+        return '\n'.join(textList)
+
+    def findMostRecentUpdate(self, storyTitle):
+        '''
+        RETURNS TEXT OF MOST RECENT UPDATE TO storyTitle
+        '''
+        c = self.openDB()
+        command = "SELECT story_line FROM '{0}' WHERE story_id == (SELECT max(story_id) FROM '{0}')".format(storyTitle)
+        c.execute(command)
+        selectedVal = c.fetchone()[0]
+        return selectedVal
 
     #==========================End of story fxns==========================
+    #==========================Start of vote fxns==========================
+    '''
+    def createVoteTable(self):
+
+         #cREATES TABLE OF votes IF votes IS UNIQUE(NOT FOUND IN DATABASE)
+         #Used to store upvote/downvote information for each movie
+
+        try:
+            self.tableCreator(votes, 'movie_title text', 'user text', 'rate integer')
+            return True
+        except:
+            print("votes table already created!")
+            return False
+
+    def addVote(self, movieTitle, user, vote):
+
+        #ADD vote TO movieTitle's TABLE TO DATABASE
+        #users can upvote or downvote
+
+        row=(movieTitle,user,vote)
+        self.insertRow(votes, row)
+        return True
+        '''
+    def getRating(self,movieTitle):
+        pass
+
 
     #======================== DB FXNS =========================
 #======================== END OF CLASS DB_Manager =========================
