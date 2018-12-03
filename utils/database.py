@@ -267,6 +267,19 @@ class DB_Manager:
         self.insertRow('votes', row)
         return True
 
+    def getNumVotes(self, movieTitle):
+        '''
+        RETURNS NUMBER OF VOTES FOR INPUT movieTitle
+        '''
+        c = self.openDB()
+        command = "SELECT rate, movie_title, FROM votes WHERE movieTitle == '{1}'".format(movieTitle)
+        c.execute(command)
+        selectedVal = c.fetchall()
+        for i in selectedVal:
+            sum += i[0]
+        return sum
+
+
     def checkVote(self, movieTitle, user):
         c = self.openDB()
         command = "SELECT user, movie_title FROM votes WHERE user == '{1}' and movie_title == '{2}'".format('votes', user, movieTitle)

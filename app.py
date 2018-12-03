@@ -135,6 +135,7 @@ def movie():
     data.createMovie(movieTitle)
     movComments= data.getComments(movieTitle)
     voted = data.checkVote(movieTitle, user)
+    #print(data.getNumVotes(movieTitle))
 
     if user in session:
         return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments, trailer = movieTrailer, review = reviews, mov_id = movID, voted=voted)
