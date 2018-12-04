@@ -102,11 +102,15 @@ documentation: https://api.internationalshowtimes.com/documentation/v4/#Authenti
 #this API required some header shenanigans
 def send_request():
     #try:
+        IP = getIP()
+        longitude = getLon(IP)
+        latitude = getLat(IP)
+        loc = str(longitude) + "," + str(latitude)
         response = requests.get(
             url="https://api.internationalshowtimes.com/v4/cinemas/",
             params={
                 #"countries": "US",
-                "location": "40.72,-73.85",
+                "location": loc,
                 "distance": "30",
             },
             headers={
