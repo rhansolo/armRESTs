@@ -230,3 +230,8 @@ Users can now add comments to a movie page.
 Fixed up FEF for movie.html to look nicer and display reviews and comments and the number of each on the page.
 Need to redirect login form to current page.
 ==============================================================
+aleksandraK -- 2018-12-3 07:30
+--------------------------------------------------------------
+Added upvote and downvote functionality.
+Wrote associated db methods
+==============================================================

@@ -6,10 +6,7 @@
 import json
 import random
 import urllib.request as request
-
-
-
-
+from urllib.request import Request
 '''
 API HELPERS
 '''
@@ -94,3 +91,38 @@ def getReviews(id):
     movRest = "/reviews?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&page=1"
     genInfo = fetchInfo(movURL + str(id) + movRest)
     return genInfo['results']
+'''
+International Showtimes API
+Aleksandra's API key:  h54sMq1Q8UinW1K91Ts3fxPJ34CYMQAC
+documentation: https://api.internationalshowtimes.com/documentation/v4/#Authentication
+'''
+def send_request():
+    try:
+        response = requests.get(
+            url="https://api.internationalshowtimes.com/v4/movies/",
+            params={
+                "countries": "GB",
+            },
+            headers={
+                "X-API-Key": "h54sMq1Q8UinW1K91Ts3fxPJ34CYMQAC",
+            },
+        )
+        response= response.read()
+        print(response)
+        #print('Response HTTP Status Code: {status_code}'.format(
+            #status_code=response.status_code))
+        #print('Response HTTP Response Body: {content}'.format(
+            #content=response.content))
+        print("it works")
+    except:
+        print('HTTP Request failed')
+
+def test():
+    try:
+        response= Request('https://api.internationalshowtimes.com/v4/movies/')
+        response.add_header('X-API-Key','h54sMq1Q8UinW1K91Ts3fxPJ34CYMQAC')
+
+        a = urlopen(response).read()
+        print(a)
+    except:
+        print("oh no")

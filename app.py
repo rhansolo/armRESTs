@@ -30,6 +30,7 @@ def setUser(userName):
 @app.route('/')
 def index():
     pops= api.getPopular()
+    api.test()
     if user in session:
         return render_template('index.html', errors = True, logged_in = True, trend=pops, sidebar= genres)
     return render_template('index.html', errors = True, logged_in = False, trend=pops, sidebar= genres)
