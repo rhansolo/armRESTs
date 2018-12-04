@@ -53,3 +53,30 @@ Steps to create a venv:
   - This API does not require a key.
   - Returns the user's IP address.
   - [Here](https://www.ipify.org/) it be.
+
+## Dependencies
+- <b> Python 3 </b>
+
+We are using Python 3 as the language for this project to utilize the other dependencies below.
+Modules we use from the standard library include `random` (to facilitate the 'Feeling Lucky' function), `sqlite3` (to facilitate
+usage of our database), and `os` (to generate a secret key for our app).
+- <b> Wheel </b>
+
+To install wheel, run the following command:
+```
+pip install wheel
+```
+- <b> Flask </b>
+
+To install Flask, run the following command:
+```
+pip install flask
+```
+- <b>Bootstrap 4</b>
+
+Bootstrap is our FEF (Front-end Framework) that we are using to make our pages colorful and organized. 
+Documentation can be found [here](https://getbootstrap.com/docs/4.1/getting-started/introduction/).
+We are using their stylesheet found on their CDN which can be found below.
+```
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+```
