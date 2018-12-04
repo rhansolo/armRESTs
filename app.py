@@ -148,11 +148,11 @@ def movie():
     data.createMovie(movieTitle)
     movComments= data.getComments(movieTitle)
     voted = data.checkVote(movieTitle, user)
-    #print(data.getNumVotes(movieTitle))
+    numVotes = data.getNumVotes(movieTitle)
 
     if user in session:
-        return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments, trailer = movieTrailer, review = reviews, mov_id = movID, voted=voted)
-    return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= False, comments=movComments, trailer = movieTrailer, review = reviews, mov_id = movID, voted=voted)
+        return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments, trailer = movieTrailer, review = reviews, mov_id = movID, voted=voted, votes=numVotes)
+    return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= False, comments=movComments, trailer = movieTrailer, review = reviews, mov_id = movID, voted=voted, votes=numVotes)
 
 @app.route('/comment', methods=['GET', 'POST'])
 def comment():

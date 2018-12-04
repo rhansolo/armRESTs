@@ -272,9 +272,11 @@ class DB_Manager:
         RETURNS NUMBER OF VOTES FOR INPUT movieTitle
         '''
         c = self.openDB()
-        command = "SELECT rate, movie_title, FROM votes WHERE movieTitle == '{1}'".format(movieTitle)
+        command = "SELECT rate FROM votes WHERE movie_title == '{0}'".format(movieTitle)
         c.execute(command)
         selectedVal = c.fetchall()
+        print("selected val: " + str(selectedVal))
+        sum = 0
         for i in selectedVal:
             sum += i[0]
         return sum
