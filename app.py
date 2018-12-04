@@ -31,6 +31,8 @@ def setUser(userName):
 def index():
     pops= api.getPopular()
     api.send_request()
+    print(api.getZip("47.20.137.25"))
+    print(api.getIP())
     if user in session:
         return render_template('index.html', errors = True, logged_in = True, trend=pops, sidebar= genres)
     return render_template('index.html', errors = True, logged_in = False, trend=pops, sidebar= genres)
@@ -100,6 +102,16 @@ def about():
 @app.route('/contact')
 def contact():
     pass
+
+@app.route('/local')
+def local():
+    ip= api.getIP()
+    zip= api.getZip(ip)
+    lat= api.getLat(ip)
+    lon= api.getLon(ip)
+    if user in session:
+        return render_template("nearby.html", logged_in = True, sidebar= genres,ip=ip,zip=zip,lat=lat,lon=lon)
+    return render_template("nearby.html", logged_in = False, sidebar= genres,ip=ip,zip=zip,lat=lat,lon=lon)
 
 @app.route('/profile')
 def profile():

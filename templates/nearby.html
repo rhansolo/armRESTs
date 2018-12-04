@@ -1,0 +1,14 @@
+<!-- armRESTs - Robin Han, Aleksandra Koroza, Johnny Wong -->
+<!-- Page displaying user profile if logged in-->
+{% extends "templateLog.html" %}
+{% block title %} armRESTs {% endblock %}
+{% block content %}
+<div class = "container">
+  <center>
+    <p> Welcome your ip is: {{ ip }}</p>
+    <p> Zipcode: {{ zip }} </p>
+    <p> Latitude: {{ lat }} </p>
+    <p> Longitude: {{ lon }} </p>
+ </center>
+</div>
+{% endblock %}

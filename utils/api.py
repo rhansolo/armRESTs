@@ -92,13 +92,16 @@ def getReviews(id):
     movRest = "/reviews?api_key=95e69e7f8882e106d7cf82de25f6a422&language=en-US&page=1"
     genInfo = fetchInfo(movURL + str(id) + movRest)
     return genInfo['results']
+
 '''
 International Showtimes API
 Aleksandra's API key:  h54sMq1Q8UinW1K91Ts3fxPJ34CYMQAC
 documentation: https://api.internationalshowtimes.com/documentation/v4/#Authentication
 '''
+
+#this API required some header shenanigans
 def send_request():
-    try:
+    #try:
         response = requests.get(
             url="https://api.internationalshowtimes.com/v4/cinemas/",
             params={
@@ -114,6 +117,55 @@ def send_request():
             status_code=response.status_code))
         print('Response HTTP Response Body: {content}'.format(
             content=response.content))
+        content= response.content
+        #print(content[0])
         print("it works")
+    #except:
+        #print('HTTP Request failed')
+
+def getTheater():
+    pass
+
+'''
+ipStack API
+Aleksandra's API key:  5eccde7ed4a5f5de86b6c688b239d7c2
+documentation: https://ipstack.com/quickstart
+https://ipstack.com/documentation
+'''
+ipStackURL= "http://api.ipstack.com/"
+KEY= "5eccde7ed4a5f5de86b6c688b239d7c2"
+
+def getZip(IP):
+    try:
+        locInfo= fetchInfo(ipStackURL+IP+"?access_key="+KEY)
+        return locInfo["zip"]
     except:
-        print('HTTP Request failed')
+        print("no zip")
+
+def getLat(IP):
+    try:
+        locInfo= fetchInfo(ipStackURL+IP+"?access_key="+KEY)
+        return locInfo["latitude"]
+    except:
+        print("no lat")
+
+def getLon(IP):
+    try:
+        locInfo= fetchInfo(ipStackURL+IP+"?access_key="+KEY)
+        return locInfo["longitude"]
+    except:
+        print("no lon")
+
+'''
+ipify API
+Does not require API key; very nice and simple
+info: https://www.ipify.org/
+'''
+
+def getIP():
+    try:
+        IPURL= "https://api.ipify.org?format=json"
+        ipInfo= fetchInfo(IPURL)
+        return ipInfo['ip']
+    except:
+        print("no ip")
