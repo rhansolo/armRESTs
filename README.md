@@ -36,7 +36,7 @@ Steps to create a venv:
   There are 4 API's in use to complete this project:
 
 ### MovieDB
-  - Keys available at this [link] (https://www.themoviedb.org/documentation/api)
+  - Keys available at this [link](https://www.themoviedb.org/documentation/api)
   - Used to return trending movies and all of the categories displayed in this project.
   - Movie images, reviews, trailers, and other cool features accessed from this API.
 
