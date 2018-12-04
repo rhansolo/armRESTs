@@ -235,3 +235,10 @@ aleksandraK -- 2018-12-3 07:30
 Added upvote and downvote functionality.
 Wrote associated db methods
 ==============================================================
+aleksandraK -- 2018-12-4 00:02
+--------------------------------------------------------------
+Created ipify and ipstack API methods for use in local movies page
+Worked to access Showtimes API for the displaying of movie theaters
+Created /local route and added Nearby button to template
+Left to be done is connecting the fetched user location to the actual theaters.
+==============================================================
