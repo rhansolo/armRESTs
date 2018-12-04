@@ -5,6 +5,7 @@
 # Used for API access and methods
 import json
 import random
+import requests
 import urllib.request as request
 from urllib.request import Request
 '''
@@ -101,28 +102,17 @@ def send_request():
         response = requests.get(
             url="https://api.internationalshowtimes.com/v4/movies/",
             params={
-                "countries": "GB",
+                "countries": "US",
+                #"location": "52.50,13.37",
             },
             headers={
                 "X-API-Key": "h54sMq1Q8UinW1K91Ts3fxPJ34CYMQAC",
             },
         )
-        response= response.read()
-        print(response)
-        #print('Response HTTP Status Code: {status_code}'.format(
-            #status_code=response.status_code))
-        #print('Response HTTP Response Body: {content}'.format(
-            #content=response.content))
+        print('Response HTTP Status Code: {status_code}'.format(
+            status_code=response.status_code))
+        print('Response HTTP Response Body: {content}'.format(
+            content=response.content))
         print("it works")
     except:
         print('HTTP Request failed')
-
-def test():
-    try:
-        response= Request('https://api.internationalshowtimes.com/v4/movies/')
-        response.add_header('X-API-Key','h54sMq1Q8UinW1K91Ts3fxPJ34CYMQAC')
-
-        a = urlopen(response).read()
-        print(a)
-    except:
-        print("oh no")
