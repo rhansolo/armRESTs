@@ -123,7 +123,7 @@ def send_request():
             url="https://api.internationalshowtimes.com/v4/cinemas/",
             params={
                 #"countries": "US",
-                "location": loc,
+                "location": "{0},{1}".format(longitude, latitude),
                 "distance": "30",
             },
             headers={
@@ -135,7 +135,7 @@ def send_request():
         print('Response HTTP Response Body: {content}'.format(
             content=response.content))
         content= response.content
-        #print(content[0])
+        print(content)
         print("it works")
     #except:
         #print('HTTP Request failed')
