@@ -100,10 +100,11 @@ documentation: https://api.internationalshowtimes.com/documentation/v4/#Authenti
 def send_request():
     try:
         response = requests.get(
-            url="https://api.internationalshowtimes.com/v4/movies/",
+            url="https://api.internationalshowtimes.com/v4/cinemas/",
             params={
-                "countries": "US",
-                #"location": "52.50,13.37",
+                #"countries": "US",
+                "location": "40.72,-73.85",
+                "distance": "30",
             },
             headers={
                 "X-API-Key": "h54sMq1Q8UinW1K91Ts3fxPJ34CYMQAC",
