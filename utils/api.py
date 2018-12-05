@@ -125,24 +125,24 @@ def send_request():
                 #"countries": "US",
                 "location": loc,
                 #"location": "40.72,-73.86",
-                "distance": "30",
+                "distance": "1",
             },
             headers={
                 "X-API-Key": "{0}".format(showtimes_key),
             },
         )
         
-        print('Response HTTP Status Code: {status_code}'.format(
-            status_code=response.status_code))
-        print('Response HTTP Response Body: {content}'.format(
-            content=response.content))
-        content= response.content
-        print(content)
-        print(response.url)
-        print("it works")
+        #print('Response HTTP Status Code: {status_code}'.format(
+        #    status_code=response.status_code))
+        #print('Response HTTP Response Body: {content}'.format(
+        #    content=response.content))
+        content= response.json()
+        #print(content)
+        #print(response.url)
+        #print("it works")
     #except:
         #print('HTTP Request failed')
-
+        return content
 def getTheater():
     pass
 

@@ -109,15 +109,19 @@ def local():
     zip= api.getZip(ip)
     lat= api.getLat(ip)
     lon= api.getLon(ip)
+    theaters = api.send_request()
     if user in session:
-        return render_template("nearby.html", logged_in = True, sidebar= genres,ip=ip,zip=zip,lat=lat,lon=lon)
-    return render_template("nearby.html", logged_in = False, sidebar= genres,ip=ip,zip=zip,lat=lat,lon=lon)
+        return render_template("nearby.html", logged_in = True, sidebar= genres,ip=ip,zip=zip,lat=lat,lon=lon,theaters = theaters['cinemas'], count = len(theaters['cinemas']))
+    return render_template("nearby.html", logged_in = False, sidebar= genres,ip=ip,zip=zip,lat=lat,lon=lon,theaters = theaters['cinemas'], count = len(theaters['cinemas']))
 
 @app.route('/profile')
 def profile():
     '''
     Generates User profile
     '''
+    
+
+    print(theaters['cinemas'])
     if user in session:
         name= user
         return render_template("profile.html",name=name,logged_in = True, sidebar= genres)

@@ -5,10 +5,24 @@
 {% block content %}
 <div class = "container">
   <center>
-    <p> Welcome your ip is: {{ ip }}</p>
+    <!--<p> Welcome your ip is: {{ ip }}</p>
     <p> Zipcode: {{ zip }} </p>
     <p> Latitude: {{ lat }} </p>
     <p> Longitude: {{ lon }} </p>
+    -->
+    <h3> There are {{count}} movie theaters near you </h3>
+    {% for theather in theaters %}
+    <p> {{theather['name']}}
+    <br>
+    Address: {{theather['location']['address']['display_text']}}
+    <br>
+    Telephone: {{ theather['telephone']}}
+    <br>
+    Website: <a href = {{theather['website']}}> Click me to visit movie theater website! </a>
+    <br>
+    -------------------------------------------------------------
+    </p>
+    {% endfor %}
  </center>
 </div>
 {% endblock %}
