@@ -13,9 +13,9 @@ from urllib.request import Request
 '''
 LIST OF KEYS
 '''
-key0 = open('utils/key0.txt', 'r')
-key1 = open('utils/key1.txt', 'r')
-key2 = open('utils/key2.txt', 'r')
+key0 = open('key0.txt', 'r')
+key1 = open('key1.txt', 'r')
+key2 = open('key2.txt', 'r')
 movieDB_key = key0.readline().strip()
 showtimes_key = key1.readline().strip()
 ipStack_key = key2.readline().strip()
