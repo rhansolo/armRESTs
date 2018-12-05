@@ -254,12 +254,13 @@ def search():
     elif request.args["Submit"] == "Search3":
 
         movDict = api.getRandom()
+        id = movDict['id']
         movieTrailer = api.getTrailer(movDict['id'])
         reviews = api.getReviews(movDict['id'])
         if user in session:
-            return render_template('movie.html', logged_in=True, sidebar=genres, dict = movDict, trailer = movieTrailer, review = reviews)
+            return render_template('movie.html', logged_in=True, sidebar=genres, dict = movDict, trailer = movieTrailer, review = reviews, mov_id=id)
         else:
-            return render_template('movie.html',  logged_in=False, sidebar=genres, dict = movDict, trailer = movieTrailer, review = reviews)
+            return render_template('movie.html',  logged_in=False, sidebar=genres, dict = movDict, trailer = movieTrailer, review = reviews, mov_id=id)
 
 @app.route('/mood',methods=['POST'])
 def mood():
