@@ -10,6 +10,7 @@
       <h2 class="text-info pb-2"><b>Create Account</b></h2>
           <div class="row pb-4">
             <div class="col">
+              <input type="hidden" name="address" value="{{request.full_path}}">
               <input type="text" name="username" placeholder="Username" required>
             </div>
           </div>
