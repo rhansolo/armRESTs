@@ -2,12 +2,19 @@
 <!-- Page displaying user profile if logged in-->
 {% extends "templateLog.html" %}
 {% block title %} armRESTs {% endblock %}
+
 {% block content %}
 <div class = "container">
   <center>
     <p> Welcome {{ name }} ! </p>
-    <p> Movies you have rated: {{ rated }} </p>
-    <p> Number of comments you have made: {{ commentNum }}
+    <!--<p> Number of comments you have made: {{ commentNum }} -->
+    <p> The following are the movies you've commented on: </p>
+    <dl>
+     {% for key, value in commentDict.items() %}
+          <dt>{{ key }}</dt>
+          <dd>{{ value }}</dd>
+     {% endfor %}
+   </dl>
     <br>
     <br>
 

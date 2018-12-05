@@ -12,7 +12,7 @@ class DB_Manager:
     database, the instance of the DB_Manager must save using
     the save method.
     The operations/methods can be found below. DB_Manager
-    has been custom fitted to work with
+    has been custom fit to work with
     P01: ArRESTed Development
     '''
     def __init__(self, dbfile):
@@ -202,7 +202,7 @@ class DB_Manager:
 
     def getComments(self,movieTitle):
         '''
-        RETURNS A SET CONTAINING ALL CURRENT movieComments
+        RETURNS A SET CONTAINING ALL CURRENT movieComments for a specific movie
         '''
         c = self.openDB()
         command = "SELECT comment, user FROM '{0}'".format(movieTitle)
@@ -211,6 +211,33 @@ class DB_Manager:
         print(selectedVal)
         movieComments = set(selectedVal)
         return movieComments
+
+    def getMoviesCommentedOn(self,user):
+        '''
+        Returns a set containg all current movieTitles user has commented on
+        '''
+        c = self.openDB()
+        movieSet = set()
+        for movie in self.getMovies():
+            command = "SELECT movie_title FROM '{0}' WHERE user = '{1}';".format(movie, user)
+            c.execute(command)
+            selectedVal = c.fetchone()
+            if selectedVal != None:
+                movieSet.add(movie)
+        return movieSet
+
+    def getUserComments(self,user,movie):
+        '''
+        Returns a set of comments left by a particular user on a particular movie
+        '''
+        c = self.openDB()
+        commentSet = set()
+        command = "SELECT comment FROM '{0}' WHERE user = '{1}';".format(movie, user)
+        c.execute(command)
+        selectedVal = c.fetchone()
+        if selectedVal != None:
+            commentSet.add(selectedVal)
+        return commentSet
 
     def getStoriesContributedTo(self, userName):
         '''
@@ -227,6 +254,7 @@ class DB_Manager:
                 contributions.add(story)
         #print(contributions)
         return contributions
+
     def getStoryText(self, storyTitle):
         '''
         RETURNS ALL TEXT OF storyTitle

@@ -30,9 +30,9 @@ def setUser(userName):
 @app.route('/')
 def index():
     pops= api.getPopular()
-    api.send_request()
-    print(api.getZip("47.20.137.25"))
-    print(api.getIP())
+    #api.send_request()
+    #print(api.getZip("47.20.137.25"))
+    #print(api.getIP())
     if user in session:
         return render_template('index.html', errors = True, logged_in = True, trend=pops, sidebar= genres)
     return render_template('index.html', errors = True, logged_in = False, trend=pops, sidebar= genres)
@@ -119,12 +119,20 @@ def profile():
     '''
     Generates User profile
     '''
-    
+    # instantiates DB_Manager with path to DB_FILE
+    data = arms.DB_Manager(DB_FILE)
+    movWithComment= data.getMoviesCommentedOn(user)
+    data.save()
+    movComments= {} #key is movie and value is associated comment
 
-    print(theaters['cinemas'])
+    for movie in movWithComment:
+        comments= data.getUserComments(user,movie)
+        data.save()
+        movComments[movie]= comments
+
     if user in session:
         name= user
-        return render_template("profile.html",name=name,logged_in = True, sidebar= genres)
+        return render_template("profile.html",name=user,logged_in = True, sidebar= genres,commentDict= movComments)
     return redirect(url_for('index'))
 
 @app.route('/categories',methods=['GET'])
@@ -185,11 +193,11 @@ def vote():
         try:
             id = request.args['Submit1']
             vote= 1
-            print(vote)
+            #print(vote)
         except:
             id = request.args['Submit2']
             vote = -1
-            print(vote)
+            #print(vote)
 
         title = api.getMovieName(id)
         data.addVote(title, user, vote)

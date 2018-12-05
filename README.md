@@ -74,7 +74,7 @@ pip install flask
 ```
 - <b>Bootstrap 4</b>
 
-Bootstrap is our FEF (Front-end Framework) that we are using to make our pages colorful and organized. 
+Bootstrap is our FEF (Front-end Framework) that we are using to make our pages colorful and organized.
 Documentation can be found [here](https://getbootstrap.com/docs/4.1/getting-started/introduction/).
 We are using their stylesheet found on their CDN which can be found below.
 ```
