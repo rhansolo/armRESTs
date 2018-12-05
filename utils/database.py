@@ -36,7 +36,7 @@ class DB_Manager:
         '''
         c = self.openDB()
         if not self.isInDB(tableName):
-            command = "CREATE TABLE '{0}'({1}, {2}, {3});".format(tableName, col0, col1, col2)
+            command = 'CREATE TABLE "{0}"({1}, {2}, {3});'.format(tableName, col0, col1, col2)
             c.execute(command)
 
 
@@ -47,7 +47,7 @@ class DB_Manager:
          @data is a tuple containing data to be entered
        '''
        c = self.openDB()
-       command = "INSERT INTO '{0}' VALUES(?, ?, ?)"
+       command = 'INSERT INTO "{0}" VALUES(?, ?, ?)'
        c.execute(command.format(tableName), data)
 
 
@@ -57,7 +57,7 @@ class DB_Manager:
         RETURNS False OTHERWISE
         '''
         c = self.openDB()
-        command = "SELECT * FROM sqlite_master WHERE type = 'table'"
+        command = 'SELECT * FROM sqlite_master WHERE type = "table"'
         c.execute(command)
         selectedVal = c.fetchall()
         # list comprehensions -- fetch all tableNames and store in a set
@@ -70,7 +70,7 @@ class DB_Manager:
         PRINTS OUT ALL ROWS OF INPUT tableName
         '''
         c = self.openDB()
-        command = "SELECT * FROM '{0}'".format(tableName)
+        command = 'SELECT * FROM "{0}"'.format(tableName)
         c.execute(command)
         print(c.fetchall())
 
@@ -89,7 +89,7 @@ class DB_Manager:
         RETURNS A DICTIONARY CONTAINING ALL CURRENT users AND CORRESPONDING PASSWORDS
         '''
         c = self.openDB()
-        command = "SELECT user_name, passwords FROM users"
+        command = 'SELECT user_name, passwords FROM users'
         c.execute(command)
         selectedVal = c.fetchall()
         return dict(selectedVal)
@@ -99,7 +99,7 @@ class DB_Manager:
         RETURNS SET OF user_ids CONTRIBUTED TO storyTitle
         '''
         c = self.openDB()
-        command = "SELECT user_id FROM '{0}'".format(storyTitle)
+        command = 'SELECT user_id FROM "{0}"'.format(storyTitle)
         c.execute(command)
         ids = set(x[0] for x in c.fetchall())
         return ids
@@ -109,7 +109,7 @@ class DB_Manager:
         ADDS user TO DATABASE
         '''
         c = self.openDB()
-        command = "SELECT user_id FROM users WHERE user_id = (SELECT max(user_id) FROM users)"
+        command = 'SELECT user_id FROM users WHERE user_id = (SELECT max(user_id) FROM users)'
         c.execute(command)
         selectedVal = c.fetchone()
         max_id = 0
@@ -137,7 +137,7 @@ class DB_Manager:
         CHECKS IF userName AND password MATCH THOSE FOUND IN DATABASE
         '''
         c = self.openDB()
-        command = "SELECT user_name, passwords FROM users WHERE user_name = {0}".format("'" + userName + "'")
+        command = 'SELECT user_name, passwords FROM users WHERE user_name = "{0}"'.format(userName)
         c.execute(command)
         selectedVal = c.fetchone()
         if selectedVal == None:
@@ -151,7 +151,7 @@ class DB_Manager:
         RETURNS user_id OF userName
         '''
         c = self.openDB()
-        command = "SELECT user_id FROM users WHERE user_name == '{0}'".format(userName)
+        command = 'SELECT user_id FROM users WHERE user_name == "{0}"'.format(userName)
         c.execute(command)
         id = c.fetchone()[0]
         return id
@@ -192,7 +192,7 @@ class DB_Manager:
         RETURNS A SET CONTAINING ALL CURRENT movieTitles
         '''
         c = self.openDB()
-        command = "SELECT * FROM sqlite_master WHERE type = 'table'"
+        command = 'SELECT * FROM sqlite_master WHERE type = "table"'
         c.execute(command)
         selectedVal = c.fetchall()
         # list comprehensions -- fetch all movieTitles and store in a set
@@ -204,7 +204,7 @@ class DB_Manager:
         RETURNS A SET CONTAINING ALL CURRENT movieComments for a specific movie
         '''
         c = self.openDB()
-        command = "SELECT comment, user FROM '{0}'".format(movieTitle)
+        command = 'SELECT comment, user FROM "{0}"'.format(movieTitle)
         c.execute(command)
         selectedVal = c.fetchall()
         movieComments = set(selectedVal)
@@ -217,7 +217,7 @@ class DB_Manager:
         c = self.openDB()
         movieSet = set()
         for movie in self.getMovies():
-            command = "SELECT movie_title FROM '{0}' WHERE user = '{1}';".format(movie, user)
+            command = 'SELECT movie_title FROM "{0}" WHERE user = "{1}";'.format(movie, user)
             c.execute(command)
             selectedVal = c.fetchone()
             if selectedVal != None:
@@ -230,7 +230,7 @@ class DB_Manager:
         '''
         c = self.openDB()
         commentSet = set()
-        command = "SELECT comment FROM '{0}' WHERE user = '{1}';".format(movie, user)
+        command = 'SELECT comment FROM "{0}" WHERE user = "{1}";'.format(movie, user)
         c.execute(command)
         selectedVal = c.fetchall()
         for comment in selectedVal:
@@ -244,7 +244,7 @@ class DB_Manager:
         c = self.openDB()
         movieSet = set()
         for movie in self.getMovies():
-            command = "SELECT movie_title FROM votes WHERE user = '{0}';".format(user)
+            command = 'SELECT movie_title FROM votes WHERE user = "{0}";'.format(user)
             c.execute(command)
             selectedVal = c.fetchone()
             if selectedVal != None:
@@ -258,7 +258,7 @@ class DB_Manager:
         Returns 0 if the user has not voted on the movie
         '''
         c = self.openDB()
-        command = "SELECT rate FROM votes WHERE user = '{0}' and movie_title = '{1}';".format(user,movie)
+        command = 'SELECT rate FROM votes WHERE user = "{0}" and movie_title = "{1}";'.format(user,movie)
         c.execute(command)
         selectedVal = c.fetchall()
         if len(selectedVal) > 0:
@@ -292,10 +292,10 @@ class DB_Manager:
         RETURNS NUMBER OF VOTES FOR INPUT movieTitle
         '''
         c = self.openDB()
-        command = "SELECT rate FROM votes WHERE movie_title == '{0}'".format(movieTitle)
+        command = 'SELECT rate FROM votes WHERE movie_title == "{0}"'.format(movieTitle)
         c.execute(command)
         selectedVal = c.fetchall()
-        print("selected val: " + str(selectedVal))
+        print('selected val: ' + str(selectedVal))
         sum = 0
         for i in selectedVal:
             sum += i[0]
@@ -307,7 +307,7 @@ class DB_Manager:
         Checks whether user has voted on a particular movie
         '''
         c = self.openDB()
-        command = "SELECT user, movie_title FROM votes WHERE user == '{1}' and movie_title == '{2}'".format('votes', user, movieTitle)
+        command = 'SELECT user, movie_title FROM votes WHERE user == "{0}" and movie_title == "{1}"'.format(user, movieTitle)
         c.execute(command)
         selectedVal = c.fetchone()
         print(selectedVal)
