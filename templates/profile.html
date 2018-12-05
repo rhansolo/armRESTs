@@ -7,7 +7,7 @@
 <div class = "container">
   <center>
     <p> Welcome {{ name }} ! </p>
-    <!--<p> Number of comments you have made: {{ commentNum }} -->
+    <p> Number of comments you have made: {{ movWithComment }} </p>
     <p> The following are the movies you've commented on: </p>
     <dl>
      {% for key, value in commentDict.items() %}
@@ -15,6 +15,14 @@
           <dd>{{ value }}</dd>
      {% endfor %}
    </dl>
+    <p> The following are the movies you've upvoted: </p>
+   {% for umovie in votedUp %}
+   <p> {{ umovie }}
+   {% endfor %}
+    <p> The following are the movies you've downvoted: </p>
+    {% for dmovie in votedDown %}
+    <p> {{ dmovie }}
+    {% endfor %}
     <br>
     <br>
 

@@ -232,12 +232,40 @@ class DB_Manager:
         '''
         c = self.openDB()
         commentSet = set()
-        command = "SELECT comment FROM '{0}' WHERE user = '{1}';".format(movie, user)
+        if movie != "votes":
+            command = "SELECT comment FROM '{0}' WHERE user = '{1}';".format(movie, user)
+            c.execute(command)
+            selectedVal = c.fetchone()
+            if selectedVal != None:
+                commentSet.add(selectedVal)
+        return commentSet
+
+    def getMoviesVotedOn(self,user):
+        '''
+        Returns a set containing all current movieTitles user has voted on
+        '''
+        c = self.openDB()
+        movieSet = set()
+        for movie in self.getMovies():
+            command = "SELECT movie_title FROM votes WHERE user = '{0}';".format(user)
+            c.execute(command)
+            selectedVal = c.fetchone()
+            if selectedVal != None:
+                movieSet.add(movie)
+        return movieSet
+
+    def getMovieVote(self,user,movie):
+        '''
+        Returns a set containing how a user has voted for a movie (upvote or downvote)
+        '''
+        c = self.openDB()
+        voteSet = set()
+        command = "SELECT rate FROM votes WHERE user = '{0}' and movie_title= '{1}';".format(user,movie)
         c.execute(command)
         selectedVal = c.fetchone()
         if selectedVal != None:
             commentSet.add(selectedVal)
-        return commentSet
+        return voteSet
 
     def getStoriesContributedTo(self, userName):
         '''
@@ -276,21 +304,22 @@ class DB_Manager:
         selectedVal = c.fetchone()[0]
         return selectedVal
 
-    #==========================End of story fxns==========================
+    #==========================End of movie fxns==========================
     #==========================Start of vote fxns==========================
 
     def createVoteTable(self):
-
-         #cREATES TABLE OF votes IF votes IS UNIQUE(NOT FOUND IN DATABASE)
-         #Used to store upvote/downvote information for each movie
+        '''
+        #cREATES TABLE OF votes IF votes IS UNIQUE(NOT FOUND IN DATABASE)
+        #Used to store upvote/downvote information for each movie
+        '''
         self.tableCreator('votes', 'movie_title text', 'user text', 'rate integer')
         return True
 
     def addVote(self, movieTitle, user, vote):
-
-        #ADD vote TO movieTitle's TABLE TO DATABASE
-        #users can upvote or downvote
-
+        '''
+        ADD vote TO movieTitle's TABLE TO DATABASE
+        users can upvote or downvote
+        '''
         row=(movieTitle,user,vote)
         self.insertRow('votes', row)
         return True
@@ -311,6 +340,9 @@ class DB_Manager:
 
 
     def checkVote(self, movieTitle, user):
+        '''
+        Checks whether user has voted on a particular movie
+        '''
         c = self.openDB()
         command = "SELECT user, movie_title FROM votes WHERE user == '{1}' and movie_title == '{2}'".format('votes', user, movieTitle)
         c.execute(command)

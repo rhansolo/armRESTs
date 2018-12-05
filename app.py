@@ -122,17 +122,33 @@ def profile():
     # instantiates DB_Manager with path to DB_FILE
     data = arms.DB_Manager(DB_FILE)
     movWithComment= data.getMoviesCommentedOn(user)
+    print(movWithComment)
+    data.save()
+    movWithVotes= data.getMoviesVotedOn(user)
     data.save()
     movComments= {} #key is movie and value is associated comment
+    votedUp=[]
+    votedDown=[]
 
-    for movie in movWithComment:
-        comments= data.getUserComments(user,movie)
-        data.save()
-        movComments[movie]= comments
+    if len(movWithComment)!=0:
+        for movie in movWithComment:
+            comments= data.getUserComments(user,movie)
+            data.save()
+            movComments[movie]= comments
+
+
+    if len(movWithVotes)!=0:
+        for movie in movWithVotes:
+            rating= list(data.getMovieVote(user,movie))
+            data.save()
+            if 1 in rating:
+                votedUp.add(movie)
+            elif -1 in rating:
+                votedDown.add(movie)
 
     if user in session:
         name= user
-        return render_template("profile.html",name=user,logged_in = True, sidebar= genres,commentDict= movComments)
+        return render_template("profile.html",name=user,logged_in = True, sidebar= genres,commentDict= movComments, movWithComment=movWithComment, votedUp=votedUp, votedDown=votedDown)
     return redirect(url_for('index'))
 
 @app.route('/categories',methods=['GET'])
