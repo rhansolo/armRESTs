@@ -37,19 +37,19 @@ Steps to create a venv:
 
 ### MovieDB
   - Keys available at this [link](https://www.themoviedb.org/documentation/api)
-  - You can use your own key by replacing the one we have in `utils/key0.txt`
+  - You can use your own key by replacing the one we have in `key0.txt`
   - Used to return trending movies and all of the categories displayed in this project.
   - Movie images, reviews, trailers, and other cool features accessed from this API.
 
 ### International Showtimes API
   - Keys available by following steps on this [link](https://www.internationalshowtimes.com/signup.html).(takes a few minutes to process)
-  - You can use your own key by replacing the one we have in `utils/key1.txt`
+  - You can use your own key by replacing the one we have in `key1.txt`
   - Used to access movie theaters in the user's area given their location.
 
 ### ipStack API
   - A key can be procured by following the steps on this [link](https://ipstack.com/). (sign up for the free plan)
   - API used to return the user's location given their IP.
-  - You can use your own key by replacing the one we have in `utils/key2.txt`
+  - You can use your own key by replacing the one we have in `key2.txt`
   - More specifically, we use longitude, latitude, and zipcode.
 
 ### ipify API
