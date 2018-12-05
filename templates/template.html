@@ -21,6 +21,7 @@
               top: 0;
               bottom: 0;
               left: 0;
+              overflow-y: scroll; /* categories scrollable */
             }
             #search {
               padding-right: 240px;
@@ -83,6 +84,7 @@
                     <form action="/categories">
                       <button class="btn btn-dark text-warning mb-1" type="submit" name="Submit" value="{{genreName}}"><b>{{genre['name']}}</b></button>
                     </form>
+                    <br>
               		{% endif %}
               	{% endfor %}
               	{% endif %}
