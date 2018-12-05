@@ -126,7 +126,7 @@ def send_request():
                 #"location": "40.72,-73.86",
                 "location": loc,
                 # distance is measured in kilometers
-                "distance": "20",
+                "distance": "5",
 
             },
             headers={
