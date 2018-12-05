@@ -264,7 +264,7 @@ class DB_Manager:
         c.execute(command)
         selectedVal = c.fetchone()
         if selectedVal != None:
-            commentSet.add(selectedVal)
+            voteSet.add(selectedVal)
         return voteSet
 
     def getStoriesContributedTo(self, userName):
