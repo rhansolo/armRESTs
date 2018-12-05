@@ -246,3 +246,7 @@ johnnyW -- 2018-12-4 11:10
 --------------------------------------------------------------
 Implemented summing votes for each movie. 
 ==============================================================
+robinH -- 2018-12-4 20:35
+--------------------------------------------------------------
+Clicking near me now displays information relating to nearby movie theaters based off of location including theater name, phone number, website, and address.
+==============================================================
