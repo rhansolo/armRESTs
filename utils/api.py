@@ -118,24 +118,27 @@ def send_request():
         IP = getIP()
         longitude = getLon(IP)
         latitude = getLat(IP)
-        loc = str(longitude) + "," + str(latitude)
+        loc = str(latitude) + "," + str(longitude)
         response = requests.get(
             url="https://api.internationalshowtimes.com/v4/cinemas/",
             params={
                 #"countries": "US",
-                "location": "{0},{1}".format(longitude, latitude),
+                "location": loc,
+                #"location": "40.72,-73.86",
                 "distance": "30",
             },
             headers={
                 "X-API-Key": "{0}".format(showtimes_key),
             },
         )
+        
         print('Response HTTP Status Code: {status_code}'.format(
             status_code=response.status_code))
         print('Response HTTP Response Body: {content}'.format(
             content=response.content))
         content= response.content
         print(content)
+        print(response.url)
         print("it works")
     #except:
         #print('HTTP Request failed')
