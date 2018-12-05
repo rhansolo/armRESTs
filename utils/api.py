@@ -97,9 +97,15 @@ def getTrailer(id):
     movURL = "https://api.themoviedb.org/3/movie/"
     movRest ="/videos?api_key={0}&language=en-US".format(movieDB_key)
     genInfo = fetchInfo(movURL + str(id) + movRest)
-    key = genInfo['results'][0]['key']
-    link =  "https://www.youtube.com/embed/" + str(key)
-    return link
+    try:
+        key = genInfo['results'][0]['key']
+        link =  "https://www.youtube.com/embed/" + str(key)
+        return link
+    except:
+        #very edge case in case page does load, sound of music link
+        link= "https://www.youtube.com/embed/drnBMAEA3AM"
+        return link
+
 def getReviews(id):
     movURL =  "https://api.themoviedb.org/3/movie/"
     movRest = "/reviews?api_key={0}&language=en-US&page=1".format(movieDB_key)

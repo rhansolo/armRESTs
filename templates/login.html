@@ -1,0 +1,17 @@
+<!-- armRESTs - Robin Han, Aleksandra Koroza, Johnny Wong -->
+<!-- General Search results page generating movie reccomendations -->
+{% extends "templateLog.html" %}
+{% block title %} armRESTs {% endblock %}
+{% block content %}
+<div class = "container">
+  <div class="row justify-content-center pb-3">
+    <p> Please input your username and password </p>
+    <form action="/authenticate" method="POST">
+       <input class="form-control  mr-sm-2" type="text" name="username" placeholder = "Username" required>
+       <input class="form-control  mr-sm-2" type="password" name="password" placeholder = "Password" required>
+       <input class="btn btn-outline-warning " type="submit" name="submit" value = "Login">
+       <input type="hidden" name="address" value="{{request.full_path}}">
+     </form>
+   </div>
+ </div>
+{% endblock %}

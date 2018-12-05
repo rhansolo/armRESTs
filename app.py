@@ -43,6 +43,12 @@ def register():
         return redirect(url_for('index'))
     return render_template('register.html', sidebar=genres)
 
+@app.route('/login')
+def login():
+    if user in session:
+        return redirect(url_for('index'))
+    return render_template('login.html', sidebar=genres)
+
 @app.route('/authenticate', methods=['POST'])
 def authenticate():
     if user in session:
