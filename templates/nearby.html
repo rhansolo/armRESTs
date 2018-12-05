@@ -4,25 +4,27 @@
 {% block title %} armRESTs {% endblock %}
 {% block content %}
 <div class = "container">
-  <center>
-    <!--<p> Welcome your ip is: {{ ip }}</p>
-    <p> Zipcode: {{ zip }} </p>
-    <p> Latitude: {{ lat }} </p>
-    <p> Longitude: {{ lon }} </p>
-    -->
-    <h3> There are {{count}} movie theaters near you </h3>
+  <div class="row text-center">
+    <div class="col-md-12">
+      <h3> There are <b class="text-warning">{{count}}</b> movie theaters near you </h3>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="col-md-12 border-top border-dark mb-5">
     {% for theather in theaters %}
-    <p> {{theather['name']}}
+    <p class="border-bottom border-dark"> <b class="text-info">{{theather['name']}}</b>
     <br>
-    Address: {{theather['location']['address']['display_text']}}
+    <b>Address</b>: {{theather['location']['address']['display_text']}}
     <br>
-    Telephone: {{ theather['telephone']}}
+    <b>Telephone Number</b>: {{ theather['telephone']}}
     <br>
-    Website: <a href = {{theather['website']}}> Click me to visit movie theater website! </a>
-    <br>
-    -------------------------------------------------------------
+    {% if theather['website'] != None %}
+      <b><a style="text-decoration:none;" class="text-warning" href={{theather['website']}}>Website</b></a>
+      <br>
+    {% endif %}
     </p>
     {% endfor %}
- </center>
+    </div>
+  </div>
 </div>
 {% endblock %}

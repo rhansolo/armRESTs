@@ -49,7 +49,8 @@ def authenticate():
         return redirect(url_for('index'))
     # instantiates DB_Manager with path to DB_FILE
     data = arms.DB_Manager(DB_FILE)
-    username, password = request.form['username'], request.form['password']
+    username, password, curr_page = request.form['username'], request.form['password'], request.form['address']
+    print(curr_page)
     # LOGGING IN
     if request.form["submit"] == "Login":
         if username != "" and password != "" and data.verifyUser(username, password):
@@ -57,7 +58,7 @@ def authenticate():
             setUser(username)
             data.save()
             flash('Successfully logged in!')
-            return redirect(url_for('index'))
+            return redirect(curr_page)
         # user was found in DB but password did not match
         elif data.findUser(username):
             flash('Incorrect password!')
@@ -65,7 +66,7 @@ def authenticate():
         else:
             flash('Incorrect username!')
         data.save()
-        return redirect(url_for('index'))
+        return redirect(curr_page)
     # REGISTERING
     else:
         if len(username.strip()) != 0 and not data.findUser(username):
@@ -90,10 +91,11 @@ def logout():
     '''
     Logs user out
     '''
+    curr_page = request.args['address']
     session.pop(user, None)
     setUser(None)
     flash('Successfully logged out!')
-    return redirect(url_for('index'))
+    return redirect(curr_page)
 
 @app.route('/about')
 def about():
@@ -122,10 +124,7 @@ def profile():
     # instantiates DB_Manager with path to DB_FILE
     data = arms.DB_Manager(DB_FILE)
     movWithComment= data.getMoviesCommentedOn(user)
-    print(movWithComment)
-    data.save()
     movWithVotes= data.getMoviesVotedOn(user)
-    data.save()
     movComments= {} #key is movie and value is associated comment
     votedUp=[]
     votedDown=[]
@@ -133,19 +132,16 @@ def profile():
     if len(movWithComment)!=0:
         for movie in movWithComment:
             comments= data.getUserComments(user,movie)
-            data.save()
             movComments[movie]= comments
-
 
     if len(movWithVotes)!=0:
         for movie in movWithVotes:
-            rating= list(data.getMovieVote(user,movie))
-            data.save()
-            if 1 in rating:
-                votedUp.add(movie)
-            elif -1 in rating:
-                votedDown.add(movie)
-
+            rating = data.getMovieVote(user, movie)
+            if rating == 1:
+                votedUp.append(movie)
+            if rating == -1:
+                votedDown.append(movie)
+    data.save()
     if user in session:
         name= user
         return render_template("profile.html",name=user,logged_in = True, sidebar= genres,commentDict= movComments, movWithComment=movWithComment, votedUp=votedUp, votedDown=votedDown)
@@ -184,6 +180,9 @@ def movie():
 
 @app.route('/comment', methods=['GET', 'POST'])
 def comment():
+    '''
+    Form action to submit a comment. Flashes user on successful comment submission.
+    '''
     if user in session:
         data = arms.DB_Manager(DB_FILE)
         comment = request.args['entry']

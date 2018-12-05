@@ -4,28 +4,37 @@
 {% block title %} armRESTs {% endblock %}
 
 {% block content %}
-<div class = "container">
-  <center>
-    <p> Welcome {{ name }} ! </p>
-    <p> Number of comments you have made: {{ movWithComment }} </p>
-    <p> The following are the movies you've commented on: </p>
-    <dl>
-     {% for key, value in commentDict.items() %}
-          <dt>{{ key }}</dt>
-          <dd>{{ value }}</dd>
-     {% endfor %}
-   </dl>
-    <p> The following are the movies you've upvoted: </p>
-   {% for umovie in votedUp %}
-   <p> {{ umovie }} </p>
-   {% endfor %}
-    <p> The following are the movies you've downvoted: </p>
-    {% for dmovie in votedDown %}
-    <p> {{ dmovie }} </p>
-    {% endfor %}
-    <br>
-    <br>
-
- </center>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 pb-2 border-bottom border-dark">
+      <h3> Welcome to your profile <i><b class="text-warning">{{ name }}</b></i>! </h3>
+    </div>
+  </div>
+  <div class="row pt-2 pb-3 mb-5">
+    <div class="col-md-6">
+      <h5 class="text-primary">Movies you've commented on: <b><i>{{ movWithComment | length }}</i></b> </h5>
+      {% if commentDict.items() | length > 0 %}
+        <h6 class="text-dark">Below are your comments</h6>
+        <dl>
+          {% for key, value in commentDict.items() %}
+               <dt class="text-info">{{ key }}</dt>
+               {% for comment in value %}
+               <dd class="text-dark ml-3"><i>{{comment}}</i></dd>
+               {% endfor %}
+          {% endfor %}
+        </dl>
+      {% endif %}
+    </div>
+    <div class="col-md-6 text-right">
+      <h5 class="text-dark"> The following are the movies you've upvoted: </h5>
+       {% for umovie in votedUp %}
+       <p class="text-info"><b>{{ umovie }}</b> 👍</p>
+       {% endfor %}
+      <h5 class="text-dark pt-3"> The following are the movies you've downvoted: </h5>
+        {% for dmovie in votedDown %}
+        <p class="text-info"><b>{{ dmovie }}</b> 👎</p>
+        {% endfor %}
+    </div>
+   </div>
 </div>
 {% endblock %}

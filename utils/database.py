@@ -196,11 +196,10 @@ class DB_Manager:
         c.execute(command)
         selectedVal = c.fetchall()
         # list comprehensions -- fetch all movieTitles and store in a set
-        movieTitles = set([x[1] for x in selectedVal if x[3] > 2 and x != 'votes'])
-        print(selectedVal)
+        movieTitles = set([x[1] for x in selectedVal if x[3] > 2 and x[1] != 'votes'])
         return movieTitles
 
-    def getComments(self,movieTitle):
+    def getComments(self, movieTitle):
         '''
         RETURNS A SET CONTAINING ALL CURRENT movieComments for a specific movie
         '''
@@ -208,11 +207,10 @@ class DB_Manager:
         command = "SELECT comment, user FROM '{0}'".format(movieTitle)
         c.execute(command)
         selectedVal = c.fetchall()
-        print(selectedVal)
         movieComments = set(selectedVal)
         return movieComments
 
-    def getMoviesCommentedOn(self,user):
+    def getMoviesCommentedOn(self, user):
         '''
         Returns a set containg all current movieTitles user has commented on
         '''
@@ -226,18 +224,17 @@ class DB_Manager:
                 movieSet.add(movie)
         return movieSet
 
-    def getUserComments(self,user,movie):
+    def getUserComments(self, user, movie):
         '''
         Returns a set of comments left by a particular user on a particular movie
         '''
         c = self.openDB()
         commentSet = set()
-        if movie != "votes":
-            command = "SELECT comment FROM '{0}' WHERE user = '{1}';".format(movie, user)
-            c.execute(command)
-            selectedVal = c.fetchone()
-            if selectedVal != None:
-                commentSet.add(selectedVal)
+        command = "SELECT comment FROM '{0}' WHERE user = '{1}';".format(movie, user)
+        c.execute(command)
+        selectedVal = c.fetchall()
+        for comment in selectedVal:
+            commentSet.add(comment[0])
         return commentSet
 
     def getMoviesVotedOn(self,user):
@@ -254,55 +251,21 @@ class DB_Manager:
                 movieSet.add(movie)
         return movieSet
 
-    def getMovieVote(self,user,movie):
+    def getMovieVote(self, user, movie):
         '''
-        Returns a set containing how a user has voted for a movie (upvote or downvote)
-        '''
-        c = self.openDB()
-        voteSet = set()
-        command = "SELECT rate FROM votes WHERE user = '{0}' and movie_title= '{1}';".format(user,movie)
-        c.execute(command)
-        selectedVal = c.fetchone()
-        if selectedVal != None:
-            voteSet.add(selectedVal)
-        return voteSet
-
-    def getStoriesContributedTo(self, userName):
-        '''
-        RETURNS A SET CONTAINING ALL CURRENT storyTitles userName contributed to
+        Returns 1 if the user upvoted the movie
+        Returns -1 if the user downvoted the movie
+        Returns 0 if the user has not voted on the movie
         '''
         c = self.openDB()
-        contributions = set()
-        for story in self.getStories():
-            id = str(self.getID_fromUser(userName))
-            command = "SELECT user_id FROM '{0}' WHERE user_id = '{1}';".format(story, id)
-            c.execute(command)
-            selectedVal = c.fetchone()
-            if selectedVal != None:
-                contributions.add(story)
-        #print(contributions)
-        return contributions
-
-    def getStoryText(self, storyTitle):
-        '''
-        RETURNS ALL TEXT OF storyTitle
-        '''
-        c = self.openDB()
-        command = "SELECT story_line FROM '{0}'".format(storyTitle)
+        command = "SELECT rate FROM votes WHERE user = '{0}' and movie_title = '{1}';".format(user,movie)
         c.execute(command)
         selectedVal = c.fetchall()
-        textList = [x[0] for x in selectedVal]
-        return '\n'.join(textList)
+        if len(selectedVal) > 0:
+            return selectedVal[0][0]
+        return 0
 
-    def findMostRecentUpdate(self, storyTitle):
-        '''
-        RETURNS TEXT OF MOST RECENT UPDATE TO storyTitle
-        '''
-        c = self.openDB()
-        command = "SELECT story_line FROM '{0}' WHERE story_id == (SELECT max(story_id) FROM '{0}')".format(storyTitle)
-        c.execute(command)
-        selectedVal = c.fetchone()[0]
-        return selectedVal
+
 
     #==========================End of movie fxns==========================
     #==========================Start of vote fxns==========================

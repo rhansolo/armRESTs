@@ -123,15 +123,17 @@ def send_request():
             url="https://api.internationalshowtimes.com/v4/cinemas/",
             params={
                 #"countries": "US",
-                "location": loc,
                 #"location": "40.72,-73.86",
-                "distance": "1",
+                "location": loc,
+                # distance is measured in kilometers
+                "distance": "20",
+
             },
             headers={
                 "X-API-Key": "{0}".format(showtimes_key),
             },
         )
-        
+
         #print('Response HTTP Status Code: {status_code}'.format(
         #    status_code=response.status_code))
         #print('Response HTTP Response Body: {content}'.format(

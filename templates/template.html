@@ -91,7 +91,6 @@
           </nav>
         </div>
 
-        {% if errors %}
         {% set msgs = get_flashed_messages() %}{# program is now  aware there are flash messages #}
                 {% for each in msgs %}{# Loops through messages #}
                 <div class="container">
@@ -104,7 +103,6 @@
                   </div>
                 </div>
                 {% endfor %}
-        {% endif %}
 
         {% block content %}
 

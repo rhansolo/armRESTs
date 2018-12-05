@@ -244,9 +244,21 @@ Left to be done is connecting the fetched user location to the actual theaters.
 ==============================================================
 johnnyW -- 2018-12-4 11:10
 --------------------------------------------------------------
-Implemented summing votes for each movie. 
+Implemented summing votes for each movie.
 ==============================================================
 robinH -- 2018-12-4 20:35
 --------------------------------------------------------------
 Clicking near me now displays information relating to nearby movie theaters based off of location including theater name, phone number, website, and address.
+==============================================================
+johnnyW -- 2018-12-5 03:18
+--------------------------------------------------------------
+Profile page now displays:
+	How many comments you have made
+	What movies you commented on and what the comment(s) were
+	The movies you have upvoted or downvoted
+Near me displays movie theaters based on a 20 kilometer or 12.4 mile radius from the ip address
+Spruced up FEF on profile page and near me page
+Can now LOGIN AND LOGOUT from ANYWHERE on our web app. It will redirect you back to your current page.
+	Note: It is slow to login and out from the near me page because our app computes the
+			  nearby location again after the form is submitted.
 ==============================================================
