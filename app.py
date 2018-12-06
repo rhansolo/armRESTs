@@ -174,6 +174,7 @@ def movie():
     movieTitle= api.getMovieName(movID)
     movieTrailer = api.getTrailer(movID)
     reviews = api.getReviews(movID)
+    simMovie = api.getSimilar(movID)
     data = arms.DB_Manager(DB_FILE)
     data.createMovie(movieTitle)
     movComments= data.getComments(movieTitle)
@@ -181,8 +182,8 @@ def movie():
     numVotes = data.getNumVotes(movieTitle)
 
     if user in session:
-        return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments, trailer = movieTrailer, review = reviews, mov_id = movID, voted=voted, votes=numVotes)
-    return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= False, comments=movComments, trailer = movieTrailer, review = reviews, mov_id = movID, voted=voted, votes=numVotes)
+        return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= True, comments=movComments, trailer = movieTrailer, review = reviews, mov_id = movID, voted=voted, votes=numVotes,simMovie=simMovie)
+    return render_template('movie.html', dict = movDict, sidebar = genres, logged_in= False, comments=movComments, trailer = movieTrailer, review = reviews, mov_id = movID, voted=voted, votes=numVotes, simMovie=simMovie)
 
 @app.route('/comment', methods=['GET', 'POST'])
 def comment():

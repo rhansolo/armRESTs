@@ -85,6 +85,9 @@ def searchMovie(keyword, page = '1'):
     return fetchInfo(keywordURL)['results']
 
 def getRandom():
+    '''
+    Returns a random movie id from popular movies
+    '''
     year = random.randint(2000,2018)
     num = random.randint(0,19)
     movURL = "https://api.themoviedb.org/3/discover/movie?api_key={0}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&page=1&year={1}".format(movieDB_key, str(year))
@@ -94,6 +97,9 @@ def getRandom():
     return getMovieDict(str(id))
 
 def getTrailer(id):
+    '''
+    Returns link to movie's trailer given id
+    '''
     movURL = "https://api.themoviedb.org/3/movie/"
     movRest ="/videos?api_key={0}&language=en-US".format(movieDB_key)
     genInfo = fetchInfo(movURL + str(id) + movRest)
@@ -107,11 +113,22 @@ def getTrailer(id):
         return link
 
 def getReviews(id):
+    '''
+    Returns reviews given movie id
+    '''
     movURL =  "https://api.themoviedb.org/3/movie/"
     movRest = "/reviews?api_key={0}&language=en-US&page=1".format(movieDB_key)
     genInfo = fetchInfo(movURL + str(id) + movRest)
     return genInfo['results']
 
+def getSimilar(id):
+    '''
+    Returns list of similar movies
+    '''
+    movURL = "https://api.themoviedb.org/3/movie/"+str(id)
+    movRest= "/similar?api_key={0}&language=en-US&page=1".format(movieDB_key)
+    simInfo= fetchInfo(movURL + movRest)
+    return simInfo['results']
 '''
 International Showtimes API
 Aleksandra's API key:  h54sMq1Q8UinW1K91Ts3fxPJ34CYMQAC

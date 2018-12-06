@@ -82,5 +82,15 @@
       {% endif %}
     </div>
   </div>
+  <div class="row pt-3 mb-4">
+    <div class="col-md-8">
+      <h3> Check out some movies similar to {{ dict['title'] }} : </h3>
+      {% for movie in simMovie %}
+      <form action="/movie">
+        <button class="btn btn-light text-info mb-1" type="submit" name="Submit" value="{{movie['id']}}"><b>{{movie['title']}}</b></button>
+      </form>
+      {% endfor %}
+    </div>
+  </div>
 </div>
 {% endblock %}
