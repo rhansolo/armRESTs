@@ -268,3 +268,8 @@ Implemented pagination of categories.
 	A new interval is generated every 5 pages. Each interval stored in a dictionary.
 Spruced up FEF on new login page to clear space on navbar.
 ==============================================================
+johnnyW -- 2018-12-6 14:01
+--------------------------------------------------------------
+Feeling lucky now redirects to movie route and passes movie id
+Vote route now redirects to movie route and passes movie id
+==============================================================
