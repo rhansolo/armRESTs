@@ -55,11 +55,19 @@ def getMovieName(id):
     dict= getMovieDict(id)
     return dict['title']
 
+movInfo={}
 def getPopular():
     ''' Getting trending movies '''
-    movURL=" https://api.themoviedb.org/3/movie/popular?api_key={0}&language=en-US&page=1"
+    movURL="https://api.themoviedb.org/3/movie/popular?api_key={0}&language=en-US&page=1"
     movInfo= fetchInfo(movURL.format(movieDB_key))
+    return movInfo['results']
+    '''
+    for page in range(2,6):
+        movURL="https://api.themoviedb.org/3/movie/popular?api_key={0}&language=en-US&page={1}"
+        newDict= fetchInfo(movURL.format(movieDB_key,page))
+        movInfo['results'].append(newDict['results'])
     return movInfo['results'];
+    '''
 
 def getGenres():
     ''' Getting all possible genres '''
