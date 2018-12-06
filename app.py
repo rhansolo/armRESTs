@@ -239,7 +239,7 @@ def comment():
         movDict = api.getMovieDict(id)
         movieTrailer = api.getTrailer(id)
         reviews = api.getReviews(id)
-        return render_template('movie.html', errors = True, dict = movDict, sidebar = genres, logged_in = True, comments = movComments, trailer = movieTrailer, review = reviews, mov_id = id)
+        return redirect("/movie?Submit={0}".format(str(id))) 
     return redirect(url_for('index'))
 
 @app.route('/vote', methods=['GET', 'POST'])
@@ -268,7 +268,7 @@ def vote():
         reviews = api.getReviews(id)
         #need to store whether user navbar
         #another db func here
-        return render_template('movie.html', errors = True, dict = movDict, sidebar = genres, logged_in = True, comments = movComments, trailer = movieTrailer, review = reviews, mov_id = id, voted=True)
+        return redirect("/movie?Submit={0}".format(str(id)))
     return redirect(url_for('index'))
 
 @app.route('/search', methods=['GET'])
