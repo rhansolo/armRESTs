@@ -239,7 +239,7 @@ def comment():
         movDict = api.getMovieDict(id)
         movieTrailer = api.getTrailer(id)
         reviews = api.getReviews(id)
-        return redirect("/movie?Submit={0}".format(str(id))) 
+        return redirect("/movie?Submit={0}".format(str(id)))
     return redirect(url_for('index'))
 
 @app.route('/vote', methods=['GET', 'POST'])
@@ -299,9 +299,6 @@ def search():
 
         movDict = api.getRandom()
         id = movDict['id']
-        movieTrailer = api.getTrailer(id)
-        reviews = api.getReviews(id)
-        simMovie = api.getSimilar(id)
         if user in session:
             return redirect('/movie?Submit={0}'.format(str(id)))
         else:
