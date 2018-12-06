@@ -20,6 +20,8 @@ app.secret_key = os.urandom(32)
 # manage cookies and user data here
 DB_FILE = "data/armRESTs.db"
 user = None
+pageInterval = [1,2,3,4,5]
+pageDict = {'1': [str(x) for x in pageInterval.copy()]}
 genres = api.getGenres()
 
 def setUser(userName):
@@ -30,24 +32,21 @@ def setUser(userName):
 @app.route('/')
 def index():
     pops= api.getPopular()
-    #api.send_request()
-    #print(api.getZip("47.20.137.25"))
-    #print(api.getIP())
     if user in session:
-        return render_template('index.html', errors = True, logged_in = True, trend=pops, sidebar= genres)
-    return render_template('index.html', errors = True, logged_in = False, trend=pops, sidebar= genres)
+        return render_template('index.html', errors = True, logged_in = True, trend=pops, sidebar= genres, index=True)
+    return render_template('index.html', errors = True, logged_in = False, trend=pops, sidebar= genres, index=True)
 
 @app.route('/register')
 def register():
     if user in session:
         return redirect(url_for('index'))
-    return render_template('register.html', sidebar=genres)
+    return render_template('register.html', sidebar=genres, logged_in=False)
 
-@app.route('/login')
+@app.route('/login', methods=['POST'])
 def login():
     if user in session:
         return redirect(url_for('index'))
-    return render_template('login.html', sidebar=genres)
+    return render_template('login.html', sidebar=genres, address=request.form['address'], logged_in=False)
 
 @app.route('/authenticate', methods=['POST'])
 def authenticate():
@@ -135,6 +134,22 @@ def profile():
     votedUp=[]
     votedDown=[]
 
+
+    # Attempt to get links for each movie on the profile page below...
+    '''
+    movIDs = {}
+    allMovs = set()
+
+    for mov in movWithComment:
+        allMovs.add(mov)
+    for mov in movWithVotes:
+        allMovs.add(mov)
+    for mov in allMovs:
+        mov_id = api.getMovieID(mov)
+        movIDs[mov] = str(mov_id)
+    print(movIDs)
+    '''
+
     if len(movWithComment)!=0:
         for movie in movWithComment:
             comments= data.getUserComments(user,movie)
@@ -153,14 +168,36 @@ def profile():
         return render_template("profile.html",name=user,logged_in = True, sidebar= genres,commentDict= movComments, movWithComment=movWithComment, votedUp=votedUp, votedDown=votedDown)
     return redirect(url_for('index'))
 
+
+@app.route('/page', methods=['GET'])
+def page():
+    global pageDict
+    genre = request.args['genre']
+    intPage = int(request.args['page'])
+    page = str(intPage)
+    interval = []
+    if intPage % 5 == 0:
+        pageDict[str(intPage)] = [str(x + intPage) for x in [int(x) for x in pageDict['1'].copy()]]
+        interval = pageDict[page]
+    elif intPage % 5 < 5:
+        if intPage < 5:
+            interval = pageDict[str((intPage % 5) - intPage + 1)]
+        else:
+            interval = pageDict[str(intPage - (intPage % 5))]
+    movieDict = api.getMovies(genre, intPage)
+    return render_template('category.html',  sidebar=genres, genre=genre, movieDict=movieDict, logged_in = user in session, movieQ=True, curr_page=page, pages=interval, notIndex=True)
+
+
+
 @app.route('/categories',methods=['GET'])
 #this route uses the 'GET' method so links can easily be shared amongst users for the different categories
 #while still maintaining the robustness of using one template to render a page dedicated to one
 #specific category of movies
 def categories():
     genre = request.args["Submit"]
-    movieDict = api.getMovies(genre)
-    return render_template('category.html',  sidebar=genres, genre=genre, movieDict=movieDict, logged_in = user in session)
+    page = str(request.args['page'])
+    movieDict = api.getMovies(genre, int(page))
+    return render_template('category.html',  sidebar=genres, genre=genre, movieDict=movieDict, logged_in = user in session, movieQ=True, curr_page=page, pages=pageDict['1'], notIndex=True)
 
 @app.route('/movie', methods=['POST','GET'])
 def movie():
@@ -246,9 +283,9 @@ def search():
                 flash("There were no movies with '{0}'!".format(entry))
                 return redirect(url_for('index'))
             if user in session:
-                return render_template('searchResults.html', entry= entry, logged_in=True, sidebar=genres, movieDict=movieDict)
+                return render_template('searchResults.html', entry= entry, logged_in=True, sidebar=genres, movieDict=movieDict, movieQ=True, pages=pageDict['1'])
             else:
-                return render_template('searchResults.html', entry= entry, logged_in=False, sidebar=genres, movieDict=movieDict)
+                return render_template('searchResults.html', entry= entry, logged_in=False, sidebar=genres, movieDict=movieDict, movieQ=True, pages=pageDict['1'])
         flash("Please input a movie name!")
         return redirect(url_for('index'))
     #pressing the mood button
@@ -277,22 +314,22 @@ def mood():
         history = api.getMovies("History")
         #fill in some API shenanigans
         #possible problem: passing in entry from searching into mood
-        return render_template('mood.html',mood = "Happy", sidebar=genres, disp = [family,romantic,history])
+        return render_template('mood.html',mood = "Happy", sidebar=genres, disp = [family,romantic,history], movieQ=True)
     if request.form["submit"] == "Sad":
         comedy = api.getMovies("Comedy")
         fantasy = api.getMovies("Fantasy")
-        return render_template('mood.html', mood = "Sad", sidebar=genres, disp = [comedy,fantasy])
+        return render_template('mood.html', mood = "Sad", sidebar=genres, disp = [comedy,fantasy], movieQ=True)
     if request.form["submit"] == "Stressed":
         animation = api.getMovies("Animation")
         music = api.getMovies("Music")
         action = api.getMovies("Action")
-        return render_template('mood.html', mood = "Stressed", sidebar=genres, disp = [animation,music,action])
+        return render_template('mood.html', mood = "Stressed", sidebar=genres, disp = [animation,music,action], movieQ=True)
     if request.form["submit"] == "Bored":
         drama = api.getMovies("Drama")
         crime = api.getMovies("Crime")
         adventure = api.getMovies("Adventure")
         comedy = api.getMovies("Comedy")
-        return render_template('mood.html', mood = "Bored",sidebar=genres, disp = [drama,crime,adventure,comedy])
+        return render_template('mood.html', mood = "Bored",sidebar=genres, disp = [drama,crime,adventure,comedy], movieQ=True)
 
 if __name__ == '__main__':
     app.debug = True

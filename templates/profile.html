@@ -17,7 +17,7 @@
         <h6 class="text-dark">Below are your comments</h6>
         <dl>
           {% for key, value in commentDict.items() %}
-               <dt class="text-info">{{ key }}</dt>
+               <a style="text-decoration: none;" href="#"><dt class="text-info">{{ key }}</dt></a>
                {% for comment in value %}
                <dd class="text-dark ml-3"><i>{{comment}}</i></dd>
                {% endfor %}
@@ -28,11 +28,11 @@
     <div class="col-md-6 text-right">
       <h5 class="text-dark"> The following are the movies you've upvoted: </h5>
        {% for umovie in votedUp %}
-       <p class="text-info"><b>{{ umovie }}</b> 👍</p>
+       <a class="text-info" style="text-decoration: none;" href="#"><p><b>{{ umovie }}</b></a> 👍</p>
        {% endfor %}
       <h5 class="text-dark pt-3"> The following are the movies you've downvoted: </h5>
         {% for dmovie in votedDown %}
-        <p class="text-info"><b>{{ dmovie }}</b> 👎</p>
+        <a class="text-info" style="text-decoration: none;" href="#"><p><b>{{ dmovie }}</b></a> 👎</p>
         {% endfor %}
     </div>
    </div>

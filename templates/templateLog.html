@@ -2,37 +2,38 @@
 <!-- feature allowing for login and logout-->
 {% extends "template.html" %}
 {% block login %}
-<div class="navbar-collapse collapse " id="navbarSupportedContent">
+<div class="navbar-collapse collapse d-flex flex-row-reverse" id="navbarSupportedContent">
+  <div>
+    <!-- NEAR ME -->
+  <form class="form-inline my-2 my-lg-0" action="/local">
+    <input class="btn btn-outline-warning ml-4" type="submit" name="submit" value = "Near Me">
+  </form>
+  </div>
 {% if not logged_in %}
-    <form id="navbarSupportedContent" class="form-inline ml-5 my-2 my-lg-0" action="/authenticate" method="POST">
+    <form id="navbarSupportedContent" class="form-inline ml-3 my-2 my-lg-0" action="/authenticate" method="POST">
            <a class="btn btn-outline-info ml-2" href="/register">Register</a>
     </form>
-    <form id="navbarSupportedContent" class="form-inline ml-5 my-2 my-lg-0" action="/login" method="POST">
-           <a class="btn btn-outline-info ml-2" href="/login">Login</a>
+    <form id="navbarSupportedContent" class="form-inline ml-5 my-2 my-lg-0 " action="/login" method="POST">
+           <input type="hidden" name="address" value="{{request.full_path}}">
+           <input class="btn btn-outline-info ml-4" type="submit" name="submit" value ="Login">
     </form>
 {% endif %}
 {% if logged_in %}
-<!-- User Profile -->
-<div>
-<form class="form-inline my-2 my-lg-0" action="/profile">
-  <input class="btn btn-outline-warning ml-4" type="submit" name="submit" value = "Profile">
-</form>
-</div>
 <!-- Log Out -->
-</div>
   <form class="form-inline my-2 my-lg-0" action="/logout">
     <input type="hidden" name="address" value="{{request.full_path}}">
     <input class="btn btn-outline-warning ml-4" type="submit" name="submit" value = "Log Out">
   </form>
+<!-- User Profile -->
+  <div>
+    <form class="form-inline my-2 my-lg-0" action="/profile">
+      <input class="btn btn-outline-warning ml-4" type="submit" name="submit" value = "Profile">
+    </form>
+  </div>
+</div>
+
 {% endif %}
 {% if not logged_in %}
 </div>
 {% endif %}
 {% endblock %}
-<nav>
-  <ul class="pagination justify-content-center">
-    <li class="page-item"><span class="page-link">Previous</span></li>
-
-
-  </ul>
-</nav>

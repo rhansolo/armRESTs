@@ -262,3 +262,9 @@ Can now LOGIN AND LOGOUT from ANYWHERE on our web app. It will redirect you back
 	Note: It is slow to login and out from the near me page because our app computes the
 			  nearby location again after the form is submitted.
 ==============================================================
+johnnyW -- 2018-12-6 03:18
+--------------------------------------------------------------
+Implemented pagination of categories.
+	A new interval is generated every 5 pages. Each interval stored in a dictionary.
+Spruced up FEF on new login page to clear space on navbar.
+==============================================================

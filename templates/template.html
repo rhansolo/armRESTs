@@ -55,12 +55,6 @@
                               <button class="btn btn-outline-info ml-2 my-2 my-sm-0" type="submit" name="Submit" value="Search3">Feeling Lucky?</button>
                             </form>
                   </div>
-                  <div>
-                    <!-- NEAR ME -->
-                  <form class="form-inline my-2 my-lg-0" action="/local">
-                    <input class="btn btn-outline-warning ml-4" type="submit" name="submit" value = "Near Me">
-                  </form>
-                  </div>
 
                       {% block login %}
                       {% endblock %}
@@ -82,7 +76,8 @@
               		{% if genre != "" %}
                     {% set genreName = genre['name']%}
                     <form action="/categories">
-                      <button class="btn btn-dark text-warning mb-1" type="submit" name="Submit" value="{{genreName}}"><b>{{genre['name']}}</b></button>
+                      <input type='hidden' name='page' value='1'>
+                      <button class="btn btn-dark text-warning" type="submit" name="Submit" value="{{genreName}}"><b>{{genre['name']}}</b></button>
                     </form>
                     <br>
               		{% endif %}
@@ -109,7 +104,26 @@
         {% block content %}
 
         {% endblock %}
-
+        {% if movieQ %}
+        <div class="container">
+          <div class="row border-top border-dark d-flex justify-content-center">
+            <h6 class="text-info pt-3 pb-1"><b>Pages</b></h6>
+          </div>
+        </div>
+        <nav>
+          <ul class="pagination justify-content-center mb-5">
+            {% if notIndex %}
+              {% for page in pages %}
+                <form action="/page">
+                  <input type="hidden" name="genre" value="{{genre}}">
+                  <input type="hidden" name="address" value="{{request.full_path | replace('page=1', 'page=' + page)}}">
+                  <input class="btn btn-outline-info text-dark ml-2 mr-2" type="submit" name="page" value="{{page}}">
+                </form>
+              {% endfor %}
+            {% endif %}
+          </ul>
+        </nav>
+        {% endif %}
       </div>
       <footer class="-footer bg-dark fixed-bottom text-warning text-right ">&copy;armRESTs 2018 &mdash; Robin Han, Aleksandra Koroza, Johnny Wong</footer>
 </body>

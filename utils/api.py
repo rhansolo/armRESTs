@@ -45,6 +45,15 @@ examples: https://www.themoviedb.org/documentation/api/discover
 /discover/movie?sort_by=popularity.desc for popular movies ?
 '''
 
+def getMovieID(movietitle):
+    search_url = "https://api.themoviedb.org/3/search/movie?api_key={0}&language=en-US&query={1}&page=1&include_adult=false".format(movieDB_key, movietitle.replace(" ", "%20"))
+    try:
+        search_list = fetchInfo(search_url)['results']
+        for i in search_list:
+            if i['title'] == movietitle:
+                return i['id']
+    except:
+        return 0
 
 def getMovieDict(id):
     ''' Getting entire associated movie dictionary '''
@@ -77,11 +86,11 @@ def getGenres():
 
 GENRES = getGenres()
 
-def getMovies(genre):
+def getMovies(genre, page = 1):
     ''' Getting all movies given genre '''
     search_for_genre = [x for x in GENRES if x['name'] == genre][0]
     genre_id = search_for_genre['id']
-    genURL = "https://api.themoviedb.org/3/discover/movie?api_key={0}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres={1}".format(movieDB_key,genre_id)
+    genURL = "https://api.themoviedb.org/3/discover/movie?api_key={0}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={1}&with_genres={2}".format(movieDB_key, page, genre_id)
     genInfo = fetchInfo(genURL)
     return genInfo['results']
 

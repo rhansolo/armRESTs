@@ -4,13 +4,21 @@
 {% block title %} armRESTs {% endblock %}
 {% block content %}
 <div class = "container">
-  <div class="row justify-content-center pb-3">
-    <p> Please input your username and password </p>
+  <div class="col-md-4">
     <form action="/authenticate" method="POST">
-       <input class="form-control  mr-sm-2" type="text" name="username" placeholder = "Username" required>
-       <input class="form-control  mr-sm-2" type="password" name="password" placeholder = "Password" required>
-       <input class="btn btn-outline-warning " type="submit" name="submit" value = "Login">
-       <input type="hidden" name="address" value="{{request.full_path}}">
+      <h2 class="text-info pb-2"><b>Login</b></h2>
+        <div class="row pb-2">
+          <div class="col">
+            <input type="hidden" name="address" value="{{address}}">
+            <input class="form-control mr-sm-2" type="text" name="username" placeholder = "Username" required>
+          </div>
+        </div>
+        <div class="row pb-4">
+          <div class="col">
+            <input class="form-control mr-sm-2" type="password" name="password" placeholder = "Password" required>
+          </div>
+        </div>
+       <input class="btn btn-warning text-dark shadow mb-5" type="submit" name="submit" value ="Login">
      </form>
    </div>
  </div>
