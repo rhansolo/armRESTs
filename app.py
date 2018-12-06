@@ -299,13 +299,13 @@ def search():
 
         movDict = api.getRandom()
         id = movDict['id']
-        movieTrailer = api.getTrailer(movDict['id'])
-        reviews = api.getReviews(movDict['id'])
+        movieTrailer = api.getTrailer(id)
+        reviews = api.getReviews(id)
+        simMovie = api.getSimilar(id)
         if user in session:
-            return render_template('movie.html', logged_in=True, sidebar=genres, dict = movDict, trailer = movieTrailer, review = reviews, mov_id=id)
+            return redirect('/movie?Submit={0}'.format(str(id)))
         else:
-            return render_template('movie.html',  logged_in=False, sidebar=genres, dict = movDict, trailer = movieTrailer, review = reviews, mov_id=id)
-
+            return redirect('/movie?Submit={0}'.format(str(id)))
 @app.route('/mood',methods=['POST'])
 def mood():
     if request.form["submit"] == "Happy":
