@@ -113,10 +113,16 @@ def local():
     zip= api.getZip(ip)
     lat= api.getLat(ip)
     lon= api.getLon(ip)
-    theaters = api.send_request()
+    try:
+        theaterDict = api.send_request()
+        theaters= theatherDict['cinemas']
+    except:
+        #for if there are no theaters near you!
+        theaters=[]
+
     if user in session:
-        return render_template("nearby.html", logged_in = True, sidebar= genres,ip=ip,zip=zip,lat=lat,lon=lon,theaters = theaters['cinemas'], count = len(theaters['cinemas']))
-    return render_template("nearby.html", logged_in = False, sidebar= genres,ip=ip,zip=zip,lat=lat,lon=lon,theaters = theaters['cinemas'], count = len(theaters['cinemas']))
+        return render_template("nearby.html", logged_in = True, sidebar= genres,ip=ip,zip=zip,lat=lat,lon=lon,theaters = theaters, count = len(theaters))
+    return render_template("nearby.html", logged_in = False, sidebar= genres,ip=ip,zip=zip,lat=lat,lon=lon,theaters = theaters ,count = len(theaters))
 
 @app.route('/profile')
 def profile():

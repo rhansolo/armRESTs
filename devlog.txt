@@ -250,6 +250,11 @@ robinH -- 2018-12-4 20:35
 --------------------------------------------------------------
 Clicking near me now displays information relating to nearby movie theaters based off of location including theater name, phone number, website, and address.
 ==============================================================
+aleksandraK -- 2018-12-4 18:54
+--------------------------------------------------------------
+Wrote several db functions related to user profile (getMoviesCommentedOn(), getUserComments() and modified append to
+showcase comments and votes for logged in profile page. Added details to readme doc.
+==============================================================
 johnnyW -- 2018-12-5 03:18
 --------------------------------------------------------------
 Profile page now displays:
@@ -262,6 +267,14 @@ Can now LOGIN AND LOGOUT from ANYWHERE on our web app. It will redirect you back
 	Note: It is slow to login and out from the near me page because our app computes the
 			  nearby location again after the form is submitted.
 ==============================================================
+aleksandraK -- 2018-12-5 18:50
+--------------------------------------------------------------
+Added similar movies to movie pages (buttons leading to movie page)
+Made sidebar sections scrollable, reformatted.
+Moved login to a separate page for aesthetic reasons.
+Fixed bug where certain movies did not have trailers (trailers simply not displayed instead of page crashing!)
+Started work on pagination.
+==============================================================
 johnnyW -- 2018-12-6 03:18
 --------------------------------------------------------------
 Implemented pagination of categories.
@@ -272,4 +285,11 @@ johnnyW -- 2018-12-6 14:01
 --------------------------------------------------------------
 Feeling lucky now redirects to movie route and passes movie id
 Vote route now redirects to movie route and passes movie id
+==============================================================
+aleksandraK -- 2018-12-6 00:02
+--------------------------------------------------------------
+Created ipify and ipstack API methods for use in local movies page
+Worked to access Showtimes API for the displaying of movie theaters
+Created /local route and added Nearby button to template
+Left to be done is connecting the fetched user location to the actual theaters.
 ==============================================================

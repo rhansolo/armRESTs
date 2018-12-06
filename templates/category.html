@@ -20,6 +20,11 @@
       {% set poster = movie['poster_path'] %}
       {% set link = "https://image.tmdb.org/t/p/w500" + poster %}
       <a href={{formLink}}><img class="mb-5" src={{link}} height="200px" width="150px"></a>
+      {% else %}
+      {% set img = url_for('static',filename='404.png') %}
+      {% set link = img %}
+      <!-- for if there is no image to display, fill the space -->
+        <a href={{formLink}}><img class="mb-5"  src = {{link}} height="200px" width="150px"></a>
       {% endif %}
     </div>
     {% endif %}

@@ -15,7 +15,14 @@
         <div class="col-md-4">
         <img src = {{link}} height="400" width="260">
         </div>
-    {% endif %}
+  {% else %}
+    {% set img = url_for('static',filename='404.png') %}
+    {% set link = img %}
+    <!-- for if there is no image to display, fill the space -->
+    <div class="col-md-4">
+    <img src = {{link}} height="400" width="260">
+    </div>
+  {% endif %}
     {% if trailer != "https://www.youtube.com/embed/drnBMAEA3AM" %}
       <iframe class="embed-responsive-item ml-2" width=580px src="{{trailer}}" allowfullscreen></iframe>
     {% endif %}
