@@ -313,3 +313,8 @@ The last important change was our switching from the Fandango API to the Interna
 cinemas. This change was necessary because the Fandango API is no longer freely accessible to students and 
 hobbyists. We did not get approved for an API key. 
 ==============================================================
+robinH & aleksandraK & johnnyW -- 2018-12-4 2:18
+--------------------------------------------------------------
+Addressed final bugs relating to refreshing pages and drastically improved the FEF for all our html pages. 
+Kissed our project goodnight...
+==============================================================
