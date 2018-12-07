@@ -203,7 +203,8 @@ class DB_Manager:
         c.execute(command)
         selectedVal = c.fetchall()
         # list comprehensions -- fetch all movieTitles and store in a set
-        movieTitles = set([x[1] for x in selectedVal if x[3] > 2 and x[1] != 'votes'])
+        movieTitles = set([x[1] for x in selectedVal if x[1] != 'votes' and x[1] != 'users'])
+        print(movieTitles)
         return movieTitles
 
     def getComments(self, movieTitle):
