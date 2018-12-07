@@ -6,8 +6,8 @@ Johnny Wong
 pd 8
 
 ---------------------  
-### Groovy Movie  
-Hello and welcome to our project! Our site allows the user to browse through various trending
+## Groovy Movie  
+Hello and welcome to our project Groovy Movie! Our site allows the user to browse through various trending
 movies, to leave comments on said movies, and to downvote/upvote as they see fit. The user can also search for specific movies, get recommended movies based on their mood, and get a random movie assigned to them. The user can also see what movies and theaters are available in their locality.
 
 ### Instructions for setup:
