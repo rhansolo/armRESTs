@@ -73,11 +73,6 @@
               </li>
                 {% if sidebar %}
                   {% set first_page = 1 %}
-                  {% if notIndex %}
-                    {% if pages[0]|int > 5 %}
-                      {% set first_page = (pages[0]|int - 1)|string %}
-                    {% endif %}
-                  {% endif %}
               	{% for genre in sidebar %}
               		{% if genre != "" %}
                     {% set genreName = genre['name']%}

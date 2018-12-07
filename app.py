@@ -228,6 +228,8 @@ def categories():
     genre = request.args["Submit"]
     page = str(request.args['page'])
     movieDict = api.getMovies(genre, int(page))
+    if int(interval) != 1 and int(interval) % 5 != 0:
+        return redirect('/categories?interval=1&page=1&Submit={0}'.format(genre))
     return render_template('category.html',  sidebar=genres, genre=genre, movieDict=movieDict, logged_in = user in session, movieQ=True, curr_page=page, pages=pageDict[interval], notIndex=True)
 
 @app.route('/movie', methods=['POST','GET'])
