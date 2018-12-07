@@ -3,7 +3,7 @@
 {% extends "templateLog.html" %}
 {% block title %} armRESTs {% endblock %}
 {% block content %}
-<div class="container">
+<div class="container-fluid">
   <a class="text-dark" style="text-decoration: none;" href="/categories?page={{curr_page}}Submit={{genre}}"><h1 class="text-center">{{genre}} Movies</h1>
   <div class="row">
   </div>
@@ -12,19 +12,20 @@
     {% if movie != "" %}
     <div class="col-md-4">
       {% set movLink = movie['id']|string %}
-			{% set formLink = '/movie?Submit=' + movLink %}
+      {% set formLink = '/movie?Submit=' + movLink %}
       <form action="/movie">
-        <button class="btn btn-light text-info mb-1" type="submit" name="Submit" value="{{movie['id']}}"><b>{{movie['title']}}</b></button>
+        <center><button class="btn btn-light text-info mb-1" type="submit" name="Submit" value="{{movie['id']}}"><b>{{movie['title']}}</b></button></center>
+        
       </form>
       {% if movie['poster_path'] != None %}
       {% set poster = movie['poster_path'] %}
       {% set link = "https://image.tmdb.org/t/p/w500" + poster %}
-      <a href={{formLink}}><img class="mb-5" src={{link}} height="200px" width="150px"></a>
+      <center><a href={{formLink}}><img class="mb-5" src={{link}} height="200px" width="150px"></a></center>
       {% else %}
       {% set img = url_for('static',filename='404.png') %}
       {% set link = img %}
       <!-- for if there is no image to display, fill the space -->
-        <a href={{formLink}}><img class="mb-5"  src = {{link}} height="200px" width="150px"></a>
+      <center><a href={{formLink}}><img class="mb-5"  src = {{link}} height="200px" width="150px"></a></center>
       {% endif %}
     </div>
     {% endif %}

@@ -3,12 +3,12 @@
 {% extends "templateLog.html" %}
 {% block title %} armRESTs {% endblock %}
 {% block content %}
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-md-6">
         <div class="row justify-content-center pb-3">
         <b><p class="text-info text-left"> Please choose from the following moods:</p></b>
-        <form class="form-inline my-2 my-lg-0" action="/mood" method="POST">
+        <form class="form-inline my-2 my-lg-10" action="/mood" method="POST">
           <input class="btn btn-success" type="submit" name="submit" value = "Happy">
           <input class="btn btn-info ml-4" type="submit" name="submit" value = "Sad">
           <input class="btn btn-danger ml-4" type="submit" name="submit" value = "Stressed">
@@ -18,7 +18,7 @@
     </div>
     </div>
     {% if mood %}
-    <h2 class="pt-3"> <i>{{mood}}</i>? Try watching these movies...</h2>
+    <center><h2 class="pt-3"> <i>{{mood}}</i>? Try watching these movies...</h2></center>
       <div class="row pt-3">
       {% for genre in disp %}
       {% for movie in genre %}
@@ -27,17 +27,17 @@
           {% set movLink = movie['id']|string %}
           {% set formLink = '/movie?Submit=' + movLink %}
           <form action="/movie">
-            <button class="btn btn-light text-info mb-1" type="submit" name="Submit" value="{{movie['id']}}"><b>{{movie['title']}}</b></button>
+            <center><button class="btn btn-light text-info mb-1" type="submit" name="Submit" value="{{movie['id']}}"><b>{{movie['title']}}</b></button></center>
           </form>
           {% if movie['poster_path'] != None %}
           {% set poster = movie['poster_path'] %}
           {% set link = "https://image.tmdb.org/t/p/w500" + poster %}
-          <a href={{formLink}}><img class="mb-5" src={{link}} height="200px" width="150px"></a>
+          <center><a href={{formLink}}><img class="mb-5" src={{link}} height="200px" width="150px"></a></center>
           {% else %}
           {% set img = url_for('static',filename='404.png') %}
           {% set link = img %}
           <!-- for if there is no image to display, fill the space -->
-          <a href={{formLink}}><img class="mb-5"  src = {{link}} height="200px" width="150px"></a>
+          <center><a href={{formLink}}><img class="mb-5"  src = {{link}} height="200px" width="150px"></a></center>
           {% endif %}
         </div>
         {% endif %}
