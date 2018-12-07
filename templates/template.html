@@ -144,7 +144,7 @@
                   {% if page|int == 1 %}
                   <button class="btn btn-outline-info text-dark mr-3" type="submit" name="page" value="{{page}}"> << </button>
                   {% else %}
-                  <button class="btn btn-outline-info text-dark mr-3" type="submit" name="page" value="{{(page | int - 1) | string}}">Prev 5</button>
+                  <button class="btn btn-outline-info text-dark mr-3" type="submit" name="page" value="{{(page | int - 1) | string}}"><<</button>
                   {% endif %}
                 </form>
                 {% endif %}
