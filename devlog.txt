@@ -301,9 +301,15 @@ Wrote users table method
 robinH -- 2018-12-7 1:18
 --------------------------------------------------------------
 DEVLOG FIX:  
-Structure of DB was reworked from the original. Instead of creating one table to house information about every movie accessed by the user, we decided to create a separate table for every movie. This proved to be an easier system by which to access commentary. We also used a votes table which was not part of the original design and is used to store upvoting/downvoting information as an integer (1 = upvote, -1 = downvote).
+Structure of DB was reworked from the original. Instead of creating one table to house information about 
+every movie accessed by the user, we decided to create a separate table for every movie. This proved to 
+be an easier system by which to access commentary. We also used a votes table which was not part of the 
+original design and is used to store upvoting/downvoting information as an integer (1 = upvote, -1 = downvote).
 
-In addition, we did not end up implementing a “Favorites” list for the user to access. Testing code and fixing bugs was prioritized over adding a feature as we approached the deadline.
+In addition, we did not end up implementing a “Favorites” list for the user to access. Testing code and fixing 
+bugs was prioritized over adding a feature as we approached the deadline.
 
-The last important change was our switching from the Fandango API to the International Showtimes API to access cinemas. This change was necessary because the Fandango API is no longer freely accessible to students and hobbyists. We did not get approved for an API key. 
+The last important change was our switching from the Fandango API to the International Showtimes API to access 
+cinemas. This change was necessary because the Fandango API is no longer freely accessible to students and 
+hobbyists. We did not get approved for an API key. 
 ==============================================================
