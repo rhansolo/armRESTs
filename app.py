@@ -25,6 +25,27 @@ def setUser(userName):
     global user
     user = userName
 
+def getInterval(page = 1):
+    global pageDict
+    # page is greater than 1
+    if page > 1:
+        # page is a multiple of 5
+        if page % 5 == 0:
+            # create an interval for each multiple of 5
+            pageDict[str(page)] = pageDict[str(page)] = [str(x + page) for x in [int(x) for x in pageDict['1'].copy()]]
+            return pageDict[str(page)]
+        # page is in first interval
+        if page < 5:
+            return pageDict[str((page % 5) - page + 1)]
+        # page is in intervals past the first
+        else:
+            multiple_of_five = page - (page % 5)
+            # create an interval for multiple_of_five
+            pageDict[str(multiple_of_five)] = [str(x + multiple_of_five) for x in [int(x) for x in pageDict['1'].copy()]]
+            return pageDict[str(multiple_of_five)]
+    else:
+        return pageDict['1']
+
 
 @app.route('/')
 def index():
@@ -175,21 +196,15 @@ def profile():
 @app.route('/page', methods=['GET'])
 def page():
     global pageDict
+    interval = request.args['interval']
     genre = request.args['genre']
     intPage = int(request.args['page'])
+    print(getInterval(11))
     page = str(intPage)
-    interval = []
     if intPage % 5 == 0:
-        pageDict[str(intPage)] = [str(x + intPage) for x in [int(x) for x in pageDict['1'].copy()]]
-        interval = pageDict[page]
-    elif intPage % 5 < 5:
-        if intPage < 5:
-            interval = pageDict[str((intPage % 5) - intPage + 1)]
-        else:
-            interval = pageDict[str(intPage - (intPage % 5))]
-    movieDict = api.getMovies(genre, intPage)
-    return render_template('category.html',  sidebar=genres, genre=genre, movieDict=movieDict, logged_in = user in session, movieQ=True, curr_page=page, pages=interval, notIndex=True)
-
+        newInterval = getInterval(intPage)
+        return redirect("/categories?interval={0}&page={1}&Submit={2}".format(intPage, str(intPage + 1), genre))
+    return redirect("/categories?interval={0}&page={1}&Submit={2}".format(interval, page, genre))
 
 
 @app.route('/categories',methods=['GET'])
@@ -197,10 +212,12 @@ def page():
 #while still maintaining the robustness of using one template to render a page dedicated to one
 #specific category of movies
 def categories():
+    interval = request.args['interval']
+    getInterval(int(interval)) # creates interval for this page
     genre = request.args["Submit"]
     page = str(request.args['page'])
     movieDict = api.getMovies(genre, int(page))
-    return render_template('category.html',  sidebar=genres, genre=genre, movieDict=movieDict, logged_in = user in session, movieQ=True, curr_page=page, pages=pageDict['1'], notIndex=True)
+    return render_template('category.html',  sidebar=genres, genre=genre, movieDict=movieDict, logged_in = user in session, movieQ=True, curr_page=page, pages=pageDict[interval], notIndex=True)
 
 @app.route('/movie', methods=['POST','GET'])
 def movie():
@@ -286,9 +303,9 @@ def search():
                 flash("There were no movies with '{0}'!".format(entry))
                 return redirect(url_for('index'))
             if user in session:
-                return render_template('searchResults.html', entry= entry, logged_in=True, sidebar=genres, movieDict=movieDict, movieQ=True, pages=pageDict['1'])
+                return render_template('searchResults.html', entry= entry, logged_in=True, sidebar=genres, movieDict=movieDict, pages=pageDict['1'])
             else:
-                return render_template('searchResults.html', entry= entry, logged_in=False, sidebar=genres, movieDict=movieDict, movieQ=True, pages=pageDict['1'])
+                return render_template('searchResults.html', entry= entry, logged_in=False, sidebar=genres, movieDict=movieDict, pages=pageDict['1'])
         flash("Please input a movie name!")
         return redirect(url_for('index'))
     #pressing the mood button
@@ -314,22 +331,22 @@ def mood():
         history = api.getMovies("History")
         #fill in some API shenanigans
         #possible problem: passing in entry from searching into mood
-        return render_template('mood.html',mood = "Happy", sidebar=genres, disp = [family,romantic,history], movieQ=True)
+        return render_template('mood.html',mood = "Happy", sidebar=genres, disp = [family,romantic,history])
     if request.form["submit"] == "Sad":
         comedy = api.getMovies("Comedy")
         fantasy = api.getMovies("Fantasy")
-        return render_template('mood.html', mood = "Sad", sidebar=genres, disp = [comedy,fantasy], movieQ=True)
+        return render_template('mood.html', mood = "Sad", sidebar=genres, disp = [comedy,fantasy])
     if request.form["submit"] == "Stressed":
         animation = api.getMovies("Animation")
         music = api.getMovies("Music")
         action = api.getMovies("Action")
-        return render_template('mood.html', mood = "Stressed", sidebar=genres, disp = [animation,music,action], movieQ=True)
+        return render_template('mood.html', mood = "Stressed", sidebar=genres, disp = [animation,music,action])
     if request.form["submit"] == "Bored":
         drama = api.getMovies("Drama")
         crime = api.getMovies("Crime")
         adventure = api.getMovies("Adventure")
         comedy = api.getMovies("Comedy")
-        return render_template('mood.html', mood = "Bored",sidebar=genres, disp = [drama,crime,adventure,comedy], movieQ=True)
+        return render_template('mood.html', mood = "Bored",sidebar=genres, disp = [drama,crime,adventure,comedy])
 
 if __name__ == '__main__':
     app.debug = True

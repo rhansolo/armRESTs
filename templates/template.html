@@ -72,10 +72,17 @@
                 <a class="nav-link disabled text-light"><b>Categories</b></a>
               </li>
                 {% if sidebar %}
+                  {% set first_page = 1 %}
+                  {% if notIndex %}
+                    {% if pages[0]|int > 5 %}
+                      {% set first_page = (pages[0]|int - 1)|string %}
+                    {% endif %}
+                  {% endif %}
               	{% for genre in sidebar %}
               		{% if genre != "" %}
                     {% set genreName = genre['name']%}
                     <form action="/categories">
+                      <input type="hidden" name="interval" value="{{first_page}}">
                       <input type='hidden' name='page' value='1'>
                       <button class="btn btn-dark text-warning" type="submit" name="Submit" value="{{genreName}}"><b>{{genre['name']}}</b></button>
                     </form>
@@ -113,8 +120,13 @@
         <nav>
           <ul class="pagination justify-content-center mb-5">
             {% if notIndex %}
+              {% set first_page = 1 %}
+                {% if pages[0]|int > 5 %}
+                  {% set first_page = (pages[0]|int - 1)|string %}
+                {% endif %}
               {% for page in pages %}
                 <form action="/page">
+                  <input type="hidden" name="interval" value="{{first_page}}">
                   <input type="hidden" name="genre" value="{{genre}}">
                   <input type="hidden" name="address" value="{{request.full_path | replace('page=1', 'page=' + page)}}">
                   <input class="btn btn-outline-info text-dark ml-2 mr-2" type="submit" name="page" value="{{page}}">
