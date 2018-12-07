@@ -34,7 +34,7 @@
   </div>
   <div class="row pt-3 pb-3">
     <div class="col-md-7 ml-4">
-      <h3 class="pb-1">Summary</h3>
+      <h3 class="pb-1" style="color:#9381ff;">Summary</h3>
       <p>{{dict['overview']}}</p>
       <!-- Show reviews-->
           <h3 class="text-info"><b>Reviews</b> ({{review|length}})</h3>
@@ -82,7 +82,7 @@
       <h5 class="pb-1 text-right">Upvotes: {{votes}}</h5>
       <br>
       <!-- Similar movies -->
-      <h3 class="text-primary mb-3">Similar Movies</h3>
+      <h3 class="mb-3" style="color: #f26430;">Similar Movies</h3>
       <div class="col-md-12 d-flex flex-column justify-content-end">
         {% for movie in simMovie %}
         <form action="/movie">
