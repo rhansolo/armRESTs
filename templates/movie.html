@@ -1,7 +1,7 @@
 <!-- armRESTs - Robin Han, Aleksandra Koroza, Johnny Wong -->
 <!-- page generated for each recommended movie -->
 {% extends "templateLog.html" %}
-{% block title %} armRESTs {% endblock %}
+{% block title %}Groovy Movie{% endblock %}
 
 {% block content %}
 <div class = "container-fluid">
@@ -28,12 +28,12 @@
     {% endif %}
   </div>
   <div class="row justify-content-center">
-    <div class="col-md-10">
-      <i>{{dict['tagline']}}</i>
+    <div class="col-md-10 ml-5 pl-5">
+      <i class="pl-5 ml-5">{{dict['tagline']}}</i>
     </div>
   </div>
   <div class="row pt-3 pb-3">
-    <div class="col-md-8">
+    <div class="col-md-7 ml-4">
       <h3 class="pb-1">Summary</h3>
       <p>{{dict['overview']}}</p>
       <!-- Show reviews-->

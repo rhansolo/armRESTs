@@ -1,7 +1,7 @@
 <!-- armRESTs - Robin Han, Aleksandra Koroza, Johnny Wong -->
 <!-- Used to create movie suggestions based on user's mood -->
 {% extends "templateLog.html" %}
-{% block title %} armRESTs {% endblock %}
+{% block title %}Groovy Movie{% endblock %}
 {% block content %}
   <div class="container-fluid">
     <div class="row">
@@ -23,7 +23,7 @@
     {% if mood %}
     <div class="container-fluid">
     <h2 class="pt-3 text-center"> <i>{{mood}}</i>? Try watching these movies...</h2>
-      
+
       <div class="row pt-3">
       {% for genre in disp %}
       {% for movie in genre %}

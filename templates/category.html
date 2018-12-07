@@ -1,7 +1,7 @@
 <!-- armRESTs - Robin Han, Aleksandra Koroza, Johnny Wong -->
 <!-- Category template -->
 {% extends "templateLog.html" %}
-{% block title %} armRESTs {% endblock %}
+{% block title %}Groovy Movie{% endblock %}
 {% block content %}
 <div class="container-fluid">
   <a class="text-dark" style="text-decoration: none;" href="/categories?page={{curr_page}}Submit={{genre}}"><h1 class="text-center">{{genre}} Movies</h1>
@@ -15,7 +15,7 @@
       {% set formLink = '/movie?Submit=' + movLink %}
       <form action="/movie">
         <center><button class="btn btn-light text-info mb-1" type="submit" name="Submit" value="{{movie['id']}}"><b>{{movie['title']}}</b></button></center>
-        
+
       </form>
       {% if movie['poster_path'] != None %}
       {% set poster = movie['poster_path'] %}

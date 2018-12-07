@@ -1,26 +1,34 @@
 <!-- armRESTs - Robin Han, Aleksandra Koroza, Johnny Wong -->
 <!-- Creating account page -->
 {% extends "templateLog.html" %}
-{% block title %} armRESTs {% endblock %}
+{% block title %}Groovy Movie{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid">
+  <div class="row flex-xl justify-content-center">
   <div class="col-md-4">
     <form action="/authenticate" method="POST">
-      <h2 class="text-info pb-2"><b>Create Account</b></h2>
+      <h2 class="text-info pb-2 text-center"><b>Create Account</b></h2>
           <div class="row pb-2">
-            <div class="col">
+            <div class="col-md-1">
+              &#x1F464;
+            </div>
+            <div class="col-md-11">
               <input type="hidden" name="address" value="{{request.full_path}}">
               <input type="text" class="form-control mr-sm-2" name="username" placeholder="Username" required>
             </div>
           </div>
           <div class="row pb-4">
-            <div class="col">
+            <div class="col-md-1">
+              &#128274;
+            </div>
+            <div class="col-md-11">
               <input type="password" class="form-control mr-sm-2" name="password" placeholder="Password" required>
             </div>
           </div>
-      <input class="btn btn-warning text-dark shadow mb-5" type="submit" name="submit" value = "Register">
+      <input class="btn btn-block btn-warning text-dark shadow mb-5" type="submit" name="submit" value = "Register">
     </form>
+  </div>
   </div>
 </div>
 {% endblock %}
