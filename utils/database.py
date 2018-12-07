@@ -84,6 +84,13 @@ class DB_Manager:
     #========================HELPER FXNS=======================
 
     #======================== DB FXNS =========================
+    def createUsers(self):
+        '''
+        #cREATES TABLE OF users
+        '''
+        self.tableCreator('users', 'user_name text', 'passwords text', 'user_id integer')
+        return True
+
     def getUsers(self):
         '''
         RETURNS A DICTIONARY CONTAINING ALL CURRENT users AND CORRESPONDING PASSWORDS

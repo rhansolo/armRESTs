@@ -22,6 +22,7 @@ pageDict = {'1': [str(x) for x in pageInterval.copy()]}
 genres = api.getGenres()
 data = arms.DB_Manager(DB_FILE)
 data.createVoteTable()
+data.createUsers()
 
 def setUser(userName):
     global user
