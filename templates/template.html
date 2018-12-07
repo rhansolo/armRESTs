@@ -125,11 +125,28 @@
                   {% set first_page = (pages[0]|int - 1)|string %}
                 {% endif %}
               {% for page in pages %}
+                {% if page == pages[0] %}
+                <form action="/page">
+                  {% set prev_interval = 1 %}
+                  {% if (page|int) > 10 %}
+                    {% set prev_interval = (page|int) - ((page|int) % 5) - 5 %}
+                  {% endif %}
+                  <input type="hidden" name="interval" value="{{prev_interval}}">
+                  <input type="hidden" name="genre" value="{{genre}}">
+                  {% if page|int == 1 %}
+                  <button class="btn btn-outline-info text-dark mr-3" type="submit" name="page" value="{{page}}">Prev 5</button>
+                  {% else %}
+                  <button class="btn btn-outline-info text-dark mr-3" type="submit" name="page" value="{{(page | int - 1) | string}}">Prev 5</button>
+                  {% endif %}
+                </form>
+                {% endif %}
                 <form action="/page">
                   <input type="hidden" name="interval" value="{{first_page}}">
                   <input type="hidden" name="genre" value="{{genre}}">
-                  <input type="hidden" name="address" value="{{request.full_path | replace('page=1', 'page=' + page)}}">
                   <input class="btn btn-outline-info text-dark ml-2 mr-2" type="submit" name="page" value="{{page}}">
+                  {% if page == pages[4] %}
+                  <button class="btn btn-outline-info text-dark ml-3" type="submit" name="page" value="{{((page|int) + 1)|string}}">Next 5</button>
+                  {% endif %}
                 </form>
               {% endfor %}
             {% endif %}

@@ -202,12 +202,15 @@ def page():
     interval = request.args['interval']
     genre = request.args['genre']
     intPage = int(request.args['page'])
-    print(getInterval(11))
     page = str(intPage)
-    if intPage % 5 == 0:
-        newInterval = getInterval(intPage)
-        return redirect("/categories?interval={0}&page={1}&Submit={2}".format(intPage, str(intPage + 1), genre))
+    newInterval = getInterval(intPage)
+    print(newInterval)
+    if intPage - int(interval) > 5:
+        return redirect("/categories?interval={0}&page={1}&Submit={2}".format(str(intPage - 1), page, genre))
+    elif intPage == 6:
+        return redirect("/categories?interval={0}&page={1}&Submit={2}".format(str(intPage - 1), page, genre))
     return redirect("/categories?interval={0}&page={1}&Submit={2}".format(interval, page, genre))
+
 
 
 @app.route('/categories',methods=['GET'])
