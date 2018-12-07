@@ -155,7 +155,7 @@ def local():
     lon= api.getLon(ip)
     try:
         theaterDict = api.send_request()
-        theaters= theatherDict['cinemas']
+        theaters= theaterDict['cinemas']
     except:
         #for if there are no theaters near you!
         theaters=[]
