@@ -293,3 +293,8 @@ Worked to access Showtimes API for the displaying of movie theaters
 Created /local route and added Nearby button to template
 Left to be done is connecting the fetched user location to the actual theaters.
 ==============================================================
+johnnyW -- 2018-12-6 22:58
+--------------------------------------------------------------
+Added Prev 5 and Next 5 buttons to pagination.
+	ARE FUNCTIONAL!!!
+==============================================================
