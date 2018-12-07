@@ -72,7 +72,7 @@ class DB_Manager:
         c = self.openDB()
         command = 'SELECT * FROM "{0}"'.format(tableName)
         c.execute(command)
-        print(c.fetchall())
+        #print(c.fetchall())
 
 
     def save(self):
@@ -101,15 +101,6 @@ class DB_Manager:
         selectedVal = c.fetchall()
         return dict(selectedVal)
 
-    def get_user_ids(self, storyTitle):
-        '''
-        RETURNS SET OF user_ids CONTRIBUTED TO storyTitle
-        '''
-        c = self.openDB()
-        command = 'SELECT user_id FROM "{0}"'.format(storyTitle)
-        c.execute(command)
-        ids = set(x[0] for x in c.fetchall())
-        return ids
 
     def registerUser(self, userName, password):
         '''
@@ -153,19 +144,6 @@ class DB_Manager:
             return True
         return False
 
-    def getID_fromUser(self, userName):
-        '''
-        RETURNS user_id OF userName
-        '''
-        c = self.openDB()
-        command = 'SELECT user_id FROM users WHERE user_name == "{0}"'.format(userName)
-        c.execute(command)
-        id = c.fetchone()[0]
-        return id
-    '''
-    Look at story stuff for reference...
-    use it for movies instead
-    '''
     #==========================Start of movie fxns==========================
     def createMovie(self, movieTitle):
         '''
@@ -204,7 +182,6 @@ class DB_Manager:
         selectedVal = c.fetchall()
         # list comprehensions -- fetch all movieTitles and store in a set
         movieTitles = set([x[1] for x in selectedVal if x[1] != 'votes' and x[1] != 'users'])
-        print(movieTitles)
         return movieTitles
 
     def getComments(self, movieTitle):
@@ -280,8 +257,8 @@ class DB_Manager:
 
     def createVoteTable(self):
         '''
-        #cREATES TABLE OF votes IF votes IS UNIQUE(NOT FOUND IN DATABASE)
-        #Used to store upvote/downvote information for each movie
+        CREATES TABLE OF votes IF votes IS UNIQUE(NOT FOUND IN DATABASE)
+        Used to store upvote/downvote information for each movie
         '''
         self.tableCreator('votes', 'movie_title text', 'user text', 'rate integer')
         return True
@@ -303,7 +280,7 @@ class DB_Manager:
         command = 'SELECT rate FROM votes WHERE movie_title == "{0}"'.format(movieTitle)
         c.execute(command)
         selectedVal = c.fetchall()
-        print('selected val: ' + str(selectedVal))
+        #print('selected val: ' + str(selectedVal))
         sum = 0
         for i in selectedVal:
             sum += i[0]
@@ -318,11 +295,9 @@ class DB_Manager:
         command = 'SELECT user, movie_title FROM votes WHERE user == "{0}" and movie_title == "{1}"'.format(user, movieTitle)
         c.execute(command)
         selectedVal = c.fetchone()
-        print(selectedVal)
+        #print(selectedVal)
         return selectedVal != None
 
-    def getRating(self,movieTitle):
-        pass
 
 
     #======================== DB FXNS =========================

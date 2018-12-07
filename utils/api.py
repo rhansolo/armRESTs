@@ -39,10 +39,7 @@ def fetchInfo(url):
 '''
 MovieDB
 Aleksandra's API key (v3 auth)= 95e69e7f8882e106d7cf82de25f6a422
-(v4 auth)= eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NWU2OWU3Zjg4ODJlMTA2ZDdjZjgyZGUyNWY2YTQyMiIsInN1YiI6IjViZmNiYmNmYzNhMzY4NWMzNzAxZWJjYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QlJW54t6fGCvuAQNjp4_1H8kRod3DDWBBtv93Sa5VsU
-remember that it's 40 requests per 10 sec
 examples: https://www.themoviedb.org/documentation/api/discover
-/discover/movie?sort_by=popularity.desc for popular movies ?
 '''
 
 def getMovieID(movietitle):
@@ -70,13 +67,6 @@ def getPopular():
     movURL="https://api.themoviedb.org/3/movie/popular?api_key={0}&language=en-US&page=1"
     movInfo= fetchInfo(movURL.format(movieDB_key))
     return movInfo['results']
-    '''
-    for page in range(2,6):
-        movURL="https://api.themoviedb.org/3/movie/popular?api_key={0}&language=en-US&page={1}"
-        newDict= fetchInfo(movURL.format(movieDB_key,page))
-        movInfo['results'].append(newDict['results'])
-    return movInfo['results'];
-    '''
 
 def getGenres():
     ''' Getting all possible genres '''
@@ -146,24 +136,24 @@ def getSimilar(id):
     movRest= "/similar?api_key={0}&language=en-US&page=1".format(movieDB_key)
     simInfo= fetchInfo(movURL + movRest)
     return simInfo['results']
+
 '''
 International Showtimes API
 Aleksandra's API key:  h54sMq1Q8UinW1K91Ts3fxPJ34CYMQAC
 documentation: https://api.internationalshowtimes.com/documentation/v4/#Authentication
 '''
 
-#this API required some header shenanigans
 def send_request():
-    #try:
-        IP = getIP()
-        longitude = getLon(IP)
-        latitude = getLat(IP)
-        loc = str(latitude) + "," + str(longitude)
-        response = requests.get(
+    '''
+    Fetching information from International Showtimes API (with headers)
+    '''
+    IP = getIP()
+    longitude = getLon(IP)
+    latitude = getLat(IP)
+    loc = str(latitude) + "," + str(longitude)
+    response = requests.get(
             url="https://api.internationalshowtimes.com/v4/cinemas/",
             params={
-                #"countries": "US",
-                #"location": "40.72,-73.86",
                 "location": loc,
                 # distance is measured in kilometers
                 "distance": "5",
@@ -173,20 +163,8 @@ def send_request():
                 "X-API-Key": "{0}".format(showtimes_key),
             },
         )
-
-        #print('Response HTTP Status Code: {status_code}'.format(
-        #    status_code=response.status_code))
-        #print('Response HTTP Response Body: {content}'.format(
-        #    content=response.content))
-        content= response.json()
-        #print(content)
-        #print(response.url)
-        #print("it works")
-    #except:
-        #print('HTTP Request failed')
-        return content
-def getTheater():
-    pass
+    content= response.json()
+    return content
 
 '''
 ipStack API

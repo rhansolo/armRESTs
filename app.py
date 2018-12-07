@@ -97,7 +97,7 @@ def authenticate():
     # instantiates DB_Manager with path to DB_FILE
     data = arms.DB_Manager(DB_FILE)
     username, password, curr_page = request.form['username'], request.form['password'], request.form['address']
-    print(curr_page)
+
     # LOGGING IN
     if request.form["submit"] == "Login":
         if username != "" and password != "" and data.verifyUser(username, password):
@@ -207,7 +207,6 @@ def page():
     intPage = int(request.args['page'])
     page = str(intPage)
     newInterval = getInterval(intPage)
-    print(newInterval)
     if intPage - int(interval) > 5:
         return redirect("/categories?interval={0}&page={1}&Submit={2}".format(str(intPage - 1), page, genre))
     elif intPage == 6:
@@ -341,8 +340,6 @@ def mood():
         family = api.getMovies("Family")
         romantic = api.getMovies("Romance")
         history = api.getMovies("History")
-        #fill in some API shenanigans
-        #possible problem: passing in entry from searching into mood
         return render_template('mood.html',mood = "Happy", sidebar=genres, disp = [family,romantic,history])
     if request.form["submit"] == "Sad":
         comedy = api.getMovies("Comedy")

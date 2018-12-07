@@ -286,15 +286,15 @@ johnnyW -- 2018-12-6 14:01
 Feeling lucky now redirects to movie route and passes movie id
 Vote route now redirects to movie route and passes movie id
 ==============================================================
-aleksandraK -- 2018-12-6 00:02
---------------------------------------------------------------
-Created ipify and ipstack API methods for use in local movies page
-Worked to access Showtimes API for the displaying of movie theaters
-Created /local route and added Nearby button to template
-Left to be done is connecting the fetched user location to the actual theaters.
-==============================================================
 johnnyW -- 2018-12-6 22:58
 --------------------------------------------------------------
 Added Prev 5 and Next 5 buttons to pagination.
 	ARE FUNCTIONAL!!!
+==============================================================
+aleksandraK -- 2018-12-06 23:35
+--------------------------------------------------------------
+Added necessary API cards to collective knowledge base.
+Added commentary to code/ cleaned
+Fixed bug where no cinemas found and no movies found.
+Wrote users table method
 ==============================================================
