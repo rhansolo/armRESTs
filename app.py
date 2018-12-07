@@ -113,7 +113,7 @@ def authenticate():
         else:
             flash('Incorrect username!')
         data.save()
-        return redirect(curr_page)
+        return render_template('login.html', sidebar=genres, address=request.form['address'], logged_in=False)
     # REGISTERING
     else:
         if len(username.strip()) != 0 and not data.findUser(username):
@@ -131,7 +131,7 @@ def authenticate():
         else:
             flash('Username already taken!')
         # Try to register again
-        return render_template('register.html', errors = True, sidebar=genres)
+        return redirect(url_for('register'))
 
 @app.route('/logout')
 def logout():
