@@ -5,20 +5,23 @@
 {% block content %}
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="row justify-content-center pb-3">
-        <b><p class="text-info text-left"> Please choose from the following moods:</p></b>
-        <form class="form-inline my-2 my-lg-10" action="/mood" method="POST">
+        <b><h3 class="text-info"> Please choose from the following moods:</h3></b>
+        </div>
+        <div class="row justify-content-center pb-1">
+        <form action="/mood" method="POST">
           <input class="btn btn-success" type="submit" name="submit" value = "Happy">
           <input class="btn btn-info ml-4" type="submit" name="submit" value = "Sad">
           <input class="btn btn-danger ml-4" type="submit" name="submit" value = "Stressed">
           <input class="btn btn-secondary ml-4" type="submit" name="submit" value = "Bored">
         </form>
+        </div>
       </div>
     </div>
-    </div>
+  </div>
     {% if mood %}
-    <center><h2 class="pt-3"> <i>{{mood}}</i>? Try watching these movies...</h2></center>
+    <h2 class="pt-3 text-center"> <i>{{mood}}</i>? Try watching these movies...</h2>
       <div class="row pt-3">
       {% for genre in disp %}
       {% for movie in genre %}

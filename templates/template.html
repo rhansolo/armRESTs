@@ -23,8 +23,8 @@
               left: 0;
               overflow-y: scroll; /* categories scrollable */
             }
-            #search {
-              padding-right: 240px;
+            #search{
+              width:425px;
             }
             .container-fluid{
               padding-left: 175px;
@@ -35,7 +35,7 @@
   <body>
         <div class="container bg-white rounded">
           <div class="container">
-            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark flex-row">
+            <nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-dark flex-row-xl">
               <!-- The navbar present at the top of our demo page -->
                  <a class="navbar-brand text-info" href="/"><b>armRESTs</b></a>
                  <!-- JavaScript is needed for the toggle to function properly in a tiny window where nav-items cannot be seen -->
@@ -52,16 +52,18 @@
                            </ul>
                       -->
                            <!-- Search bar -->
-                           <form class="form-inline pl-4 pr-4 my-2 my-lg-0" action="/search">
-                             <input id="search" class="form-control form-control ml-4 mr-sm-2" type="search" name="entry" placeholder="Search for Movies" aria-label="Search">
-                              <button class="btn btn-outline-info my-2 my-sm-0" type="submit" name="Submit" value="Search1">Go</button>
-                              <button class="btn btn-outline-info ml-2 my-2 my-sm-0" type="submit" name="Submit" value="Search2">Mood</button>
-                              <button class="btn btn-outline-info ml-2 my-2 my-sm-0" type="submit" name="Submit" value="Search3">Feeling Lucky?</button>
+                           <form class="form-inline my-2 my-lg-0 flex-xl" action="/search">
+                             <input id="search" class="form-control form-control ml-4 mr-sm-2 flex-xl-fill" type="search" name="entry" placeholder="Search for Movies" aria-label="Search">
+                              <button class="btn btn-outline-info my-2 my-sm-0 flex-xl-fill" type="submit" name="Submit" value="Search1">🔍</button>
+                              <button class="btn btn-outline-info ml-2 my-2 my-sm-0 flex-xl-fill" type="submit" name="Submit" value="Search2">Mood</button>
+                              <button class="btn btn-outline-info ml-2 my-2 my-sm-0 flex-xl-fill" type="submit" name="Submit" value="Search3">Feeling Lucky?</button>
                             </form>
+
+                            {% block login %}
+                            {% endblock %}
                   </div>
 
-                      {% block login %}
-                      {% endblock %}
+
                   </div>
             </nav>
           </div>
