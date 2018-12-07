@@ -15,6 +15,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
 # manage cookies and user data here
+#instatiate users and votes table if does not already exist
 DB_FILE = "data/armRESTs.db"
 user = None
 pageInterval = [1,2,3,4,5]
@@ -25,10 +26,18 @@ data.createVoteTable()
 data.createUsers()
 
 def setUser(userName):
+    '''
+    Sets the user global variable to userName
+    Useful for many other methods
+    '''
     global user
     user = userName
 
 def getInterval(page = 1):
+    '''
+    Necessary for pagination
+    Intervals viewable on bottom of results pages
+    '''
     global pageDict
     # page is greater than 1
     if page > 1:
@@ -52,6 +61,9 @@ def getInterval(page = 1):
 
 @app.route('/')
 def index():
+    '''
+    Returns Home Page
+    '''
     pops= api.getPopular()
     if user in session:
         return render_template('index.html', errors = True, logged_in = True, trend=pops, sidebar= genres, index=True)
@@ -59,18 +71,27 @@ def index():
 
 @app.route('/register')
 def register():
+    '''
+    Returns Registration page if user is not logged in.
+    '''
     if user in session:
         return redirect(url_for('index'))
     return render_template('register.html', sidebar=genres, logged_in=False)
 
 @app.route('/login', methods=['POST'])
 def login():
+    '''
+    Returns Login page if user is not logged in.
+    '''
     if user in session:
         return redirect(url_for('index'))
     return render_template('login.html', sidebar=genres, address=request.form['address'], logged_in=False)
 
 @app.route('/authenticate', methods=['POST'])
 def authenticate():
+    '''
+    References db and handles authentication and registration.
+    '''
     if user in session:
         return redirect(url_for('index'))
     # instantiates DB_Manager with path to DB_FILE
@@ -115,7 +136,7 @@ def authenticate():
 @app.route('/logout')
 def logout():
     '''
-    Logs user out
+    Logs user out if they are logged in
     '''
     curr_page = request.args['address']
     session.pop(user, None)
@@ -123,16 +144,11 @@ def logout():
     flash('Successfully logged out!')
     return redirect(curr_page)
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
-@app.route('/contact')
-def contact():
-    pass
-
 @app.route('/local')
 def local():
+    '''
+    Returns Near Me page, displaying cinemas fetched from api.
+    '''
     ip= api.getIP()
     zip= api.getZip(ip)
     lat= api.getLat(ip)
@@ -161,22 +177,6 @@ def profile():
     votedUp=[]
     votedDown=[]
 
-
-    # Attempt to get links for each movie on the profile page below...
-    '''
-    movIDs = {}
-    allMovs = set()
-
-    for mov in movWithComment:
-        allMovs.add(mov)
-    for mov in movWithVotes:
-        allMovs.add(mov)
-    for mov in allMovs:
-        mov_id = api.getMovieID(mov)
-        movIDs[mov] = str(mov_id)
-    print(movIDs)
-    '''
-
     if len(movWithComment)!=0:
         for movie in movWithComment:
             comments= data.getUserComments(user,movie)
@@ -198,6 +198,9 @@ def profile():
 
 @app.route('/page', methods=['GET'])
 def page():
+    '''
+    Route necessary for pagination. Returns the resulting movies given the current page/genre.
+    '''
     global pageDict
     interval = request.args['interval']
     genre = request.args['genre']
@@ -214,10 +217,13 @@ def page():
 
 
 @app.route('/categories',methods=['GET'])
-#this route uses the 'GET' method so links can easily be shared amongst users for the different categories
-#while still maintaining the robustness of using one template to render a page dedicated to one
-#specific category of movies
 def categories():
+    '''
+    Retrieves interval for the page and returns category results given some specified genre.
+    Note: this route uses the 'GET' method so links can easily be shared amongst users for the different categories
+    while still maintaining the robustness of using one template to render a page dedicated to one
+    specific category of movies
+    '''
     interval = request.args['interval']
     getInterval(int(interval)) # creates interval for this page
     genre = request.args["Submit"]
@@ -230,7 +236,6 @@ def movie():
     '''
     Upon access, creates table specific to movie
     Renders movie page from API info
-    stores current movie as global
     '''
     movID = request.args["Submit"]
     movDict = api.getMovieDict(movID)
@@ -270,6 +275,9 @@ def comment():
 
 @app.route('/vote', methods=['GET', 'POST'])
 def vote():
+    '''
+    Allows user to either downvote or upvote on a movie page.
+    '''
     data = arms.DB_Manager(DB_FILE)
     if user in session:
         #creates table of votes if does not already exist
@@ -278,29 +286,24 @@ def vote():
         try:
             id = request.args['Submit1']
             vote= 1
-            #print(vote)
+
         except:
             id = request.args['Submit2']
             vote = -1
-            #print(vote)
 
         title = api.getMovieName(id)
         data.addVote(title, user, vote)
         data.save()
         movComments= data.getComments(title)
         flash('Successfully left a vote!')
-        movDict = api.getMovieDict(id)
-        movieTrailer = api.getTrailer(id)
-        reviews = api.getReviews(id)
-        #need to store whether user navbar
-        #another db func here
         return redirect("/movie?Submit={0}".format(str(id)))
     return redirect(url_for('index'))
 
 @app.route('/search', methods=['GET'])
 def search():
-    #following code can be shortened
-    # using the search bar to find a movie
+    '''
+    Search route allows or either Mood results, Im Feeling Lucky result, or a general search query provided in the search bar.
+    '''
     if request.args["Submit"] == "Search1":
         entry = request.args['entry'].lower().strip()
         if len(entry.strip()) != 0:
@@ -331,6 +334,9 @@ def search():
             return redirect('/movie?Submit={0}'.format(str(id)))
 @app.route('/mood',methods=['POST'])
 def mood():
+    '''
+    Given a certain mood, displays movies only of certain genres.
+    '''
     if request.form["submit"] == "Happy":
         family = api.getMovies("Family")
         romantic = api.getMovies("Romance")
