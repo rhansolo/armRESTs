@@ -33,71 +33,66 @@
     </div>
   </div>
   <div class="row pt-3 pb-3">
-    <div class="col-md-7">
+    <div class="col-md-8">
       <h3 class="pb-1">Summary</h3>
       <p>{{dict['overview']}}</p>
+      <!-- Show reviews-->
+          <h3 class="text-info"><b>Reviews</b> ({{review|length}})</h3>
+          {% if review != None %}
+            {% for rev in review %}
+              <p class="pt-2 border-top border-dark"><b>{{rev['author']}}</b>:
+              </p>
+              <p class="ml-4">{{rev['content']}}</p>
+            {% endfor %}
+          {% endif %}
+
+        <h4 class="text-warning border-bottom border-dark"><b>Comments</b> ({{comments|length}})</h4>
+        {% if logged_in %}
+        <!-- Vote section -->
+          {% if not voted %}
+        <form class="form-group pt-2" action="/vote" method= "GET">
+           <button class="btn btn-outline-success my-2 my-sm-0 mt-2" type="submit" name="Submit1" value="{{mov_id}}">👍</button>
+           <button class="btn btn-outline-danger my-2 my-sm-0 mt-2" type="submit" name="Submit2" value="{{mov_id}}">👎</button>
+        </form>
+          {% endif %}
+          {% if voted %}
+          <h6 class="text-success">You have already voted! </h6>
+          {% endif %}
+          <form class="form-group pt-2" action="/comment" method= "GET">
+            <textarea id="comment" class="form-control mb-3" name="entry" placeholder="Leave a Comment" aria-label="Comment"></textarea>
+             <button class="btn btn-outline-info my-2 my-sm-0 mt-2" type="submit" name="Submit" value="{{mov_id}}">Submit</button>
+          </form>
+        {% endif %}
+        {% if not logged_in %}
+          <h5 class="text-dark pb-3 pt-2">Please log in to comment!</h5>
+        {% endif %}
+        <!-- Show comments -->
+
+            {% if comments != None %}
+              {% for comment in comments %}
+              <p class="pt-2 border-top border-dark"><b>{{comment[1]}}</b>:
+              </p>
+              <p class="ml-4">{{comment[0]}}</p>
+              {% endfor %}
+            {% endif %}
+
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 text-right">
       <h5 class="pb-1 text-right">Runtime: {{dict['runtime']}} minutes</h5>
       <h5 class="pb-1 text-right">Upvotes: {{votes}}</h5>
-    </div>
-  </div>
-  <!-- Show reviews-->
-  <div class="row pt-3">
-    <div class="col-md-8">
-      <h3 class="text-info"><b>Reviews</b> ({{review|length}})</h3>
-      {% if review != None %}
-        {% for rev in review %}
-          <p class="pt-2 border-top border-dark"><b>{{rev['author']}}</b>:
-          </p>
-          <p class="ml-4">{{rev['content']}}</p>
+      <!-- Similar movies -->
+      <h3 class="text-primary mb-3">Similar Movies</h3>
+      <div class="col-md-12 d-flex flex-column justify-content-end">
+        {% for movie in simMovie %}
+        <form action="/movie">
+          <button class="btn btn-light text-info mb-1" type="submit" name="Submit" value="{{movie['id']}}"><b>{{movie['title']}}</b></button>
+        </form>
         {% endfor %}
-      {% endif %}
+      </div>
     </div>
   </div>
-  <div class="row pt-3 mb-4">
-    <div class="col-md-8">
-    <h4 class="text-warning border-bottom border-dark"><b>Comments</b> ({{comments|length}})</h4>
-    {% if logged_in %}
-    <!-- Vote section -->
-      {% if not voted %}
-    <form class="form-group pt-2" action="/vote" method= "GET">
-       <button class="btn btn-outline-success my-2 my-sm-0 mt-2" type="submit" name="Submit1" value="{{mov_id}}">👍</button>
-       <button class="btn btn-outline-danger my-2 my-sm-0 mt-2" type="submit" name="Submit2" value="{{mov_id}}">👎</button>
-    </form>
-      {% endif %}
-      {% if voted %}
-      <h6 class="text-success">You have already voted! </h6>
-      {% endif %}
-      <form class="form-group pt-2" action="/comment" method= "GET">
-        <textarea id="comment" class="form-control mb-3" name="entry" placeholder="Leave a Comment" aria-label="Comment"></textarea>
-         <button class="btn btn-outline-info my-2 my-sm-0 mt-2" type="submit" name="Submit" value="{{mov_id}}">Submit</button>
-      </form>
-    {% endif %}
-    {% if not logged_in %}
-      <h5 class="text-dark pb-3">Please log in to comment!</h5>
-    {% endif %}
-    </div>
-    <!-- Show comments -->
-    <div class="col-md-8">
-      {% if comments != None %}
-        {% for comment in comments %}
-        <p class="pt-2 border-top border-dark"><b>{{comment[1]}}</b>:
-        </p>
-        <p class="ml-4">{{comment[0]}}</p>
-        {% endfor %}
-      {% endif %}
-    </div>
-  </div>
-  <div class="row pt-3 mb-4">
-    <div class="col-md-8">
-      <h3> Check out some movies similar to {{ dict['title'] }} : </h3>
-      {% for movie in simMovie %}
-      <form action="/movie">
-        <button class="btn btn-light text-info mb-1" type="submit" name="Submit" value="{{movie['id']}}"><b>{{movie['title']}}</b></button>
-      </form>
-      {% endfor %}
-    </div>
+
+
   </div>
 </div>
 {% endblock %}
