@@ -21,7 +21,9 @@
     </div>
   </div>
     {% if mood %}
+    <div class="container-fluid">
     <h2 class="pt-3 text-center"> <i>{{mood}}</i>? Try watching these movies...</h2>
+      
       <div class="row pt-3">
       {% for genre in disp %}
       {% for movie in genre %}

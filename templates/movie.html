@@ -4,9 +4,9 @@
 {% block title %} armRESTs {% endblock %}
 
 {% block content %}
-<div class = "container">
+<div class = "container-fluid">
   <div class="row justify-content-center pb-3">
-	<h2 class="text-center"> {{ dict['title'] }} </h2>
+	<h1 class="text-center"> {{ dict['title'] }} </h1>
   </div>
   <div class="row justify-content-center embed-responsive-16by9">
 	 {% if dict['poster_path'] != None %}
@@ -80,6 +80,7 @@
     <div class="col-md-4 text-right">
       <h5 class="pb-1 text-right">Runtime: {{dict['runtime']}} minutes</h5>
       <h5 class="pb-1 text-right">Upvotes: {{votes}}</h5>
+      <br>
       <!-- Similar movies -->
       <h3 class="text-primary mb-3">Similar Movies</h3>
       <div class="col-md-12 d-flex flex-column justify-content-end">
